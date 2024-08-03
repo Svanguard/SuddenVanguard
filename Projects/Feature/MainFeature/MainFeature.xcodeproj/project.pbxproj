@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		830FCE7F75E99480D8BA4CB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345D8A5D4AD384DBD1CDEB1 /* ContentView.swift */; };
+		63E2D6962C5E6A2000C15338 /* FloatingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6952C5E6A2000C15338 /* FloatingSheet.swift */; };
+		63E2D6982C5E6A5D00C15338 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6972C5E6A5D00C15338 /* SheetView.swift */; };
+		63E2D69A2C5E6A8A00C15338 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6992C5E6A8A00C15338 /* MainViewModel.swift */; };
+		63E2D69C2C5E6ABC00C15338 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D69B2C5E6ABC00C15338 /* MainModel.swift */; };
+		63E2D69E2C5E6AF900C15338 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D69D2C5E6AF900C15338 /* MainView.swift */; };
 		A008A74C16400F4C352D614A /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF59E537DED595ABC4723375 /* FeatureDependency.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +30,13 @@
 
 /* Begin PBXFileReference section */
 		028067B5198A06189E74D594 /* MainFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MainFeature-Info.plist"; sourceTree = "<group>"; };
-		1345D8A5D4AD384DBD1CDEB1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		412DEA5C9D73808BEA29B72A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		4A4646C564432D5BB7376920 /* MainFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63E2D6952C5E6A2000C15338 /* FloatingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingSheet.swift; sourceTree = "<group>"; };
+		63E2D6972C5E6A5D00C15338 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		63E2D6992C5E6A8A00C15338 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		63E2D69B2C5E6ABC00C15338 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		63E2D69D2C5E6AF900C15338 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		E88239E3C16860C07494EEE2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FF59E537DED595ABC4723375 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -61,6 +69,49 @@
 			path = Derived;
 			sourceTree = "<group>";
 		};
+		63E2D6902C5E69D200C15338 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				63E2D6942C5E6A0A00C15338 /* Model */,
+				63E2D6932C5E6A0800C15338 /* ViewModel */,
+				63E2D6922C5E69EC00C15338 /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		63E2D6912C5E69D500C15338 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				63E2D6952C5E6A2000C15338 /* FloatingSheet.swift */,
+				63E2D6972C5E6A5D00C15338 /* SheetView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
+		63E2D6922C5E69EC00C15338 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63E2D69D2C5E6AF900C15338 /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		63E2D6932C5E6A0800C15338 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				63E2D6992C5E6A8A00C15338 /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		63E2D6942C5E6A0A00C15338 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63E2D69B2C5E6ABC00C15338 /* MainModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		88B00E4983284B1C425F8B55 = {
 			isa = PBXGroup;
 			children = (
@@ -82,7 +133,8 @@
 		A2C5D2ABA4EEE52E4C95210C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1345D8A5D4AD384DBD1CDEB1 /* ContentView.swift */,
+				63E2D6912C5E69D500C15338 /* Component */,
+				63E2D6902C5E69D200C15338 /* Presentation */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -135,8 +187,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = EAACB9E6F08918F3B50EE017 /* Build configuration list for PBXProject "MainFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -171,7 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830FCE7F75E99480D8BA4CB6 /* ContentView.swift in Sources */,
+				63E2D6982C5E6A5D00C15338 /* SheetView.swift in Sources */,
+				63E2D6962C5E6A2000C15338 /* FloatingSheet.swift in Sources */,
+				63E2D69C2C5E6ABC00C15338 /* MainModel.swift in Sources */,
+				63E2D69E2C5E6AF900C15338 /* MainView.swift in Sources */,
+				63E2D69A2C5E6A8A00C15338 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,7 +252,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.MainFeature;
 				PRODUCT_NAME = MainFeature;
 				SDKROOT = iphoneos;
@@ -206,10 +263,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -239,7 +293,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.MainFeature;
 				PRODUCT_NAME = MainFeature;
 				SDKROOT = iphoneos;

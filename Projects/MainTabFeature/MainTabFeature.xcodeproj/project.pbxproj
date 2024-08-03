@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3567456265403EF3770E7CE2 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01DD9ED24C5FE75C828EE1 /* MainTabView.swift */; };
+		63E2D6892C5E67DC00C15338 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6882C5E67DC00C15338 /* SampleView.swift */; };
+		63E2D68B2C5E67E400C15338 /* SampleView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D68A2C5E67E400C15338 /* SampleView2.swift */; };
+		63E2D68D2C5E67EC00C15338 /* SampleView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D68C2C5E67EC00C15338 /* SampleView3.swift */; };
 		951AF69CB6A02607BEA18D3A /* MainFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372C93AEDE2C496EA5D210FF /* MainFeature.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +30,9 @@
 /* Begin PBXFileReference section */
 		012A140AE43C132D1A947770 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		372C93AEDE2C496EA5D210FF /* MainFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63E2D6882C5E67DC00C15338 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SampleView.swift; path = ../../../../../../SampleView.swift; sourceTree = "<group>"; };
+		63E2D68A2C5E67E400C15338 /* SampleView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView2.swift; sourceTree = "<group>"; };
+		63E2D68C2C5E67EC00C15338 /* SampleView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView3.swift; sourceTree = "<group>"; };
 		74477E3F61BF8B9592B607DD /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		ABF87786BEB604C6125E4C36 /* MainTabFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MainTabFeature-Info.plist"; sourceTree = "<group>"; };
 		CB01DD9ED24C5FE75C828EE1 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
@@ -49,6 +55,9 @@
 			isa = PBXGroup;
 			children = (
 				CB01DD9ED24C5FE75C828EE1 /* MainTabView.swift */,
+				63E2D6882C5E67DC00C15338 /* SampleView.swift */,
+				63E2D68A2C5E67E400C15338 /* SampleView2.swift */,
+				63E2D68C2C5E67EC00C15338 /* SampleView3.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -143,8 +152,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 3AE8E69C6C0CEA60529676FD /* Build configuration list for PBXProject "MainTabFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -179,6 +186,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63E2D68D2C5E67EC00C15338 /* SampleView3.swift in Sources */,
+				63E2D68B2C5E67E400C15338 /* SampleView2.swift in Sources */,
+				63E2D6892C5E67DC00C15338 /* SampleView.swift in Sources */,
 				3567456265403EF3770E7CE2 /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +216,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.MainTabFeature;
 				PRODUCT_NAME = MainTabFeature;
 				SDKROOT = iphoneos;
@@ -355,7 +368,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.MainTabFeature;
 				PRODUCT_NAME = MainTabFeature;
 				SDKROOT = iphoneos;
@@ -363,10 +379,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
