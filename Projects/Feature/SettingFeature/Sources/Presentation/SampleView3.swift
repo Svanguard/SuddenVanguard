@@ -8,8 +8,10 @@
 
 import SwiftUI
 
-struct SampleView3: View {
-    var body: some View {
+public struct SampleView3: View {
+    public init() { }
+    
+    public var body: some View {
         NavigationStack {
             VStack {
                 Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)

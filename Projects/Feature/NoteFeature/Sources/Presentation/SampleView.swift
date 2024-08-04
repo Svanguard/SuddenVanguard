@@ -8,8 +8,10 @@
 
 import SwiftUI
 
-struct SampleView: View {
-    var body: some View {
+public struct SampleView: View {
+    public init() { }
+    
+    public var body: some View {
         NavigationStack {
             VStack {
                 Text("Hello, World!")

@@ -73,7 +73,7 @@ public struct MainView: View {
             .padding(.horizontal, 20)
             .padding(.top, 50)
             .background(
-                Image(uiImage: DesignSystemAsset.mainBg.image)
+                Image(uiImage: DesignSystemAsset.bg.image)
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
@@ -184,8 +184,8 @@ public struct MainView: View {
         }
     }
 }
-
-#Preview {
-    MainView()
-}
+//
+//#Preview {
+//    MainView()
+//}
 

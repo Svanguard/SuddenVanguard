@@ -25,6 +25,15 @@
          <FileRef
             location = "group:MainFeature/MainFeature.xcodeproj">
          </FileRef>
+         <FileRef
+            location = "group:NoteFeature/NoteFeature.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:ReportFeature/ReportFeature.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:SettingFeature/SettingFeature.xcodeproj">
+         </FileRef>
       </Group>
    </Group>
    <FileRef

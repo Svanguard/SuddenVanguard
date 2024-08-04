@@ -25,6 +25,7 @@ public extension [String: Plist.Value] {
             [
                 "UIInterfaceOrientationPortrait",
             ],
+        "UILaunchStoryboardName": "LaunchScreen.storyboard",
         "CFBundleShortVersionString": .shortVersion,
         "CFBundleVersion": .version,
         "CFBundleDisplayName": "$(APP_DISPLAY_NAME)",

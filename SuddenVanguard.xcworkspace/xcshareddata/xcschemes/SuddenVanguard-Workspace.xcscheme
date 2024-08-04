@@ -90,6 +90,48 @@
                ReferencedContainer = "container:Projects/MainTabFeature/MainTabFeature.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "583717D3A314FB53D5CA485A"
+               BuildableName = "NoteFeature.framework"
+               BlueprintName = "NoteFeature"
+               ReferencedContainer = "container:Projects/Feature/NoteFeature/NoteFeature.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "4BFFB0541BDE3E11A876220E"
+               BuildableName = "ReportFeature.framework"
+               BlueprintName = "ReportFeature"
+               ReferencedContainer = "container:Projects/Feature/ReportFeature/ReportFeature.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7BEF88EC734BA6ADEBC2885F"
+               BuildableName = "SettingFeature.framework"
+               BlueprintName = "SettingFeature"
+               ReferencedContainer = "container:Projects/Feature/SettingFeature/SettingFeature.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

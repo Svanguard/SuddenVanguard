@@ -5,8 +5,12 @@
 //  Created by 최동호 on 8/3/24.
 //
 
-import SwiftUI
 import MainFeature
+import NoteFeature
+import ReportFeature
+import SettingFeature
+
+import SwiftUI
 
 public struct MainTabView: View {
     // MARK: 네비게이션, 탭바 디폴트 색상
