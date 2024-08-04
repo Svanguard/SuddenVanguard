@@ -32,7 +32,6 @@ public struct ReportView: View {
                                     .stroke(DesignSystemAsset.searchBorderColor.swiftUIColor, lineWidth: 1.5)
                             }
                             .padding(.horizontal, 3)
-                            
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .automatic))
@@ -81,6 +80,7 @@ public struct ReportView: View {
                     }
                     .tint(.primary)
                     .listStyle(.grouped)
+                    .scrollIndicators(.hidden)
                     .navigationTitle("제보하기")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button {
