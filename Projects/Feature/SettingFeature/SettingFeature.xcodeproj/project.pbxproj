@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -48,7 +48,7 @@
 		3E4F6335F7BE0E77EA30F284 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				9C3C72CBC19E7962C8F9DF10 /* SettingView.swift */,
+				63E2D6A12C5FB77C00C15338 /* View */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -61,6 +61,14 @@
 			);
 			name = Config;
 			path = ../../../Config;
+			sourceTree = "<group>";
+		};
+		63E2D6A12C5FB77C00C15338 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9C3C72CBC19E7962C8F9DF10 /* SettingView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6BC3BB7C2885730218F7DADC /* Project */ = {
@@ -143,8 +151,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6FC5C63BAAF44DB241C2885D /* Build configuration list for PBXProject "SettingFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -259,7 +265,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -355,7 +364,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -363,10 +375,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

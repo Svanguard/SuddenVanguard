@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		27EFAD1EC2419638FF9823AF /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */; };
-		2E3EC70B4770D5487ECA711B /* SampleView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742A586C5ECBF8191AB6DF5 /* SampleView2.swift */; };
+		2E3EC70B4770D5487ECA711B /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742A586C5ECBF8191AB6DF5 /* ReportView.swift */; };
+		63E2D6A52C5FB89300C15338 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6A42C5FB89300C15338 /* ReportModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,7 +28,8 @@
 /* Begin PBXFileReference section */
 		2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4910DACBF9A0D056AA9C3AD2 /* ReportFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReportFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5742A586C5ECBF8191AB6DF5 /* SampleView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView2.swift; sourceTree = "<group>"; };
+		5742A586C5ECBF8191AB6DF5 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		63E2D6A42C5FB89300C15338 /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ReportFeature-Info.plist"; sourceTree = "<group>"; };
 		77A3FC16C13BFFCF6221968C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		EB079F37EAB4AC25F6B24F87 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -57,7 +59,8 @@
 		2D35C9E3289B89D38ABC63E2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				5742A586C5ECBF8191AB6DF5 /* SampleView2.swift */,
+				63E2D6A32C5FB87400C15338 /* Model */,
+				63E2D6A22C5FB78200C15338 /* View */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -68,6 +71,22 @@
 				69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		63E2D6A22C5FB78200C15338 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5742A586C5ECBF8191AB6DF5 /* ReportView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		63E2D6A32C5FB87400C15338 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63E2D6A42C5FB89300C15338 /* ReportModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		6D8C8FC0F02E0E202E61A763 /* Project */ = {
@@ -143,8 +162,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = E7F17B222147DAB2412D224A /* Build configuration list for PBXProject "ReportFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -179,7 +196,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E3EC70B4770D5487ECA711B /* SampleView2.swift in Sources */,
+				2E3EC70B4770D5487ECA711B /* ReportView.swift in Sources */,
+				63E2D6A52C5FB89300C15338 /* ReportModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +224,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.ReportFeature;
 				PRODUCT_NAME = ReportFeature;
 				SDKROOT = iphoneos;
@@ -214,10 +235,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -359,7 +377,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.ReportFeature;
 				PRODUCT_NAME = ReportFeature;
 				SDKROOT = iphoneos;

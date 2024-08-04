@@ -38,7 +38,7 @@ public struct MainTabView: View {
                     Label("핵의심", systemImage: "magnifyingglass")
                 }
             
-            SampleView2()
+            ReportView()
                 .tabItem {
                     Label("제보하기", systemImage: "light.beacon.max")
                 }
