@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import DesignSystem
 import SwiftUI
 
 public struct ReportView: View {
@@ -26,55 +27,69 @@ public struct ReportView: View {
                             .cornerRadius(10)
                             .scaledToFit()
                             .clipped()
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .stroke(DesignSystemAsset.searchBorderColor.swiftUIColor, lineWidth: 1.5)
+                            }
+                            .padding(.horizontal, 3)
+                            
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .automatic))
-                .frame(height: 220)
+                .frame(height: 210)
                 .padding([.top, .horizontal])
                 
-                List {
-                    Section {
-                        ForEach(items) { item in
-                            DisclosureGroup(
-                                isExpanded: Binding(
-                                    get: { expandedSections.contains(item.id) },
-                                    set: { isExpanded in
-                                        if isExpanded {
-                                            expandedSections.insert(item.id)
-                                        } else {
-                                            expandedSections.remove(item.id)
+                ScrollViewReader { scrollViewProxy in
+                    List {
+                        Section {
+                            ForEach(items) { item in
+                                DisclosureGroup(
+                                    isExpanded: Binding(
+                                        get: { expandedSections.contains(item.id) },
+                                        set: { isExpanded in
+                                            if isExpanded {
+                                                expandedSections.insert(item.id)
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                    withAnimation {
+                                                        scrollViewProxy.scrollTo(item.id, anchor: .top)
+                                                    }
+                                                }
+                                            } else {
+                                                expandedSections.remove(item.id)
+                                            }
+                                        }
+                                    ),
+                                    content: {
+                                        Text(item.subtitle)
+                                            .font(.subheadline)
+                                    },
+                                    label: {
+                                        HStack {
+                                            Image(systemName: "questionmark")
+                                            
+                                            Text(item.title)
+                                                .fontWeight(.medium)
                                         }
                                     }
-                                ),
-                                content: {
-                                    Text(item.subtitle)
-                                        .font(.subheadline)
-                                },
-                                label: {
-                                    HStack {
-                                        Image(systemName: "questionmark")
-                                        
-                                        Text(item.title)
-                                            .font(.headline)
-                                    }
-                                }
-                            )
+                                )
+                                .id(item.id)
+                            }
+                        } header: {
+                            Text("자주 묻는 질문 (FAQ)")
                         }
-                    } header: {
-                        Text("자주 묻는 질문 (FAQ)")
+                        .listSectionSeparator(.hidden)
                     }
-                    .listSectionSeparator(.hidden)
+                    .tint(.primary)
+                    .listStyle(.grouped)
+                    .navigationTitle("제보하기")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(trailing: Button {
+                        
+                    } label: {
+                        Text("제보")
+                            .foregroundStyle(.red)
+                    })
                 }
-                .tint(.primary)
-                .listStyle(.inset)
-                .navigationTitle("제보하기")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing: Button {
-                    
-                } label: {
-                    Text("제보")
-                        .foregroundStyle(.red)
-                })
             }
         }
     }
