@@ -19,7 +19,7 @@ public struct MainView: View {
         VStack {
             VStack {
                 VStack {
-                    Image("logo")
+                    Image(uiImage: DesignSystemAsset.logo.image)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 100)
@@ -66,15 +66,14 @@ public struct MainView: View {
                         }
                 }
                 .padding()
-                // MARK: 디자인시스템으로 바꿔야함 보더, 백그라운드
-                .border(Color.red)
-                .background(Color.yellow)
+                .border(DesignSystemAsset.searchBorderColor.swiftUIColor)
+                .background(DesignSystemAsset.searchColor.swiftUIColor)
                 .padding(.top, 20)
             }
             .padding(.horizontal, 20)
             .padding(.top, 50)
             .background(
-                Image("bg") // MARK: 디자인시스템 교체
+                Image(uiImage: DesignSystemAsset.mainBg.image)
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
