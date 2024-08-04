@@ -20,7 +20,12 @@
 
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum DesignSystemAsset {
+  public static let bg = DesignSystemImages(name: "bg")
   public static let main = DesignSystemColors(name: "main")
+  public static let searchBorderColor = DesignSystemColors(name: "searchBorderColor")
+  public static let searchColor = DesignSystemColors(name: "searchColor")
+  public static let logo = DesignSystemImages(name: "logo")
+  public static let logo2 = DesignSystemImages(name: "logo2")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name
 
@@ -85,6 +90,58 @@ public extension SwiftUI.Color {
   init(asset: DesignSystemColors) {
     let bundle = Bundle.module
     self.init(asset.name, bundle: bundle)
+  }
+}
+#endif
+
+public struct DesignSystemImages {
+  public fileprivate(set) var name: String
+
+  #if os(macOS)
+  public typealias Image = NSImage
+  #elseif os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
+  public typealias Image = UIImage
+  #endif
+
+  public var image: Image {
+    let bundle = Bundle.module
+    #if os(iOS) || os(tvOS) || os(visionOS)
+    let image = Image(named: name, in: bundle, compatibleWith: nil)
+    #elseif os(macOS)
+    let image = bundle.image(forResource: NSImage.Name(name))
+    #elseif os(watchOS)
+    let image = Image(named: name)
+    #endif
+    guard let result = image else {
+      fatalError("Unable to load image asset named \(name).")
+    }
+    return result
+  }
+
+  #if canImport(SwiftUI)
+  @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, visionOS 1.0, *)
+  public var swiftUIImage: SwiftUI.Image {
+    SwiftUI.Image(asset: self)
+  }
+  #endif
+}
+
+#if canImport(SwiftUI)
+@available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, visionOS 1.0, *)
+public extension SwiftUI.Image {
+  init(asset: DesignSystemImages) {
+    let bundle = Bundle.module
+    self.init(asset.name, bundle: bundle)
+  }
+
+  init(asset: DesignSystemImages, label: Text) {
+    let bundle = Bundle.module
+    self.init(asset.name, bundle: bundle, label: label)
+  }
+
+  init(decorative asset: DesignSystemImages) {
+    let bundle = Bundle.module
+    self.init(decorative: asset.name, bundle: bundle)
   }
 }
 #endif

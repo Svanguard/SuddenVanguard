@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9611BF61B5BE3D38FC67CA8E"
-               BuildableName = "SuddenVanguard.app"
-               BlueprintName = "SuddenVanguard"
-               ReferencedContainer = "container:SuddenVanguard.xcodeproj">
+               BlueprintIdentifier = "583717D3A314FB53D5CA485A"
+               BuildableName = "NoteFeature.framework"
+               BlueprintName = "NoteFeature"
+               ReferencedContainer = "container:NoteFeature.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,18 +26,9 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      disableMainThreadChecker = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BB129CAAA5DEFE358FAE3118"
-               BuildableName = "SuddenVanguardTests.xctest"
-               BlueprintName = "SuddenVanguardTests"
-               ReferencedContainer = "container:SuddenVanguard.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,16 +41,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9611BF61B5BE3D38FC67CA8E"
-            BuildableName = "SuddenVanguard.app"
-            BlueprintName = "SuddenVanguard"
-            ReferencedContainer = "container:SuddenVanguard.xcodeproj">
+            BlueprintIdentifier = "583717D3A314FB53D5CA485A"
+            BuildableName = "NoteFeature.framework"
+            BlueprintName = "NoteFeature"
+            ReferencedContainer = "container:NoteFeature.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -67,16 +57,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9611BF61B5BE3D38FC67CA8E"
-            BuildableName = "SuddenVanguard.app"
-            BlueprintName = "SuddenVanguard"
-            ReferencedContainer = "container:SuddenVanguard.xcodeproj">
+            BlueprintIdentifier = "583717D3A314FB53D5CA485A"
+            BuildableName = "NoteFeature.framework"
+            BlueprintName = "NoteFeature"
+            ReferencedContainer = "container:NoteFeature.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
