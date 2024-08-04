@@ -98,10 +98,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "583717D3A314FB53D5CA485A"
-               BuildableName = "NoteFeature.framework"
-               BlueprintName = "NoteFeature"
-               ReferencedContainer = "container:Projects/Feature/NoteFeature/NoteFeature.xcodeproj">
+               BlueprintIdentifier = "DFA222E7D1205E968C0F3046"
+               BuildableName = "RankFeature.framework"
+               BlueprintName = "RankFeature"
+               ReferencedContainer = "container:Projects/Feature/RankFeature/RankFeature.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry

@@ -1,6 +1,6 @@
 //
-//  SampleView.swift
-//  MainTabFeature
+//  RankView.swift
+//  RankFeature
 //
 //  Created by 강치우 on 8/4/24.
 //  Copyright © 2024 Svanguard. All rights reserved.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct SampleView: View {
+public struct RankView: View {
     public init() { }
     
     public var body: some View {
@@ -16,12 +16,12 @@ public struct SampleView: View {
             VStack {
                 Text("Hello, World!")
             }
-            .navigationTitle("핵의심")
+            .navigationTitle("실시간랭킹")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
 #Preview {
-    SampleView()
+    RankView()
 }

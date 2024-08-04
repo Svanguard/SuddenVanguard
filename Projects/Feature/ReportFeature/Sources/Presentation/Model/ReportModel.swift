@@ -16,7 +16,7 @@ struct ReportModel: Identifiable {
 
 extension ReportModel {
     static var items: [ReportModel] {
-        [ReportModel(title: "핵 의심 유저를 어떻게 제보하나요?", subtitle: "오른쪽 상단의 제보하기를 눌러 메일을 보내주세요."),
+        [ReportModel(title: "핵 의심 유저를 어떻게 제보하나요?", subtitle: "오른쪽 상단의 제보 버튼을 눌러 메일을 보내주세요."),
          ReportModel(title: "제보할 때 어떤 정보를 제공해야 하나요?", subtitle: """
                                                                                                     다음 정보를 제공해 주시면 감사합니다:
                                                                                                     

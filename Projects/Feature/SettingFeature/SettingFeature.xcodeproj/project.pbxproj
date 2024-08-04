@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		30894D4179E013E7C7D56574 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3C72CBC19E7962C8F9DF10 /* SettingView.swift */; };
 		E8A8546242A81B970BD30D09 /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4AAF76EF7C33787661B5E /* FeatureDependency.framework */; };
+		FCF9E28828A25BA0BFF0FD22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A78043D843BF9E057BD2BD8 /* SettingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,8 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A78043D843BF9E057BD2BD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		9B5464B031AB4D133AA521B6 /* SettingFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SettingFeature-Info.plist"; sourceTree = "<group>"; };
-		9C3C72CBC19E7962C8F9DF10 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		A6A4AAF76EF7C33787661B5E /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7494899126DBEFEBF8A557A /* SettingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E26364CC0E882A538EAC59 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		3E4F6335F7BE0E77EA30F284 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				63E2D6A12C5FB77C00C15338 /* View */,
+				8F352C74C0CB05B7FB22BFA6 /* View */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -61,14 +61,6 @@
 			);
 			name = Config;
 			path = ../../../Config;
-			sourceTree = "<group>";
-		};
-		63E2D6A12C5FB77C00C15338 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				9C3C72CBC19E7962C8F9DF10 /* SettingView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		6BC3BB7C2885730218F7DADC /* Project */ = {
@@ -95,6 +87,14 @@
 				9B5464B031AB4D133AA521B6 /* SettingFeature-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		8F352C74C0CB05B7FB22BFA6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8A78043D843BF9E057BD2BD8 /* SettingView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		A4B9D26355F18B228561E610 /* Products */ = {
@@ -151,6 +151,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 6FC5C63BAAF44DB241C2885D /* Build configuration list for PBXProject "SettingFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -185,7 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30894D4179E013E7C7D56574 /* SettingView.swift in Sources */,
+				FCF9E28828A25BA0BFF0FD22 /* SettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,10 +267,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -364,10 +363,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -375,7 +371,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

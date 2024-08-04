@@ -1,6 +1,6 @@
 //
 //  ReportView.swift
-//  MainTabFeature
+//  ReportFeature
 //
 //  Created by 강치우 on 8/3/24.
 //  Copyright © 2024 Svanguard. All rights reserved.
@@ -36,7 +36,12 @@ public struct ReportView: View {
                                     .font(.subheadline)
                             },
                             label: {
-                                Text(item.title)
+                                HStack {
+                                    Image(systemName: "questionmark")
+                                    
+                                    Text(item.title)
+                                        .font(.headline)
+                                }
                             }
                         )
                     }
@@ -47,12 +52,12 @@ public struct ReportView: View {
             }
             .tint(.primary)
             .listStyle(.inset)
-            .navigationTitle("FAQ")
+            .navigationTitle("제보하기")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing: Button {
                 
             } label: {
-                Text("제보하기")
+                Text("제보")
                     .foregroundStyle(.red)
             })
         }

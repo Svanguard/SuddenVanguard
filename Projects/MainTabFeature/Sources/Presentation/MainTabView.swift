@@ -6,7 +6,7 @@
 //
 
 import MainFeature
-import NoteFeature
+import RankFeature
 import ReportFeature
 import SettingFeature
 
@@ -33,9 +33,9 @@ public struct MainTabView: View {
                     Label("전과자", systemImage: "person.slash")
                 }
             
-            SampleView()
+            RankView()
                 .tabItem {
-                    Label("핵의심", systemImage: "magnifyingglass")
+                    Label("실시간랭킹", systemImage: "trophy")
                 }
             
             ReportView()
