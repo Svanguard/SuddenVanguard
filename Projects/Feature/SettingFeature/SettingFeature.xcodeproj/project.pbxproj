@@ -3,11 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33A0980FAFF591ACD391169C /* SampleView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34248DFABC011F88E4D5D509 /* SampleView3.swift */; };
+		33A0980FAFF591ACD391169C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34248DFABC011F88E4D5D509 /* SettingView.swift */; };
 		E8A8546242A81B970BD30D09 /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4AAF76EF7C33787661B5E /* FeatureDependency.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		34248DFABC011F88E4D5D509 /* SampleView3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView3.swift; sourceTree = "<group>"; };
+		34248DFABC011F88E4D5D509 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		9B5464B031AB4D133AA521B6 /* SettingFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SettingFeature-Info.plist"; sourceTree = "<group>"; };
 		A6A4AAF76EF7C33787661B5E /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7494899126DBEFEBF8A557A /* SettingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +48,7 @@
 		3E4F6335F7BE0E77EA30F284 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				34248DFABC011F88E4D5D509 /* SampleView3.swift */,
+				34248DFABC011F88E4D5D509 /* SettingView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -142,9 +142,8 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 6FC5C63BAAF44DB241C2885D /* Build configuration list for PBXProject "SettingFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -179,7 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33A0980FAFF591ACD391169C /* SampleView3.swift in Sources */,
+				33A0980FAFF591ACD391169C /* SettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +249,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Derived/InfoPlists/SettingFeature-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -259,7 +259,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -346,6 +350,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Derived/InfoPlists/SettingFeature-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -355,7 +360,11 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -363,10 +372,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
