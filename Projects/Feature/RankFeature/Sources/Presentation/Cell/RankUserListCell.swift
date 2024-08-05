@@ -18,7 +18,7 @@ public struct RankUserListCell: View {
                 Circle()
                     .frame(width: 44, height: 44)
                 
-                VStack(alignment: .leading, spacing: 6) {
+                VStack(alignment: .leading, spacing: 8) {
                     Text(surfingID)
                         .font(.system(.subheadline, weight: .semibold))
                     
@@ -28,6 +28,7 @@ public struct RankUserListCell: View {
                     
                     Text("검색 횟수 : 12314")
                         .font(.caption)
+                        .fontWeight(.semibold)
                         .padding(.top, 6)
                 }
                 .padding(.horizontal, 4)
@@ -39,14 +40,14 @@ public struct RankUserListCell: View {
                 } label: {
                     Text("병영 수첩")
                         .font(.subheadline)
-                        .fontWeight(.medium)
+                        .fontWeight(.semibold)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
                         .foregroundStyle(.primary)
                         .cornerRadius(8)
                         .overlay(
                             RoundedRectangle(cornerRadius: 6)
-                                .stroke(Color.gray, lineWidth: 1)
+                                .stroke(Color.gray, lineWidth: 0.7)
                         )
                 }
                 .padding(5)

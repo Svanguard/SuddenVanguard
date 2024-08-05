@@ -71,6 +71,7 @@ public struct RankView: View {
                     RankUserListCell(surfingID: user.0, surfingUsername: user.1)
                 }
                 .listStyle(.plain)
+                .padding(.top, 8)
             }
             .navigationTitle("실시간랭킹")
             .navigationBarTitleDisplayMode(.inline)
