@@ -11,13 +11,25 @@
          location = "group:Common/Common.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Core/Core.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Data/Data.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:DesignSystem/DesignSystem.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Domain/Domain.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:FeatureDependency/FeatureDependency.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:MainTabFeature/MainTabFeature.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:NetworkService/NetworkService.xcodeproj">
       </FileRef>
       <Group
          location = "group:Feature"
