@@ -24,6 +24,10 @@ public enum DesignSystemAsset {
   public static let main = DesignSystemColors(name: "main")
   public static let searchBorderColor = DesignSystemColors(name: "searchBorderColor")
   public static let searchColor = DesignSystemColors(name: "searchColor")
+  public static let reportpic2 = DesignSystemImages(name: "reportpic2")
+  public static let reportpic3 = DesignSystemImages(name: "reportpic3")
+  public static let reportpic4 = DesignSystemImages(name: "reportpic4")
+  public static let reportpic5 = DesignSystemImages(name: "reportpic5")
   public static let logo = DesignSystemImages(name: "logo")
   public static let logo2 = DesignSystemImages(name: "logo2")
 }

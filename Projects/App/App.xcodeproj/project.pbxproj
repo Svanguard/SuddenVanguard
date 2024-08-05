@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0F3EBD548A92D7401B1FC633 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057A3CD8D734F9C1B4948C18 /* LaunchScreen.storyboard */; };
+		208A0B2977324FC8C3E22297 /* RankFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AD41ECDE897CDB5708D4A222 /* RankFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2524C0F1238A3AB595D269F1 /* Common.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E907779D8170AF0208B302A /* Common.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2E743A6F76CCB6064D781210 /* TuistAssets+App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D529DAAF6A9D59C44D9D68 /* TuistAssets+App.swift */; };
 		48469C5111BF762561C9B9B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F7F83A194E1D17030DCA033 /* Assets.xcassets */; };
@@ -17,7 +18,6 @@
 		9E68636922D1DB3F98CBD482 /* ReportFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EC2619E61EDDEEC39EB30054 /* ReportFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BBBE384CC7BA744069B9D850 /* SuddenVanguardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A267D95D414DFCF454F00902 /* SuddenVanguardApp.swift */; };
 		BC253706FB28F093D091FFBC /* FeatureDependency.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A9432DE0287E5923CB65DC49 /* FeatureDependency.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C8D2ADD4101CF4ABB23D794F /* NoteFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A41D307CA2BE9F6E9FFE65C6 /* NoteFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CE28A12AE11FBBC8B313B9BF /* MainTabFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721D9790A705419CC668666D /* MainTabFeature.framework */; };
 		CE85338A8D9299509DE34B35 /* MainTabFeature.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 721D9790A705419CC668666D /* MainTabFeature.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DFA60B2A737D9DB9D1E28EA9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC0AA1A8806B18EBA97671BC /* Preview Assets.xcassets */; };
@@ -36,7 +36,7 @@
 				BC253706FB28F093D091FFBC /* FeatureDependency.framework in Embed Frameworks */,
 				94F9DC49C89B28C614DC384E /* MainFeature.framework in Embed Frameworks */,
 				CE85338A8D9299509DE34B35 /* MainTabFeature.framework in Embed Frameworks */,
-				C8D2ADD4101CF4ABB23D794F /* NoteFeature.framework in Embed Frameworks */,
+				208A0B2977324FC8C3E22297 /* RankFeature.framework in Embed Frameworks */,
 				9E68636922D1DB3F98CBD482 /* ReportFeature.framework in Embed Frameworks */,
 				6ED7E576B3D033E65BFDE49D /* SettingFeature.framework in Embed Frameworks */,
 			);
@@ -58,8 +58,8 @@
 		8F7F83A194E1D17030DCA033 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95D529DAAF6A9D59C44D9D68 /* TuistAssets+App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+App.swift"; sourceTree = "<group>"; };
 		A267D95D414DFCF454F00902 /* SuddenVanguardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuddenVanguardApp.swift; sourceTree = "<group>"; };
-		A41D307CA2BE9F6E9FFE65C6 /* NoteFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NoteFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9432DE0287E5923CB65DC49 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD41ECDE897CDB5708D4A222 /* RankFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RankFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C41BF65550E887A8163688 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		BC0AA1A8806B18EBA97671BC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E9369BFA2C65412102538303 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,7 +168,7 @@
 				A9432DE0287E5923CB65DC49 /* FeatureDependency.framework */,
 				6CB714690F6D4BEF6743DA1F /* MainFeature.framework */,
 				721D9790A705419CC668666D /* MainTabFeature.framework */,
-				A41D307CA2BE9F6E9FFE65C6 /* NoteFeature.framework */,
+				AD41ECDE897CDB5708D4A222 /* RankFeature.framework */,
 				EC2619E61EDDEEC39EB30054 /* ReportFeature.framework */,
 				21AEC2FF9D75DAD7EAE1713E /* SettingFeature.framework */,
 			);
@@ -204,8 +204,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = B3FD05C59F197F398A0B04AB /* Build configuration list for PBXProject "App" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -258,9 +256,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2024.08.04.15.33;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2024.08.04.23.51;
+				DEVELOPMENT_TEAM = ND6356Y385;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Derived/InfoPlists/App-Info.plist";
@@ -270,17 +269,18 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.App;
 				PRODUCT_NAME = App;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -350,7 +350,7 @@
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
 				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2024.08.04.15.33;
+				CURRENT_PROJECT_VERSION = 2024.08.04.23.51;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Derived/InfoPlists/App-Info.plist";
@@ -360,7 +360,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.App;
 				PRODUCT_NAME = App;
 				SDKROOT = iphoneos;
