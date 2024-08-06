@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-class RankViewModel: ObservableObject {
+final class RankViewModel: ObservableObject {
     @Published var text: String = ""
     @Published var users: [RankUser] = []
     @Published var isLoading: Bool = true

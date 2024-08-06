@@ -54,10 +54,20 @@ public struct RankUserListCell: View {
                         )
                 }
                 .padding(5)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    triggerHapticFeedback()
+                    showSafari = true
+                }
+                .simultaneousGesture(TapGesture().onEnded { })
                 .sheet(isPresented: $showSafari) {
                     SafariView(url: URL(string: "https://barracks.sa.nexon.com/\(user.userID)/match")!)
                 }
             }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            // MARK: 셀 터치 이벤트를 구분 (아무런 동작을 하지 않도록 설정)
         }
     }
     
