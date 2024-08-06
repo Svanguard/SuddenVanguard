@@ -13,12 +13,14 @@ struct RankUser: Identifiable, Equatable {
     let username: String
     let userID: String
     var frequency: Int
+    var rank: Int?
     
-    init(username: String, userID: String, frequency: Int) {
+    init(username: String, userID: String, frequency: Int, rank: Int? = nil) {
         self.id = UUID()
         self.username = username
         self.userID = userID
         self.frequency = frequency
+        self.rank = rank
     }
     
     // 더미 데이터

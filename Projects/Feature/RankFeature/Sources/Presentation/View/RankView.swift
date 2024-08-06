@@ -10,9 +10,9 @@ import DesignSystem
 import SwiftUI
 
 public struct RankView: View {
-    @StateObject private var viewModel = RankViewModel()
-    
     public init() { }
+    
+    @StateObject private var viewModel = RankViewModel()
     
     public var body: some View {
         NavigationStack {
@@ -27,15 +27,16 @@ public struct RankView: View {
                     Spacer()
                 } else {
                     List {
-                        ForEach(viewModel.filteredUsers) { user in
-                            RankUserListCell(user: user)
-                                .onAppear {
-                                    if viewModel.filteredUsers.last == user {
-                                        viewModel.loadMoreData()
+                        ForEach(viewModel.filteredUsers.enumerated().map({ $0 }), id: \.1.id) { index, user in
+                            Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
+                                RankUserListCell(user: user)
+                                    .onAppear {
+                                        if viewModel.filteredUsers.last == user {
+                                            viewModel.loadMoreData()
+                                        }
                                     }
-                                }
+                            }
                         }
-                        .listSectionSeparator(.hidden, edges: .top)
                         
                         if viewModel.isLoadingMore {
                             ProgressView()
@@ -55,6 +56,12 @@ public struct RankView: View {
                 viewModel.loadData()
             }
         }
+    }
+    
+    private func headerView(for rank: Int) -> some View {
+        Text("\(rank) 위")
+            .font(rank < 4 ? .title3 : .callout)
+            .fontWeight(.semibold)
     }
 }
 

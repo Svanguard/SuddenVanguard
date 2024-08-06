@@ -25,11 +25,14 @@ final class RankViewModel: ObservableObject {
     
     // MARK: 필터링 로직
     var filteredUsers: [RankUser] {
-        if text.isEmpty {
-            return users.sorted { $0.frequency > $1.frequency }
-        } else {
-            return users.filter { $0.username.contains(text) || $0.userID.contains(text) }.sorted { $0.frequency > $1.frequency }
-        }
+        let sortedUsers = users.sorted { $0.frequency > $1.frequency }
+        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) || $0.userID.contains(text) }
+        
+        return filtered
+    }
+    
+    var isSearching: Bool {
+        return !text.isEmpty
     }
     
     // MARK: 처음 보여줄 데이터
