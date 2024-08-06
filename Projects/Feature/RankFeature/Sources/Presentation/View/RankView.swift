@@ -18,13 +18,29 @@ public struct RankView: View {
         NavigationStack {
             VStack {
                 if viewModel.isLoading {
+                    Spacer()
+                    
                     ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(1.5)
+                    
+                    Spacer()
                 } else {
-                    List(viewModel.filteredUsers) { user in
-                        Section {
+                    List {
+                        ForEach(viewModel.filteredUsers) { user in
                             RankUserListCell(user: user)
+                                .onAppear {
+                                    if viewModel.filteredUsers.last == user {
+                                        viewModel.loadMoreData()
+                                    }
+                                }
                         }
                         .listSectionSeparator(.hidden, edges: .top)
+                        
+                        if viewModel.isLoadingMore {
+                            ProgressView()
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
                     }
                     .listStyle(.plain)
                     .searchable(text: $viewModel.text, placement: .navigationBarDrawer(displayMode: .always), prompt: "검색")
