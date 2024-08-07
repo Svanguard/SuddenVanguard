@@ -12,70 +12,56 @@ import SwiftUI
 public struct RankView: View {
     public init() { }
     
-    @State private var text: String = ""
-    @State private var isEditing: Bool = false
-    
-    // 임시 데이터 배열
-    private let users = [
-        ("이창준", "2453454241"),
-        ("강치우", "1231241352"),
-        ("김희성", "1231241242"),
-        ("최동호", "2453454241"),
-        ("노주영", "1231241352"),
-        ("김명현", "1231241242"),
-        ("황민채", "2342352312"),
-        ("이민영", "5634524343"),
-        ("황성진", "3452342345"),
-    ]
+    @StateObject private var viewModel = RankViewModel()
     
     public var body: some View {
         NavigationStack {
             VStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.primary)
+                if viewModel.isLoading {
+                    Spacer()
                     
-                    TextField("검색", text: $text)
-                        .foregroundColor(.primary)
-                        .tint(.primary)
-                        .submitLabel(.search)
-                        .onTapGesture {
-                            withAnimation {
-                                isEditing = true
-                            }
-                        }
-                        .overlay {
-                            HStack {
-                                Spacer()
-                                
-                                if isEditing && !text.isEmpty {
-                                    Button(action: {
-                                        text = ""
-                                    }) {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(Color.gray)
-                                            .frame(width: 35, height: 35)
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                        .scaleEffect(1.5)
+                    
+                    Spacer()
+                } else {
+                    List {
+                        ForEach(viewModel.filteredUsers.enumerated().map({ $0 }), id: \.1.id) { index, user in
+                            Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
+                                RankUserListCell(user: user)
+                                    .onAppear {
+                                        if viewModel.filteredUsers.last == user {
+                                            viewModel.loadMoreData()
+                                        }
                                     }
-                                    .padding(.trailing, 5)
-                                }
                             }
                         }
+                        
+                        if viewModel.isLoadingMore {
+                            ProgressView()
+                                .frame(maxWidth: .infinity, alignment: .center)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .searchable(text: $viewModel.text, placement: .navigationBarDrawer(displayMode: .always), prompt: "검색")
+                    .refreshable {
+                        viewModel.refreshData()
+                    }
                 }
-                .padding(10)
-                .background(Color(.systemGray6))
-                .cornerRadius(12)
-                .padding(.top, 20)
-                .padding(.horizontal)
-                
-                List(users, id: \.0) { user in
-                    RankUserListCell(surfingID: user.0, surfingUsername: user.1)
-                }
-                .listStyle(.plain)
-                .padding(.top, 8)
             }
             .navigationTitle("실시간랭킹")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitleDisplayMode(.large)
+            .onAppear {
+                viewModel.loadData()
+            }
         }
+    }
+    
+    private func headerView(for rank: Int) -> some View {
+        Text("\(rank) 위")
+            .font(rank < 4 ? .title3 : .callout)
+            .fontWeight(.semibold)
     }
 }
 

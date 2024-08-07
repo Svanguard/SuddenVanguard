@@ -6,11 +6,13 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import SafariServices
 import SwiftUI
 
 public struct RankUserListCell: View {
-    let surfingID: String
-    let surfingUsername: String
+    let user: RankUser
+    
+    @State private var showSafari = false
     
     public var body: some View {
         VStack {
@@ -19,14 +21,14 @@ public struct RankUserListCell: View {
                     .frame(width: 44, height: 44)
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(surfingID)
+                    Text(user.username)
                         .font(.system(.subheadline, weight: .semibold))
                     
-                    Text(surfingUsername)
+                    Text(user.userID)
                         .font(.system(.footnote))
                         .foregroundStyle(Color(.systemGray))
                     
-                    Text("검색 횟수 : 12314")
+                    Text("검색 횟수: \(user.frequency) 번")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.top, 6)
@@ -36,7 +38,8 @@ public struct RankUserListCell: View {
                 Spacer()
                 
                 Button {
-                    
+                    triggerHapticFeedback()
+                    showSafari = true
                 } label: {
                     Text("병영 수첩")
                         .font(.subheadline)
@@ -51,9 +54,38 @@ public struct RankUserListCell: View {
                         )
                 }
                 .padding(5)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    triggerHapticFeedback()
+                    showSafari = true
+                }
+                .simultaneousGesture(TapGesture().onEnded { })
+                .sheet(isPresented: $showSafari) {
+                    SafariView(url: URL(string: "https://barracks.sa.nexon.com/\(user.userID)/match")!)
+                }
             }
         }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            // MARK: 셀 터치 이벤트를 구분 (아무런 동작을 하지 않도록 설정)
+        }
     }
+    
+    // MARK: 햅틱 피드백(진동 센서)
+    private func triggerHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {}
 }
 
 #Preview {
