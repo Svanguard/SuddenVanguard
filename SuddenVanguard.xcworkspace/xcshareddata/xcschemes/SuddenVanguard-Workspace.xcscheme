@@ -140,6 +140,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DFA222E7D1205E968C0F3046"
+               BuildableName = "RankFeature.framework"
+               BlueprintName = "RankFeature"
+               ReferencedContainer = "container:Projects/Feature/RankFeature/RankFeature.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+               <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "453323209A3FFF1E78EECE5D"
                BuildableName = "NetworkService.framework"
                BlueprintName = "NetworkService"

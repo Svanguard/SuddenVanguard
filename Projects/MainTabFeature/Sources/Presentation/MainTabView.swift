@@ -6,25 +6,14 @@
 //
 
 import MainFeature
-import NoteFeature
+import RankFeature
 import ReportFeature
 import SettingFeature
 
 import SwiftUI
 
 public struct MainTabView: View {
-    // MARK: 네비게이션, 탭바 디폴트 색상
-    public init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithDefaultBackground()
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithDefaultBackground()
-        UITabBar.appearance().standardAppearance = tabBarAppearance
-        UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-    }
+    public init() { }
     
     public var body: some View {
         TabView {
@@ -33,17 +22,17 @@ public struct MainTabView: View {
                     Label("전과자", systemImage: "person.slash")
                 }
             
-            SampleView()
+            RankView()
                 .tabItem {
-                    Label("핵의심", systemImage: "magnifyingglass")
+                    Label("실시간랭킹", systemImage: "trophy")
                 }
             
-            SampleView2()
+            ReportView()
                 .tabItem {
                     Label("제보하기", systemImage: "light.beacon.max")
                 }
             
-            SampleView3()
+            SettingView()
                 .tabItem {
                     Label("설정", systemImage: "gearshape")
                 }

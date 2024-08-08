@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "Svanguard40.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
@@ -11,6 +12,7 @@
       "size" : "20x20"
     },
     {
+      "filename" : "Svanguard58.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
@@ -21,6 +23,7 @@
       "size" : "29x29"
     },
     {
+      "filename" : "Svanguard80.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
@@ -31,6 +34,7 @@
       "size" : "40x40"
     },
     {
+      "filename" : "Svanguard120.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
@@ -41,6 +45,7 @@
       "size" : "60x60"
     },
     {
+      "filename" : "Svanguard20.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "20x20"
@@ -51,6 +56,7 @@
       "size" : "20x20"
     },
     {
+      "filename" : "Svanguard29.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
@@ -61,6 +67,7 @@
       "size" : "29x29"
     },
     {
+      "filename" : "Svanguard40 1.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
@@ -71,21 +78,25 @@
       "size" : "40x40"
     },
     {
+      "filename" : "Svanguard76.png",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "76x76"
     },
     {
+      "filename" : "Svanguard152.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
     },
     {
+      "filename" : "Svanguard167.png",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "Svanguard.png",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

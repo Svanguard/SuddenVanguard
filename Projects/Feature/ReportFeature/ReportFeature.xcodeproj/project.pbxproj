@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		27EFAD1EC2419638FF9823AF /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */; };
-		2E3EC70B4770D5487ECA711B /* SampleView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5742A586C5ECBF8191AB6DF5 /* SampleView2.swift */; };
+		935EB2C9487EFDD533378C27 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37455DA036D5EFFD2F35C9F /* ReportModel.swift */; };
+		DA7FDE83571B166F94210682 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B066607FC2F956439F7F3 /* ReportView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,11 +26,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		132B066607FC2F956439F7F3 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4910DACBF9A0D056AA9C3AD2 /* ReportFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReportFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5742A586C5ECBF8191AB6DF5 /* SampleView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView2.swift; sourceTree = "<group>"; };
 		69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ReportFeature-Info.plist"; sourceTree = "<group>"; };
 		77A3FC16C13BFFCF6221968C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		C37455DA036D5EFFD2F35C9F /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
 		EB079F37EAB4AC25F6B24F87 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,7 +59,8 @@
 		2D35C9E3289B89D38ABC63E2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				5742A586C5ECBF8191AB6DF5 /* SampleView2.swift */,
+				9E10F4A8BAA9DF47BE4F3611 /* Model */,
+				6CE6FD28F935472111B37101 /* View */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -68,6 +71,14 @@
 				69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		6CE6FD28F935472111B37101 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				132B066607FC2F956439F7F3 /* ReportView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6D8C8FC0F02E0E202E61A763 /* Project */ = {
@@ -94,6 +105,14 @@
 				6D8C8FC0F02E0E202E61A763 /* Project */,
 				12F45989D94B9DBE87C2C283 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		9E10F4A8BAA9DF47BE4F3611 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C37455DA036D5EFFD2F35C9F /* ReportModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9EEB4BC04A4638F2882701D3 /* Sources */ = {
@@ -179,7 +198,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E3EC70B4770D5487ECA711B /* SampleView2.swift in Sources */,
+				935EB2C9487EFDD533378C27 /* ReportModel.swift in Sources */,
+				DA7FDE83571B166F94210682 /* ReportView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

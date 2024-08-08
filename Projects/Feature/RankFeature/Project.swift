@@ -9,7 +9,7 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project = Project.makeProject(
-    name: "NoteFeature",
+    name: "RankFeature",
     moduleType: .feature,
     dependencies: [
         .featureDependency,
