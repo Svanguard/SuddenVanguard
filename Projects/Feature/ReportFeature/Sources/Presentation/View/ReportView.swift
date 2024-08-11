@@ -10,51 +10,52 @@ import DesignSystem
 import SwiftUI
 
 public struct ReportView: View {
-    public init() { }
-    
-    @State private var expandedSections: Set<UUID> = []
+    @StateObject private var viewModel = ReportViewModel()
     
     private var items = ReportModel.items
     private var image = exampleImage.item
     
+    public init() { }
+    
     public var body: some View {
         NavigationStack {
             VStack {
-                TabView {
-                    ForEach(image) { exampleImage in
-                        Image(uiImage: exampleImage.imageName)
-                            .resizable()
-                            .cornerRadius(10)
-                            .scaledToFit()
-                            .clipped()
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(DesignSystemAsset.searchBorderColor.swiftUIColor, lineWidth: 1.5)
-                            }
-                            .padding(.horizontal, 3)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .automatic))
-                .frame(height: 210)
-                .padding([.top, .horizontal])
-                
                 ScrollViewReader { scrollViewProxy in
                     List {
+                        Section {
+                            TabView {
+                                ForEach(image.indices, id: \.self) { index in
+                                    Image(uiImage: image[index].imageName)
+                                        .resizable()
+                                        .cornerRadius(10)
+                                        .scaledToFit()
+                                        .clipped()
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(DesignSystemAsset.searchBorderColor.swiftUIColor, lineWidth: 1.5)
+                                        }
+                                        .padding(.horizontal, 3)
+                                }
+                            }
+                            .tabViewStyle(.page(indexDisplayMode: .always))
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
+                        } header: {
+                            Text("핵 의심 스크린샷")
+                        }
+                        
                         Section {
                             ForEach(items) { item in
                                 DisclosureGroup(
                                     isExpanded: Binding(
-                                        get: { expandedSections.contains(item.id) },
+                                        get: { viewModel.isSectionExpanded(item.id) },
                                         set: { isExpanded in
+                                            viewModel.toggleSection(item.id)
                                             if isExpanded {
-                                                expandedSections.insert(item.id)
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                     withAnimation {
                                                         scrollViewProxy.scrollTo(item.id, anchor: .top)
                                                     }
                                                 }
-                                            } else {
-                                                expandedSections.remove(item.id)
                                             }
                                         }
                                     ),
@@ -79,7 +80,7 @@ public struct ReportView: View {
                         .listSectionSeparator(.hidden)
                     }
                     .tint(.primary)
-                    .listStyle(.grouped)
+                    .listStyle(.inset)
                     .scrollIndicators(.hidden)
                     .navigationTitle("제보하기")
                     .navigationBarTitleDisplayMode(.inline)

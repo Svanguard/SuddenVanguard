@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		27EFAD1EC2419638FF9823AF /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */; };
+		630C92B92C68A0CF000A7A36 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92B82C68A0CF000A7A36 /* ReportViewModel.swift */; };
 		935EB2C9487EFDD533378C27 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37455DA036D5EFFD2F35C9F /* ReportModel.swift */; };
 		DA7FDE83571B166F94210682 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B066607FC2F956439F7F3 /* ReportView.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +30,7 @@
 		132B066607FC2F956439F7F3 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4910DACBF9A0D056AA9C3AD2 /* ReportFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReportFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		630C92B82C68A0CF000A7A36 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ReportFeature-Info.plist"; sourceTree = "<group>"; };
 		77A3FC16C13BFFCF6221968C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		C37455DA036D5EFFD2F35C9F /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 		2D35C9E3289B89D38ABC63E2 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				630C92B72C68A0C5000A7A36 /* ViewModel */,
 				9E10F4A8BAA9DF47BE4F3611 /* Model */,
 				6CE6FD28F935472111B37101 /* View */,
 			);
@@ -71,6 +74,14 @@
 				69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		630C92B72C68A0C5000A7A36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				630C92B82C68A0CF000A7A36 /* ReportViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		6CE6FD28F935472111B37101 /* View */ = {
@@ -162,8 +173,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = E7F17B222147DAB2412D224A /* Build configuration list for PBXProject "ReportFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -198,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				630C92B92C68A0CF000A7A36 /* ReportViewModel.swift in Sources */,
 				935EB2C9487EFDD533378C27 /* ReportModel.swift in Sources */,
 				DA7FDE83571B166F94210682 /* ReportView.swift in Sources */,
 			);
@@ -226,7 +236,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.ReportFeature;
 				PRODUCT_NAME = ReportFeature;
 				SDKROOT = iphoneos;
@@ -234,10 +247,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -379,7 +389,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.ReportFeature;
 				PRODUCT_NAME = ReportFeature;
 				SDKROOT = iphoneos;
