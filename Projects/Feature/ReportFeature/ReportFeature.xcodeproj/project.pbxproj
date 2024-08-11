@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		27EFAD1EC2419638FF9823AF /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */; };
 		630C92B92C68A0CF000A7A36 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92B82C68A0CF000A7A36 /* ReportViewModel.swift */; };
+		630C92BB2C68A69C000A7A36 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92BA2C68A69C000A7A36 /* MailView.swift */; };
+		630C92BD2C68A87A000A7A36 /* MailContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92BC2C68A87A000A7A36 /* MailContent.swift */; };
 		935EB2C9487EFDD533378C27 /* ReportModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37455DA036D5EFFD2F35C9F /* ReportModel.swift */; };
 		DA7FDE83571B166F94210682 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132B066607FC2F956439F7F3 /* ReportView.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +33,8 @@
 		2A0DC1CB810813BDB7B82112 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4910DACBF9A0D056AA9C3AD2 /* ReportFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReportFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630C92B82C68A0CF000A7A36 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		630C92BA2C68A69C000A7A36 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
+		630C92BC2C68A87A000A7A36 /* MailContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailContent.swift; sourceTree = "<group>"; };
 		69C77FF6F0EFAD8922B1B5E2 /* ReportFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ReportFeature-Info.plist"; sourceTree = "<group>"; };
 		77A3FC16C13BFFCF6221968C /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		C37455DA036D5EFFD2F35C9F /* ReportModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportModel.swift; sourceTree = "<group>"; };
@@ -88,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				132B066607FC2F956439F7F3 /* ReportView.swift */,
+				630C92BA2C68A69C000A7A36 /* MailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				C37455DA036D5EFFD2F35C9F /* ReportModel.swift */,
+				630C92BC2C68A87A000A7A36 /* MailContent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -207,9 +213,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				630C92BD2C68A87A000A7A36 /* MailContent.swift in Sources */,
 				630C92B92C68A0CF000A7A36 /* ReportViewModel.swift in Sources */,
 				935EB2C9487EFDD533378C27 /* ReportModel.swift in Sources */,
 				DA7FDE83571B166F94210682 /* ReportView.swift in Sources */,
+				630C92BB2C68A69C000A7A36 /* MailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

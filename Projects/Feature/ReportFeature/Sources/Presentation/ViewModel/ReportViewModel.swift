@@ -11,8 +11,13 @@ import Combine
 
 final class ReportViewModel: ObservableObject {
     @Published var expandedSections: Set<UUID> = []
-    
-    init() { }
+    @Published var items: [ReportModel] = []
+    @Published var images: [ScreenShotImage] = []
+
+    init() {
+        loadItems()
+        loadImages()
+    }
     
     func toggleSection(_ id: UUID) {
         if expandedSections.contains(id) {
@@ -24,5 +29,13 @@ final class ReportViewModel: ObservableObject {
     
     func isSectionExpanded(_ id: UUID) -> Bool {
         return expandedSections.contains(id)
+    }
+    
+    func loadItems() {
+        items = ReportModel.items
+    }
+    
+    func loadImages() {
+        images = ScreenShotImage.item
     }
 }

@@ -8,12 +8,14 @@
 
 import DesignSystem
 import SwiftUI
+import MessageUI
 
 public struct ReportView: View {
     @StateObject private var viewModel = ReportViewModel()
-    
-    private var items = ReportModel.items
-    private var image = exampleImage.item
+    @State private var showMailView = false
+    @State private var mailResult: Result<MFMailComposeResult, Error>? = nil
+    @State private var showMailErrorAlert = false
+    @State private var mailContent = MailContent.defaultMailContent()
     
     public init() { }
     
@@ -24,8 +26,8 @@ public struct ReportView: View {
                     List {
                         Section {
                             TabView {
-                                ForEach(image.indices, id: \.self) { index in
-                                    Image(uiImage: image[index].imageName)
+                                ForEach(viewModel.images.indices, id: \.self) { index in
+                                    Image(uiImage: viewModel.images[index].imageName)
                                         .resizable()
                                         .cornerRadius(10)
                                         .scaledToFit()
@@ -44,7 +46,7 @@ public struct ReportView: View {
                         }
                         
                         Section {
-                            ForEach(items) { item in
+                            ForEach(viewModel.items) { item in
                                 DisclosureGroup(
                                     isExpanded: Binding(
                                         get: { viewModel.isSectionExpanded(item.id) },
@@ -85,7 +87,12 @@ public struct ReportView: View {
                     .navigationTitle("제보하기")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button {
-                        
+                        if MFMailComposeViewController.canSendMail() {
+                            triggerHapticFeedback()
+                            showMailView = true
+                        } else {
+                            showMailErrorAlert = true
+                        }
                     } label: {
                         Text("제보")
                             .foregroundStyle(.red)
@@ -93,6 +100,22 @@ public struct ReportView: View {
                 }
             }
         }
+        .sheet(isPresented: $showMailView) {
+            MailView(isShowing: $showMailView, mailContent: mailContent)
+        }
+        .alert(isPresented: $showMailErrorAlert) {
+            Alert(
+                title: Text("메일 전송 불가"),
+                message: Text("메일 계정이 설정되어 있지 않거나, 메일 전송이 불가능한 상태입니다."),
+                dismissButton: .default(Text("확인"))
+            )
+        }
+    }
+    
+    // MARK: 햅틱 피드백(진동 센서)
+    private func triggerHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
     }
 }
 

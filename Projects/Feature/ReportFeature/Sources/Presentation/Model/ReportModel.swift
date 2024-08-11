@@ -33,17 +33,17 @@ extension ReportModel {
     }
 }
 
-struct exampleImage: Identifiable {
+struct ScreenShotImage: Identifiable {
     let id = UUID()
     let imageName: UIImage
 }
 
-extension exampleImage {
-    static var item: [exampleImage] {
-        [ exampleImage(imageName: DesignSystemAsset.reportpic4.image),
-          exampleImage(imageName: DesignSystemAsset.reportpic2.image),
-          exampleImage(imageName: DesignSystemAsset.reportpic3.image),
-          exampleImage(imageName: DesignSystemAsset.reportpic5.image)
+extension ScreenShotImage {
+    static var item: [ScreenShotImage] {
+        [ ScreenShotImage(imageName: DesignSystemAsset.reportpic4.image),
+          ScreenShotImage(imageName: DesignSystemAsset.reportpic2.image),
+          ScreenShotImage(imageName: DesignSystemAsset.reportpic3.image),
+          ScreenShotImage(imageName: DesignSystemAsset.reportpic5.image)
         ]
     }
 }
