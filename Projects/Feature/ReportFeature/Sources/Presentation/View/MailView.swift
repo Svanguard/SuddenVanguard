@@ -6,11 +6,12 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import SwiftUI
 import MessageUI
+import SwiftUI
 
 struct MailView: UIViewControllerRepresentable {
     @Binding var isShowing: Bool
+    
     var mailContent: MailContent
 
     func makeUIViewController(context: Context) -> MFMailComposeViewController {

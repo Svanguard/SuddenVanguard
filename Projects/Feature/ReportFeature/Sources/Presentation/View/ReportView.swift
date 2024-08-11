@@ -7,15 +7,11 @@
 //
 
 import DesignSystem
-import SwiftUI
 import MessageUI
+import SwiftUI
 
 public struct ReportView: View {
     @StateObject private var viewModel = ReportViewModel()
-    @State private var showMailView = false
-    @State private var mailResult: Result<MFMailComposeResult, Error>? = nil
-    @State private var showMailErrorAlert = false
-    @State private var mailContent = MailContent.defaultMailContent()
     
     public init() { }
     
@@ -87,12 +83,7 @@ public struct ReportView: View {
                     .navigationTitle("제보하기")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button {
-                        if MFMailComposeViewController.canSendMail() {
-                            triggerHapticFeedback()
-                            showMailView = true
-                        } else {
-                            showMailErrorAlert = true
-                        }
+                        viewModel.mailButtonTapped()
                     } label: {
                         Text("제보")
                             .foregroundStyle(.red)
@@ -100,10 +91,10 @@ public struct ReportView: View {
                 }
             }
         }
-        .sheet(isPresented: $showMailView) {
-            MailView(isShowing: $showMailView, mailContent: mailContent)
+        .sheet(isPresented: $viewModel.showMailView) {
+            MailView(isShowing: $viewModel.showMailView, mailContent: viewModel.mailContent)
         }
-        .alert(isPresented: $showMailErrorAlert) {
+        .alert(isPresented: $viewModel.showMailErrorAlert) {
             Alert(
                 title: Text("메일 전송 불가"),
                 message: Text("메일 계정이 설정되어 있지 않거나, 메일 전송이 불가능한 상태입니다."),
@@ -111,14 +102,4 @@ public struct ReportView: View {
             )
         }
     }
-    
-    // MARK: 햅틱 피드백(진동 센서)
-    private func triggerHapticFeedback() {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-    }
-}
-
-#Preview {
-    ReportView()
 }
