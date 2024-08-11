@@ -7,54 +7,53 @@
 //
 
 import DesignSystem
+import MessageUI
 import SwiftUI
 
 public struct ReportView: View {
+    @StateObject private var viewModel = ReportViewModel()
+    
     public init() { }
-    
-    @State private var expandedSections: Set<UUID> = []
-    
-    private var items = ReportModel.items
-    private var image = exampleImage.item
     
     public var body: some View {
         NavigationStack {
             VStack {
-                TabView {
-                    ForEach(image) { exampleImage in
-                        Image(uiImage: exampleImage.imageName)
-                            .resizable()
-                            .cornerRadius(10)
-                            .scaledToFit()
-                            .clipped()
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(DesignSystemAsset.searchBorderColor.swiftUIColor, lineWidth: 1.5)
-                            }
-                            .padding(.horizontal, 3)
-                    }
-                }
-                .tabViewStyle(.page(indexDisplayMode: .automatic))
-                .frame(height: 210)
-                .padding([.top, .horizontal])
-                
                 ScrollViewReader { scrollViewProxy in
                     List {
                         Section {
-                            ForEach(items) { item in
+                            TabView {
+                                ForEach(viewModel.images.indices, id: \.self) { index in
+                                    Image(uiImage: viewModel.images[index].imageName)
+                                        .resizable()
+                                        .cornerRadius(10)
+                                        .scaledToFit()
+                                        .clipped()
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 10)
+                                                .stroke(DesignSystemAsset.searchBorderColor.swiftUIColor, lineWidth: 1.5)
+                                        }
+                                        .padding(.horizontal, 3)
+                                }
+                            }
+                            .tabViewStyle(.page(indexDisplayMode: .always))
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height / 4)
+                        } header: {
+                            Text("핵 의심 스크린샷")
+                        }
+                        
+                        Section {
+                            ForEach(viewModel.items) { item in
                                 DisclosureGroup(
                                     isExpanded: Binding(
-                                        get: { expandedSections.contains(item.id) },
+                                        get: { viewModel.isSectionExpanded(item.id) },
                                         set: { isExpanded in
+                                            viewModel.toggleSection(item.id)
                                             if isExpanded {
-                                                expandedSections.insert(item.id)
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                     withAnimation {
                                                         scrollViewProxy.scrollTo(item.id, anchor: .top)
                                                     }
                                                 }
-                                            } else {
-                                                expandedSections.remove(item.id)
                                             }
                                         }
                                     ),
@@ -79,12 +78,12 @@ public struct ReportView: View {
                         .listSectionSeparator(.hidden)
                     }
                     .tint(.primary)
-                    .listStyle(.grouped)
+                    .listStyle(.inset)
                     .scrollIndicators(.hidden)
                     .navigationTitle("제보하기")
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button {
-                        
+                        viewModel.mailButtonTapped()
                     } label: {
                         Text("제보")
                             .foregroundStyle(.red)
@@ -92,9 +91,15 @@ public struct ReportView: View {
                 }
             }
         }
+        .sheet(isPresented: $viewModel.showMailView) {
+            MailView(isShowing: $viewModel.showMailView, mailContent: viewModel.mailContent)
+        }
+        .alert(isPresented: $viewModel.showMailErrorAlert) {
+            Alert(
+                title: Text("메일 전송 불가"),
+                message: Text("메일 계정이 설정되어 있지 않거나, 메일 전송이 불가능한 상태입니다."),
+                dismissButton: .default(Text("확인"))
+            )
+        }
     }
-}
-
-#Preview {
-    ReportView()
 }

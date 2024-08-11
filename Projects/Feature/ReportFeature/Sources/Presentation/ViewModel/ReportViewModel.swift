@@ -1,0 +1,59 @@
+//
+//  ReportViewModel.swift
+//  ReportFeature
+//
+//  Created by 강치우 on 8/11/24.
+//  Copyright © 2024 Svanguard. All rights reserved.
+//
+
+import SwiftUI
+import Combine
+import MessageUI
+
+final class ReportViewModel: ObservableObject {
+    @Published var expandedSections: Set<UUID> = []
+    @Published var items: [ReportModel] = []
+    @Published var images: [ScreenShotImage] = []
+    @Published var showMailView = false
+    @Published var showMailErrorAlert = false
+    @Published var mailContent = MailContent.defaultMailContent()
+
+    init() {
+        loadItems()
+        loadImages()
+    }
+
+    func toggleSection(_ id: UUID) {
+        if expandedSections.contains(id) {
+            expandedSections.remove(id)
+        } else {
+            expandedSections.insert(id)
+        }
+    }
+
+    func isSectionExpanded(_ id: UUID) -> Bool {
+        return expandedSections.contains(id)
+    }
+
+    func loadItems() {
+        items = ReportModel.items
+    }
+
+    func loadImages() {
+        images = ScreenShotImage.item
+    }
+
+    func triggerHapticFeedback() {
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        generator.impactOccurred()
+    }
+
+    func mailButtonTapped() {
+        if MFMailComposeViewController.canSendMail() {
+            triggerHapticFeedback()
+            showMailView = true
+        } else {
+            showMailErrorAlert = true
+        }
+    }
+}
