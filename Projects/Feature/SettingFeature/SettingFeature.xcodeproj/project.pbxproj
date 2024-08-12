@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		630C92BF2C69DA06000A7A36 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92BE2C69DA06000A7A36 /* WebView.swift */; };
-		630C92C12C69E2B1000A7A36 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92C02C69E2B1000A7A36 /* NoticeView.swift */; };
+		1DFFE2149BD1BFE2893EEC67 /* NoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10F6321754B6CD9EEF390E7 /* NoticeView.swift */; };
+		BD4F86E65125649680D93F35 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3AFF8F43F58828F3EAD05E /* WebView.swift */; };
 		E8A8546242A81B970BD30D09 /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6A4AAF76EF7C33787661B5E /* FeatureDependency.framework */; };
 		FCF9E28828A25BA0BFF0FD22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A78043D843BF9E057BD2BD8 /* SettingView.swift */; };
 /* End PBXBuildFile section */
@@ -27,14 +27,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		630C92BE2C69DA06000A7A36 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		630C92C02C69E2B1000A7A36 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		8A78043D843BF9E057BD2BD8 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		9B5464B031AB4D133AA521B6 /* SettingFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SettingFeature-Info.plist"; sourceTree = "<group>"; };
+		A10F6321754B6CD9EEF390E7 /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
 		A6A4AAF76EF7C33787661B5E /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7494899126DBEFEBF8A557A /* SettingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E26364CC0E882A538EAC59 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		F6558BEA951F38968393EE73 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		FB3AFF8F43F58828F3EAD05E /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,9 +96,9 @@
 		8F352C74C0CB05B7FB22BFA6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A10F6321754B6CD9EEF390E7 /* NoticeView.swift */,
 				8A78043D843BF9E057BD2BD8 /* SettingView.swift */,
-				630C92C02C69E2B1000A7A36 /* NoticeView.swift */,
-				630C92BE2C69DA06000A7A36 /* WebView.swift */,
+				FB3AFF8F43F58828F3EAD05E /* WebView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -157,6 +157,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 6FC5C63BAAF44DB241C2885D /* Build configuration list for PBXProject "SettingFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -191,9 +193,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				630C92C12C69E2B1000A7A36 /* NoticeView.swift in Sources */,
+				1DFFE2149BD1BFE2893EEC67 /* NoticeView.swift in Sources */,
 				FCF9E28828A25BA0BFF0FD22 /* SettingView.swift in Sources */,
-				630C92BF2C69DA06000A7A36 /* WebView.swift in Sources */,
+				BD4F86E65125649680D93F35 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,10 +275,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -372,10 +371,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.SettingFeature;
 				PRODUCT_NAME = SettingFeature;
 				SDKROOT = iphoneos;
@@ -383,7 +379,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

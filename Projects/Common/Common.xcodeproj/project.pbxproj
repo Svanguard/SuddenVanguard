@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4906F43F6A038295B5589D3 /* ViewValues.swift */; };
 		2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170170CE0C43F0B37C75808F /* AppLocalized.swift */; };
+		9F03D3C993AEE0B9BE094100 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		170170CE0C43F0B37C75808F /* AppLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalized.swift; sourceTree = "<group>"; };
 		3354DE7E2B4F1877FECB508B /* Common-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Common-Info.plist"; sourceTree = "<group>"; };
 		3DA77FB5518DC2177F7CDB4F /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		E4906F43F6A038295B5589D3 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
 		F3BE6050A0C10BC33871F757 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +61,7 @@
 			children = (
 				989AAFF8E0DAACA4DBC33D99 /* Constants */,
 				DC3D86362E126B6146A10BDE /* Localize */,
+				E37D73CBD651BC5CDFF7476E /* Utilities */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -109,6 +112,14 @@
 				46B7570B57064E55A860C478 /* InfoPlists */,
 			);
 			path = Derived;
+			sourceTree = "<group>";
+		};
+		E37D73CBD651BC5CDFF7476E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		FA1B67454C7AEA0D639CD237 /* Project */ = {
@@ -188,6 +199,7 @@
 			files = (
 				24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */,
 				2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */,
+				9F03D3C993AEE0B9BE094100 /* HapticFeedbackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

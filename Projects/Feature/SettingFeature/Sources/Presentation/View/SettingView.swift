@@ -26,11 +26,11 @@ public struct SettingView: View {
                     }
                     
                     Section {
-                        NavigationLink(destination: WebViewScreen(url: URL(string: "https://kangciu.notion.site/5db62cd34a5c4ea18f4214707839efc0?pvs=4")!, title: "서든뱅가드 이용약관")) {
+                        NavigationLink(destination: WebViewScreen(url: URL(string: "https://kangciu.notion.site/5db62cd34a5c4ea18f4214707839efc0?pvs=4")!, title: "이용약관")) {
                             Text("서든뱅가드 이용약관")
                         }
 
-                        NavigationLink(destination: WebViewScreen(url: URL(string: "https://kangciu.notion.site/e1eb4ff3f8fd40babb62da2c7cd1bc80?pvs=4")!, title: "서든뱅가드 개인정보 처리 방침")) {
+                        NavigationLink(destination: WebViewScreen(url: URL(string: "https://kangciu.notion.site/e1eb4ff3f8fd40babb62da2c7cd1bc80?pvs=4")!, title: "개인정보 처리 방침")) {
                             Text("서든뱅가드 개인정보 처리 방침")
                         }
 

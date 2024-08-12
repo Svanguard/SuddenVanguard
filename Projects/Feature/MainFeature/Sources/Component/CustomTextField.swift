@@ -6,8 +6,9 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import SwiftUI
+import Common
 import DesignSystem
+import SwiftUI
 
 struct SearchFieldView: View {
     @Binding var text: String
@@ -25,6 +26,7 @@ struct SearchFieldView: View {
                 .submitLabel(.search)
                 .onTapGesture {
                     withAnimation {
+                        HapticFeedbackManager.shared.triggerHapticFeedback()
                         isEditing = true
                     }
                 }

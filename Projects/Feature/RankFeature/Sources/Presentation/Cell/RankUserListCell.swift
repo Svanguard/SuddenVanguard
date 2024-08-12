@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Common
 import SafariServices
 import SwiftUI
 
@@ -38,7 +39,7 @@ public struct RankUserListCell: View {
                 Spacer()
                 
                 Button {
-                    triggerHapticFeedback()
+                    HapticFeedbackManager.shared.triggerHapticFeedback()
                     showSafari = true
                 } label: {
                     Text("병영 수첩")
@@ -56,7 +57,7 @@ public struct RankUserListCell: View {
                 .padding(5)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    triggerHapticFeedback()
+                    HapticFeedbackManager.shared.triggerHapticFeedback()
                     showSafari = true
                 }
                 .simultaneousGesture(TapGesture().onEnded { })
@@ -69,12 +70,6 @@ public struct RankUserListCell: View {
         .onTapGesture {
             // MARK: 셀 터치 이벤트를 구분 (아무런 동작을 하지 않도록 설정)
         }
-    }
-    
-    // MARK: 햅틱 피드백(진동 센서)
-    private func triggerHapticFeedback() {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
     }
 }
 
