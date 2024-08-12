@@ -91,6 +91,9 @@ public struct ReportView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.resetExpandedSections() // 화면이 다시 나타날 때 상태 초기화
+        }
         .sheet(isPresented: $viewModel.showMailView) {
             MailView(isShowing: $viewModel.showMailView, mailContent: viewModel.mailContent)
         }

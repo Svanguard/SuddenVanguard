@@ -43,6 +43,10 @@ final class ReportViewModel: ObservableObject {
     func loadImages() {
         images = ScreenShotImage.item
     }
+    
+    func resetExpandedSections() {
+        expandedSections.removeAll()
+    }
 
     func mailButtonTapped() {
         if MFMailComposeViewController.canSendMail() {
