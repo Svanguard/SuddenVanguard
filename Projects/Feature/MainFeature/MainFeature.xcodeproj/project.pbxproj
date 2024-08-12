@@ -3,16 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0A640AFEE7FCF56341CF0682 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC062C1D0B3A52B8FACC9BC8 /* SheetView.swift */; };
 		1FBCA46BC4498430AEEC6BE0 /* FloatingSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE2CB6694C0D344FEC6ACDC /* FloatingSheet.swift */; };
 		207721AE8DA59E974D50A8A9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CEDE374127E8E097B3E89F /* MainView.swift */; };
+		630C92C32C69E5C1000A7A36 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630C92C22C69E5C1000A7A36 /* CustomTextField.swift */; };
 		A008A74C16400F4C352D614A /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF59E537DED595ABC4723375 /* FeatureDependency.framework */; };
 		BE6C333354CB38471D704614 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C9FFFD97313091FBC0105 /* MainViewModel.swift */; };
-		F96FECA6A6F650E87FA65EDD /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F747260A1CFD7B687DD7F5A /* MainModel.swift */; };
+		F96FECA6A6F650E87FA65EDD /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F747260A1CFD7B687DD7F5A /* SearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,7 +36,8 @@
 		3DE2CB6694C0D344FEC6ACDC /* FloatingSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingSheet.swift; sourceTree = "<group>"; };
 		412DEA5C9D73808BEA29B72A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		4A4646C564432D5BB7376920 /* MainFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F747260A1CFD7B687DD7F5A /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		630C92C22C69E5C1000A7A36 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		7F747260A1CFD7B687DD7F5A /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		DC062C1D0B3A52B8FACC9BC8 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		E88239E3C16860C07494EEE2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FF59E537DED595ABC4723375 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +60,7 @@
 			children = (
 				3DE2CB6694C0D344FEC6ACDC /* FloatingSheet.swift */,
 				DC062C1D0B3A52B8FACC9BC8 /* SheetView.swift */,
+				630C92C22C69E5C1000A7A36 /* CustomTextField.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -126,7 +129,7 @@
 		AB5A4E85DE9C8C41C968F766 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7F747260A1CFD7B687DD7F5A /* MainModel.swift */,
+				7F747260A1CFD7B687DD7F5A /* SearchResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,8 +190,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = EAACB9E6F08918F3B50EE017 /* Build configuration list for PBXProject "MainFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -225,7 +226,8 @@
 			files = (
 				1FBCA46BC4498430AEEC6BE0 /* FloatingSheet.swift in Sources */,
 				0A640AFEE7FCF56341CF0682 /* SheetView.swift in Sources */,
-				F96FECA6A6F650E87FA65EDD /* MainModel.swift in Sources */,
+				630C92C32C69E5C1000A7A36 /* CustomTextField.swift in Sources */,
+				F96FECA6A6F650E87FA65EDD /* SearchResult.swift in Sources */,
 				207721AE8DA59E974D50A8A9 /* MainView.swift in Sources */,
 				BE6C333354CB38471D704614 /* MainViewModel.swift in Sources */,
 			);
@@ -254,7 +256,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.MainFeature;
 				PRODUCT_NAME = MainFeature;
 				SDKROOT = iphoneos;
@@ -262,10 +267,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -295,7 +297,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.MainFeature;
 				PRODUCT_NAME = MainFeature;
 				SDKROOT = iphoneos;
