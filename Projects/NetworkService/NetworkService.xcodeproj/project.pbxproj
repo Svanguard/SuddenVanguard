@@ -3,16 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		036B6550D85D013E9E45D716 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF9FED1221312C46C36A20 /* ApiError.swift */; };
 		0422C1E028807B6222269C0E /* HttpResponseStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C05E4D710518F379088FD /* HttpResponseStatus.swift */; };
-		41827D772C610B5B002E74C9 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41827D762C610B5B002E74C9 /* EndPoint.swift */; };
 		5CD81B418DCC7667165005CA /* ApiClientServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE374FAFF5AD8033061042B6 /* ApiClientServiceImp.swift */; };
 		6E603AA8BBD6517702881483 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5312BF635CBE4D99FAE162 /* Domain.framework */; };
 		759753D185FBA434CB7A41B8 /* ApiClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17754DA0A8AF217686219AFF /* ApiClientService.swift */; };
+		B86FD9DB5331E16CC3C1F78F /* SearchEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6AB156EE76421ABF8A491C /* SearchEndPoint.swift */; };
+		BF7B74B2497062943DAB0D72 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E9564068243164AE0397F4 /* EndPoint.swift */; };
 		C2D528B369D066456ADFD047 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B8FE33444F24DC3915A82C /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,10 +34,11 @@
 		17754DA0A8AF217686219AFF /* ApiClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientService.swift; sourceTree = "<group>"; };
 		26DF9FED1221312C46C36A20 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		30B8FE33444F24DC3915A82C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		41827D762C610B5B002E74C9 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		39E9564068243164AE0397F4 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		423A93F1015E6C9CF4DB82B2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		564371F685EE5EF450EB138A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		ADC9183B12D666BFB5351F52 /* NetworkService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE6AB156EE76421ABF8A491C /* SearchEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEndPoint.swift; sourceTree = "<group>"; };
 		BD5312BF635CBE4D99FAE162 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C463F8FAE8AE26DF76BDB73C /* NetworkService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "NetworkService-Info.plist"; sourceTree = "<group>"; };
 		D14C05E4D710518F379088FD /* HttpResponseStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStatus.swift; sourceTree = "<group>"; };
@@ -74,22 +76,14 @@
 		38525DA2689C825D960A837C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				41827D752C610B51002E74C9 /* EndPoint */,
 				714617A0FA73BA59C67A790C /* ApiService */,
+				DCED9DDC8E63D40418AAA1BC /* EndPoint */,
 				ABE3E7BAEA8052D1EDBA9FA0 /* Errors */,
 				6DA280E2F36F19FC00B656B1 /* Implementations */,
 				0D0E7ECA2FE1D2974B2941D6 /* StatusResponse */,
 				30B8FE33444F24DC3915A82C /* HTTPMethod.swift */,
 			);
 			path = Sources;
-			sourceTree = "<group>";
-		};
-		41827D752C610B51002E74C9 /* EndPoint */ = {
-			isa = PBXGroup;
-			children = (
-				41827D762C610B5B002E74C9 /* EndPoint.swift */,
-			);
-			path = EndPoint;
 			sourceTree = "<group>";
 		};
 		6B3ACE6537D507A5B556E7D6 /* Config */ = {
@@ -143,6 +137,15 @@
 			path = Errors;
 			sourceTree = "<group>";
 		};
+		DCED9DDC8E63D40418AAA1BC /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				39E9564068243164AE0397F4 /* EndPoint.swift */,
+				AE6AB156EE76421ABF8A491C /* SearchEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
 		EC532597712A1FBA04CFD78C /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +193,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = FFC6118989876A9280B17F0F /* Build configuration list for PBXProject "NetworkService" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -224,8 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41827D772C610B5B002E74C9 /* EndPoint.swift in Sources */,
 				759753D185FBA434CB7A41B8 /* ApiClientService.swift in Sources */,
+				BF7B74B2497062943DAB0D72 /* EndPoint.swift in Sources */,
+				B86FD9DB5331E16CC3C1F78F /* SearchEndPoint.swift in Sources */,
 				036B6550D85D013E9E45D716 /* ApiError.swift in Sources */,
 				C2D528B369D066456ADFD047 /* HTTPMethod.swift in Sources */,
 				5CD81B418DCC7667165005CA /* ApiClientServiceImp.swift in Sources */,
@@ -256,10 +262,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.NetworkService;
 				PRODUCT_NAME = NetworkService;
 				SDKROOT = iphoneos;
@@ -296,10 +299,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.NetworkService;
 				PRODUCT_NAME = NetworkService;
 				SDKROOT = iphoneos;
@@ -307,7 +307,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
