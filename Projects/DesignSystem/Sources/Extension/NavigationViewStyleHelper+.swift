@@ -9,7 +9,7 @@
 import SwiftUI
 
 extension UIApplication {
-    func addTapGestureRecognizer() {
+    public func addTapGestureRecognizer() {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         

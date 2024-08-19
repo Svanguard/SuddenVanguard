@@ -46,7 +46,7 @@ struct SheetView: View {
         }
         .padding([.horizontal, .bottom], 15)
         .background {
-            Rectangle()
+            RoundedRectangle(cornerRadius: 12)
                 .fill(.background)
                 .padding(.top, 30)
         }
@@ -66,6 +66,7 @@ struct SheetView: View {
                 .frame(maxWidth: .infinity)
                 .background(config.tint)
         }
+        .cornerRadius(6)
     }
     
     struct Config {

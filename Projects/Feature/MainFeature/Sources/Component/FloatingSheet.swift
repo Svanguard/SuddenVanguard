@@ -20,7 +20,13 @@ extension View {
                         .presentationDragIndicator(.hidden)
                         .background(SheetShadowRemover())
                 } else {
-                    // Fallback on earlier versions
+                    content()
+                        .background(
+                            Color.clear
+                                .edgesIgnoringSafeArea(.all)
+                        )
+                        .cornerRadius(0)
+                        .background(SheetShadowRemover())
                 }
             }
     }

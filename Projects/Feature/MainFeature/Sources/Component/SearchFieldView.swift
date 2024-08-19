@@ -1,5 +1,5 @@
 //
-//  CustomTextField.swift
+//  SearchFieldView.swift
 //  MainFeature
 //
 //  Created by 강치우 on 8/12/24.
@@ -26,7 +26,6 @@ struct SearchFieldView: View {
                 .submitLabel(.search)
                 .onTapGesture {
                     withAnimation {
-                        HapticFeedbackManager.shared.triggerHapticFeedback()
                         isEditing = true
                     }
                 }

@@ -16,57 +16,69 @@ public struct MainView: View {
     @StateObject var viewModel = MainViewModel()
     
     public var body: some View {
-        VStack {
+        NavigationStack {
             VStack {
-                Image(uiImage: DesignSystemAsset.logo.image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(height: 100)
-                    .padding(.horizontal, 50)
-                
-                Text("모든 서든러의 전과기록을 확인해 보세요!")
-                    .foregroundColor(.white)
-                    .font(.caption)
-                    .fontWeight(.regular)
-                    .padding(.top, 10)
-                
-                SearchFieldView(
-                    text: $viewModel.text,
-                    isEditing: $viewModel.isEditing,
-                    onSubmit: {
-                        viewModel.searchNickname()
-                    }
-                )
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 50)
-            .background(
-                Image(uiImage: DesignSystemAsset.bg.image)
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-                    .padding(.bottom, -70)
-            )
-            
-            Spacer()
-            
-            ScrollView {
-                ForEach(0..<7) { index in
-                    Rectangle()
+                VStack {
+                    Image(uiImage: DesignSystemAsset.logo.image)
+                        .resizable()
+                        .scaledToFit()
                         .frame(height: 100)
-                        .foregroundStyle(Color(.darkGray))
-                        .overlay {
-                            Text("광고 문의")
-                                .foregroundColor(.white)
+                        .padding(.horizontal, 50)
+                    
+                    Text("모든 서든러의 전과기록을 확인해 보세요!")
+                        .foregroundColor(.white)
+                        .font(.caption)
+                        .fontWeight(.regular)
+                        .padding(.top, 10)
+                    
+                    SearchFieldView(
+                        text: $viewModel.text,
+                        isEditing: $viewModel.isEditing,
+                        onSubmit: {
+                            viewModel.searchNickname()
                         }
+                    )
+                    
+                    NavigationLink {
+                        UserSearchView()
+                    } label: {
+                        Text("이동")
+                    }
+                    
                 }
+                .padding(.horizontal, 20)
+                .padding(.top, 50)
+                .background(
+                    Image(uiImage: DesignSystemAsset.bg.image)
+                        .resizable()
+                        .scaledToFill()
+                        .ignoresSafeArea()
+                        .padding(.bottom, -70)
+                )
+                
+                Spacer()
+                
+                ScrollView {
+                    ForEach(0..<7) { index in
+                        Rectangle()
+                            .frame(height: 100)
+                            .foregroundStyle(Color(.darkGray))
+                            .overlay {
+                                Text("광고 문의")
+                                    .foregroundColor(.white)
+                            }
+                    }
+                }
+                .padding(.top, 62)
+                .scrollIndicators(.hidden)
+                
             }
-            .padding(.top, 62)
-            .scrollIndicators(.hidden)
-            
-        }
-        .floatingBottomSheet(isPresented: $viewModel.showSheet) {
-            sheetView
+            .onTapGesture {
+                UIApplication.shared.addTapGestureRecognizer()
+            }
+            .floatingBottomSheet(isPresented: $viewModel.showSheet) {
+                sheetView
+            }
         }
     }
     
