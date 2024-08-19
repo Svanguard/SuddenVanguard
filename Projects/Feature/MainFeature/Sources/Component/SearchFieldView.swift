@@ -11,43 +11,17 @@ import DesignSystem
 import SwiftUI
 
 struct SearchFieldView: View {
-    @Binding var text: String
-    @Binding var isEditing: Bool
-    var onSubmit: () -> Void
-    
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
             
-            TextField("닉네임을 입력하세요.", text: $text)
-                .foregroundColor(.white)
-                .tint(.white)
-                .submitLabel(.search)
-                .onTapGesture {
-                    withAnimation {
-                        isEditing = true
-                    }
-                }
-                .onSubmit {
-                    onSubmit()
-                }
-                .overlay {
-                    if isEditing && !text.isEmpty {
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                text = ""
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(Color.gray)
-                                    .frame(width: 35, height: 35)
-                            }
-                            .padding(.trailing, 5)
-                        }
-                    }
-                }
+            Text("닉네임을 입력하세요.")
+                .foregroundStyle(.gray)
+            
+            Spacer()
         }
+        .frame(width: UIScreen.main.bounds.width / 1.2)
         .padding()
         .border(DesignSystemAsset.searchBorderColor.swiftUIColor)
         .background(DesignSystemAsset.searchColor.swiftUIColor)

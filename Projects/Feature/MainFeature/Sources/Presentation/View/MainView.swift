@@ -31,18 +31,10 @@ public struct MainView: View {
                         .fontWeight(.regular)
                         .padding(.top, 10)
                     
-                    SearchFieldView(
-                        text: $viewModel.text,
-                        isEditing: $viewModel.isEditing,
-                        onSubmit: {
-                            viewModel.searchNickname()
-                        }
-                    )
-                    
                     NavigationLink {
                         UserSearchView()
                     } label: {
-                        Text("이동")
+                        SearchFieldView()
                     }
                     
                 }

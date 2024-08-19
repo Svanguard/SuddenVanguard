@@ -17,6 +17,19 @@ struct UserSearchView: View {
                 if viewModel.isLoading {
                     ProgressView()
                         .scaleEffect(1.5)
+                } else if viewModel.users.isEmpty {
+                    List {
+                        Section(header: Text("검색 기록")) {
+                            ForEach(viewModel.searchHistory, id: \.self) { history in
+                                Text(history)
+                                    .onTapGesture {
+                                        viewModel.searchQuery = history
+                                    }
+                            }
+                            .onDelete(perform: viewModel.deleteSearchHistory)
+                        }
+                    }
+                    .listStyle(.plain)
                 } else {
                     List(viewModel.users) { user in
                         HStack {
@@ -40,11 +53,12 @@ struct UserSearchView: View {
                                     EmptyView()
                                 }
                             }
-                            
                             VStack(alignment: .leading, spacing: 8) {
                                 Text(user.user_nick)
                                     .font(.headline)
-                                Text("고유번호: \(String(user.user_nexon_sn))")
+                                
+                                let formattedNexonSN = String(user.user_nexon_sn).replacingOccurrences(of: ",", with: "")
+                                Text("병영 번호: \(formattedNexonSN)")
                                     .font(.subheadline)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.5)
@@ -56,7 +70,8 @@ struct UserSearchView: View {
                 }
             }
             .navigationTitle("유저 검색")
-            .searchable(text: $viewModel.searchQuery, prompt: "닉네임 검색")
+            .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $viewModel.searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "닉네임 검색")
         }
     }
 }
