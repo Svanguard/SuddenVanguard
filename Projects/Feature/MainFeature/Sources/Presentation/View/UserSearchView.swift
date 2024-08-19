@@ -21,7 +21,7 @@ struct UserSearchView: View {
                     .searchable(text: $viewModel.searchQuery, placement: .navigationBarDrawer(displayMode: .always), prompt: "닉네임 검색")
             }
         }
-        .alert(isPresented: $showAlert) {
+        .alert(isPresented: $viewModel.showAlert) {
             Alert(
                 title: Text("전체 삭제"),
                 message: Text("최근 검색어를 모두 삭제하시겠습니까?"),
@@ -39,10 +39,15 @@ struct UserSearchView: View {
             if viewModel.isLoading {
                 ProgressView()
             } else if viewModel.users.isEmpty {
-                if viewModel.searchHistory.isEmpty {
+                if viewModel.searchQuery.isEmpty && viewModel.searchHistory.isEmpty {
                     Text("최근 검색어 내역이 없습니다")
                         .foregroundColor(.gray)
-                        .font(.callout)
+                        .font(.body)
+                        .padding()
+                } else if !viewModel.searchQuery.isEmpty && viewModel.users.isEmpty {
+                    Text("검색 결과가 없습니다")
+                        .foregroundColor(.gray)
+                        .font(.body)
                         .padding()
                 } else {
                     List {
@@ -51,11 +56,14 @@ struct UserSearchView: View {
                                 HStack {
                                     Image(systemName: "magnifyingglass.circle.fill")
                                         .foregroundColor(.gray)
+                                        .font(.title3)
                                     
                                     Text(history)
                                         .padding(.leading, 4)
+                                        .font(.body)
                                     
                                     Spacer()
+                                    
                                     Text(viewModel.formattedDate(for: Date()))
                                         .font(.subheadline)
                                         .foregroundColor(.gray)
