@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F1428B9E944FA682C06B389 /* DIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3CE21E9E472DF601D5E7D3 /* DIContainer.swift */; };
+		78952BBF6FF5FC63BD9B3900 /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D355AD1D2EBA6A491447DB4 /* Injected.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		26BDD2D3E7FED8CDE9A52F46 /* Core-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Core-Info.plist"; sourceTree = "<group>"; };
 		2B0FA7F85F3573FB522F9478 /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F3CE21E9E472DF601D5E7D3 /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		9D355AD1D2EBA6A491447DB4 /* Injected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				6F3CE21E9E472DF601D5E7D3 /* DIContainer.swift */,
+				9D355AD1D2EBA6A491447DB4 /* Injected.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1428B9E944FA682C06B389 /* DIContainer.swift in Sources */,
+				78952BBF6FF5FC63BD9B3900 /* Injected.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

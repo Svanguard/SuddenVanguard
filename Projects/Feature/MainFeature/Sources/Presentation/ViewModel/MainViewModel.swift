@@ -6,10 +6,15 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Core
+import Domain
 import Combine
 import SwiftUI
 
 final class MainViewModel: ObservableObject {
+    @Injected(SearchUseCase.self)
+    public var useCase: SearchUseCase
+    
     @Published var text: String = ""
     @Published var isEditing = false
     @Published var result: String = ""
