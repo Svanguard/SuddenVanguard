@@ -101,7 +101,9 @@ final class UserSearchViewModel: ObservableObject {
         saveSearchHistory()
     }
     
-    // 디바운싱을 위한 메서드
+    /// 디바운싱을 위한 메서드
+    /// 디바운싱 적용한 이유: searchable 같은 자음 모음마다 리스트가 업데이트 되는 검색기능이 있는 경우, 디바운싱 처리를 해서 딜레이를 걸어줘야 리스트가 정상적으로 업데이트됨.
+    /// 딜레이 안걸어주면 리스트가 업데이트 과부하 걸려서 업데이트 하기 힘들다고 오류뱉음
     private func debounceSearchQuery() {
         searchWorkItem?.cancel()
         
