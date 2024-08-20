@@ -40,7 +40,7 @@ struct UserSearchView: View {
                 ProgressView()
             } else if viewModel.users.isEmpty {
                 if viewModel.searchQuery.isEmpty && viewModel.searchHistory.isEmpty {
-                    Text("최근 검색 내역이 없습니다")
+                    Text("최근 검색어 내역이 없습니다")
                         .foregroundColor(.gray)
                         .font(.body)
                         .padding()
@@ -64,11 +64,6 @@ struct UserSearchView: View {
                     }
                 }
                 .listStyle(.plain)
-            }
-        }
-        .onChange(of: viewModel.searchQuery) { _ in
-            Task {
-                await viewModel.searchUsers()
             }
         }
         .navigationTitle("유저 검색")

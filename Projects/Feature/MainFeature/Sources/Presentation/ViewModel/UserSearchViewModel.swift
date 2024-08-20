@@ -11,7 +11,12 @@ import SwiftUI
 
 @MainActor
 final class UserSearchViewModel: ObservableObject {
-    @Published var searchQuery = ""
+    @Published var searchQuery = "" {
+        didSet {
+            // searchQuery가 변경될 때 디바운싱 처리
+            debounceSearchQuery()
+        }
+    }
     @Published var users: [User] = []
     @Published var isLoading = false
     @Published var searchHistory: [String] = []
@@ -23,6 +28,10 @@ final class UserSearchViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
     private let searchService = UserSearchService()
+    
+    private var searchWorkItem: DispatchWorkItem?
+    // 디바운스 딜레이 시간
+    private let debounceDelay: TimeInterval = 0.3
 
     init() {
         loadSearchHistory()
@@ -90,5 +99,21 @@ final class UserSearchViewModel: ObservableObject {
     func clearSearchHistory() {
         searchHistory.removeAll()
         saveSearchHistory()
+    }
+    
+    // 디바운싱을 위한 메서드
+    private func debounceSearchQuery() {
+        searchWorkItem?.cancel()
+        
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self = self else { return }
+            Task {
+                await self.searchUsers()
+            }
+        }
+        
+        // 0.3초 후에 검색하도록 설정
+        searchWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + debounceDelay, execute: workItem)
     }
 }
