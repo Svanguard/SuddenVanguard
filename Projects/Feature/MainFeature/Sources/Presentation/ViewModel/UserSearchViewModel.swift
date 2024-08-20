@@ -11,12 +11,7 @@ import SwiftUI
 
 @MainActor
 final class UserSearchViewModel: ObservableObject {
-    @Published var searchQuery = "" {
-        didSet {
-            // searchQuery가 변경될 때 디바운싱 처리
-            debounceSearchQuery()
-        }
-    }
+    @Published var searchQuery = ""
     @Published var users: [User] = []
     @Published var isLoading = false
     @Published var searchHistory: [String] = []
@@ -29,12 +24,11 @@ final class UserSearchViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private let searchService = UserSearchService()
     
-    private var searchWorkItem: DispatchWorkItem?
-    // 디바운스 딜레이 시간
-    private let debounceDelay: TimeInterval = 0.3
-
+    private let debounceDelay: TimeInterval = 0.5
+    
     init() {
         loadSearchHistory()
+        setupSearchDebounce()
     }
 
     func searchUsers() async {
@@ -65,19 +59,15 @@ final class UserSearchViewModel: ObservableObject {
         updateSearchHistory(with: query)
     }
 
-    // 검색 기록 관리 메서드
+    // 검색 기록 관련 함수
     private func updateSearchHistory(with query: String) {
         guard !query.isEmpty else { return }
 
-        // 동일한 검색어가 이미 있으면 제거
         if let index = searchHistory.firstIndex(of: query) {
             searchHistory.remove(at: index)
         }
 
-        // 검색어를 맨 앞에 추가
         searchHistory.insert(query, at: 0)
-
-        // 검색 기록 저장
         saveSearchHistory()
     }
 
@@ -100,22 +90,20 @@ final class UserSearchViewModel: ObservableObject {
         searchHistory.removeAll()
         saveSearchHistory()
     }
-    
-    /// 디바운싱을 위한 메서드
+
+    /// 디바운싱(Debouncing)
     /// 디바운싱 적용한 이유: searchable 같은 자음 모음마다 리스트가 업데이트 되는 검색기능이 있는 경우, 디바운싱 처리를 해서 딜레이를 걸어줘야 리스트가 정상적으로 업데이트됨.
-    /// 딜레이 안걸어주면 리스트가 업데이트 과부하 걸려서 업데이트 하기 힘들다고 오류뱉음
-    private func debounceSearchQuery() {
-        searchWorkItem?.cancel()
-        
-        let workItem = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            Task {
-                await self.searchUsers()
+    /// 딜레이 안걸어주면 리스트가 업데이트 과부하 걸려서 빈 셀을 반환한다는 오류뱉음
+    private func setupSearchDebounce() {
+        $searchQuery
+            .debounce(for: .seconds(debounceDelay), scheduler: DispatchQueue.main)
+            .removeDuplicates()
+            .sink { [weak self] query in
+                guard let self = self else { return }
+                Task {
+                    await self.searchUsers()
+                }
             }
-        }
-        
-        // 0.3초 후에 검색하도록 설정
-        searchWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + debounceDelay, execute: workItem)
+            .store(in: &cancellables)
     }
 }
