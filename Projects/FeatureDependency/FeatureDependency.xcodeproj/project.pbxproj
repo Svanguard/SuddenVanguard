@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F40C285259449366B062F3A /* DesignSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85F2AEFD97774332C0860EDA /* DesignSystem.framework */; };
+		314273DF5FB327C493FA010B /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88EE5330A4AE36A672DB9098 /* Kingfisher.framework */; };
 		DE2234B5FBF1CD238BE70567 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06CEE7C195172E7E2180CCA1 /* Sample.swift */; };
 		E3B5163B8FEB63D6E9D0A12C /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB638A5213C88B0A680A33B2 /* Common.framework */; };
 /* End PBXBuildFile section */
@@ -30,6 +31,7 @@
 		28676409D4301666744F397E /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		7165894E1415D1FDA533C4AF /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85F2AEFD97774332C0860EDA /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88EE5330A4AE36A672DB9098 /* Kingfisher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6B0127E16B0B94B695FADC2 /* FeatureDependency-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FeatureDependency-Info.plist"; sourceTree = "<group>"; };
 		BB638A5213C88B0A680A33B2 /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBDEAA694D3842787209B51 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			files = (
 				E3B5163B8FEB63D6E9D0A12C /* Common.framework in Frameworks */,
 				1F40C285259449366B062F3A /* DesignSystem.framework in Frameworks */,
+				314273DF5FB327C493FA010B /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +93,7 @@
 				BB638A5213C88B0A680A33B2 /* Common.framework */,
 				85F2AEFD97774332C0860EDA /* DesignSystem.framework */,
 				7165894E1415D1FDA533C4AF /* FeatureDependency.framework */,
+				88EE5330A4AE36A672DB9098 /* Kingfisher.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
