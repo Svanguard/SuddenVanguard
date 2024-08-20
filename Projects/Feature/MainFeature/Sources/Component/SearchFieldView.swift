@@ -16,7 +16,7 @@ struct SearchFieldView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.white)
             
-            Text("닉네임을 입력하세요.")
+            Text("닉네임으로 검색하기")
                 .foregroundStyle(.gray)
             
             Spacer()

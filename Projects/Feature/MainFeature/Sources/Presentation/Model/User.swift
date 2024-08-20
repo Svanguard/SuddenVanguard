@@ -8,18 +8,6 @@
 
 import Foundation
 
-struct SearchResponse: Decodable {
-    let rtnCode: Int
-    let message: String?
-    let result: SearchResults
-}
-
-struct SearchResults: Decodable {
-    let characterInfo: [User]
-    let total_cnt: Int
-    let page_no: Int
-}
-
 struct User: Identifiable, Decodable, Encodable, Hashable {
     let user_nexon_sn: Int
     let user_nick: String
@@ -27,4 +15,3 @@ struct User: Identifiable, Decodable, Encodable, Hashable {
     
     var id: String { "\(user_nexon_sn)" }
 }
-

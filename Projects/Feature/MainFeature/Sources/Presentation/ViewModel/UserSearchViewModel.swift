@@ -7,51 +7,56 @@
 //
 
 import Combine
-import Foundation
+import SwiftUI
 
-class UserSearchViewModel: ObservableObject {
+@MainActor
+final class UserSearchViewModel: ObservableObject {
     @Published var searchQuery = ""
     @Published var users: [User] = []
     @Published var isLoading = false
     @Published var searchHistory: [String] = []
     @Published var isSearchFieldFocused: Bool = true
     @Published var showAlert = false
+    
+    @Published var showResult = false
+    @Published var resultType: ResultType = .clean
 
     private var cancellables = Set<AnyCancellable>()
     private let searchService = UserSearchService()
-    
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM. dd."
-        return formatter
-    }()
 
     init() {
-        setupSearchListener()
         loadSearchHistory()
     }
 
-    private func setupSearchListener() {
-        $searchQuery
-            .debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-            .removeDuplicates()
-            .flatMap { query -> AnyPublisher<[User], Never> in
-                guard !query.isEmpty else {
-                    return Just([]).eraseToAnyPublisher()
-                }
-                self.isLoading = true
-                self.updateSearchHistory(with: query) // 사용자가 입력한 검색어를 기록
-                return self.searchService.searchNickname(query)
-                    .catch { _ in Just([]) }
-                    .eraseToAnyPublisher()
-            }
-            .sink { [weak self] users in
-                self?.isLoading = false
-                self?.users = users
-            }
-            .store(in: &cancellables)
+    func searchUsers() async {
+        guard !searchQuery.isEmpty else {
+            users = []
+            return
+        }
+        isLoading = true
+        do {
+            users = try await searchService.searchNickname(searchQuery)
+        } catch {
+            users = []
+        }
+        isLoading = false
     }
 
+    // 검색 기록에서 선택한 항목을 검색
+    func performSearch(for query: String) {
+        searchQuery = query
+        Task {
+            await searchUsers()
+        }
+    }
+
+    // 검색 기록에 유저 추가
+    func addUserToSearchHistory(_ user: User) {
+        let query = user.user_nick
+        updateSearchHistory(with: query)
+    }
+
+    // 검색 기록 관리 메서드
     private func updateSearchHistory(with query: String) {
         guard !query.isEmpty else { return }
 
@@ -85,13 +90,5 @@ class UserSearchViewModel: ObservableObject {
     func clearSearchHistory() {
         searchHistory.removeAll()
         saveSearchHistory()
-    }
-
-    func performSearch(for query: String) {
-        searchQuery = query
-    }
-    
-    func formattedDate(for date: Date) -> String {
-        return dateFormatter.string(from: date)
     }
 }
