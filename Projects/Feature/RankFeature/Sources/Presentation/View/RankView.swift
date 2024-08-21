@@ -50,7 +50,7 @@ public struct RankView: View {
                     }
                 }
             }
-            .navigationTitle("실시간랭킹")
+            .navigationTitle("실시간순위")
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
                 viewModel.loadData()

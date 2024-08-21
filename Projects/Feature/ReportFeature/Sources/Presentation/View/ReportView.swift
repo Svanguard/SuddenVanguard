@@ -81,7 +81,7 @@ public struct ReportView: View {
                     .listStyle(.inset)
                     .scrollIndicators(.hidden)
                     .navigationTitle("제보하기")
-                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarTitleDisplayMode(.large)
                     .navigationBarItems(trailing: Button {
                         viewModel.mailButtonTapped()
                     } label: {
@@ -90,6 +90,9 @@ public struct ReportView: View {
                     })
                 }
             }
+        }
+        .onAppear {
+            viewModel.resetExpandedSections() // 화면이 다시 나타날 때 상태 초기화
         }
         .sheet(isPresented: $viewModel.showMailView) {
             MailView(isShowing: $viewModel.showMailView, mailContent: viewModel.mailContent)

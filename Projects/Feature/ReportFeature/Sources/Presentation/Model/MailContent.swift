@@ -1,5 +1,5 @@
 //
-//  Mail.swift
+//  MailContent.swift
 //  ReportFeature
 //
 //  Created by 강치우 on 8/11/24.

@@ -6,9 +6,10 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import SwiftUI
+import Common
 import Combine
 import MessageUI
+import SwiftUI
 
 final class ReportViewModel: ObservableObject {
     @Published var expandedSections: Set<UUID> = []
@@ -42,15 +43,14 @@ final class ReportViewModel: ObservableObject {
     func loadImages() {
         images = ScreenShotImage.item
     }
-
-    func triggerHapticFeedback() {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
+    
+    func resetExpandedSections() {
+        expandedSections.removeAll()
     }
 
     func mailButtonTapped() {
         if MFMailComposeViewController.canSendMail() {
-            triggerHapticFeedback()
+            HapticFeedbackManager.shared.triggerHapticFeedback()
             showMailView = true
         } else {
             showMailErrorAlert = true

@@ -24,7 +24,7 @@ public struct MainTabView: View {
             
             RankView()
                 .tabItem {
-                    Label("실시간랭킹", systemImage: "trophy")
+                    Label("실시간순위", systemImage: "trophy")
                 }
             
             ReportView()

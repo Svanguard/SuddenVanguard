@@ -3,15 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		386C29C67EAF157519A5A9F3 /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD708BEA19A1821DFE10F34 /* FeatureDependency.framework */; };
-		63E2D6AD2C619B9000C15338 /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6AC2C619B9000C15338 /* RankUser.swift */; };
-		63E2D6AF2C619BB800C15338 /* RinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E2D6AE2C619BB800C15338 /* RinkViewModel.swift */; };
 		6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966368EE4EE0537440518A3 /* RankUserListCell.swift */; };
 		7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9101001570ABDE374806923 /* RankView.swift */; };
+		8614EB492142716EDD734FEB /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */; };
+		D612B512169DF0BF406B6923 /* RinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1CBFD11B2F5E1701822A2 /* RinkViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,9 +28,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUser.swift; sourceTree = "<group>"; };
+		4EA1CBFD11B2F5E1701822A2 /* RinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RinkViewModel.swift; sourceTree = "<group>"; };
 		5C0149663550FDF8DCA76869 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		63E2D6AC2C619B9000C15338 /* RankUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUser.swift; sourceTree = "<group>"; };
-		63E2D6AE2C619BB800C15338 /* RinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RinkViewModel.swift; sourceTree = "<group>"; };
 		7966368EE4EE0537440518A3 /* RankUserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserListCell.swift; sourceTree = "<group>"; };
 		86633602C5A33C8383427DBD /* RankFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RankFeature-Info.plist"; sourceTree = "<group>"; };
 		8CEB8A8080191539B85FE509 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -59,13 +59,21 @@
 			path = Derived;
 			sourceTree = "<group>";
 		};
+		19853B01CABA08AD817DD04C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4EA1CBFD11B2F5E1701822A2 /* RinkViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3B5140D6A9DAE7373753406E /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				63E2D6AB2C619B8100C15338 /* Model */,
-				63E2D6AA2C619B7F00C15338 /* ViewModel */,
 				A9F3096419396CEB9DAF38D3 /* Cell */,
+				9D9C867B935AA8F50F95FCF5 /* Model */,
 				828E66130473EBB98EE588D9 /* View */,
+				19853B01CABA08AD817DD04C /* ViewModel */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -76,22 +84,6 @@
 				7D1E5114EA03AF8839CA828E /* Project */,
 				7D4B05C6C9DDF88BC7CCD351 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		63E2D6AA2C619B7F00C15338 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				63E2D6AE2C619BB800C15338 /* RinkViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		63E2D6AB2C619B8100C15338 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				63E2D6AC2C619B9000C15338 /* RankUser.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		7D1E5114EA03AF8839CA828E /* Project */ = {
@@ -129,6 +121,14 @@
 			);
 			name = Config;
 			path = ../../../Config;
+			sourceTree = "<group>";
+		};
+		9D9C867B935AA8F50F95FCF5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		9E6D48C3F0031B46E8703045 /* Sources */ = {
@@ -184,6 +184,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 8586D9D5B1981841FA991236 /* Build configuration list for PBXProject "RankFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -218,10 +220,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63E2D6AD2C619B9000C15338 /* RankUser.swift in Sources */,
 				6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */,
-				63E2D6AF2C619BB800C15338 /* RinkViewModel.swift in Sources */,
+				8614EB492142716EDD734FEB /* RankUser.swift in Sources */,
 				7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */,
+				D612B512169DF0BF406B6923 /* RinkViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,10 +250,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.RankFeature;
 				PRODUCT_NAME = RankFeature;
 				SDKROOT = iphoneos;
@@ -288,10 +287,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.RankFeature;
 				PRODUCT_NAME = RankFeature;
 				SDKROOT = iphoneos;
@@ -299,7 +295,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
