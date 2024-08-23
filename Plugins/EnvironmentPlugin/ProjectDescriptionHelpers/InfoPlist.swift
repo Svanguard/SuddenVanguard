@@ -32,12 +32,13 @@ public extension [String: Plist.Value] {
     static let baseInfoPlist: Self = [
         "UISupportedInterfaceOrientations":
             [
-                "UIInterfaceOrientationPortrait",
+                "UIInterfaceOrientationPortrait"
             ],
         "NSAppTransportSecurity":
             [
                 "NSAllowsArbitraryLoads": true
             ],
+        "UIUserInterfaceStyle": "Dark",
         "UILaunchStoryboardName": "LaunchScreen.storyboard",
         "CFBundleShortVersionString": .shortVersion,
         "CFBundleVersion": .version,
