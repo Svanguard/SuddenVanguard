@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		036B6550D85D013E9E45D716 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF9FED1221312C46C36A20 /* ApiError.swift */; };
 		0422C1E028807B6222269C0E /* HttpResponseStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C05E4D710518F379088FD /* HttpResponseStatus.swift */; };
+		0B0DADFFC6FAAB2B83FABA79 /* SearchUsersEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8FD5356F63B16B5286FB9 /* SearchUsersEndPoint.swift */; };
 		5CD81B418DCC7667165005CA /* ApiClientServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE374FAFF5AD8033061042B6 /* ApiClientServiceImp.swift */; };
 		6E603AA8BBD6517702881483 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5312BF635CBE4D99FAE162 /* Domain.framework */; };
 		759753D185FBA434CB7A41B8 /* ApiClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17754DA0A8AF217686219AFF /* ApiClientService.swift */; };
-		B86FD9DB5331E16CC3C1F78F /* SearchEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE6AB156EE76421ABF8A491C /* SearchEndPoint.swift */; };
+		8E666E5F7E2C013149F5F4BC /* SearchNumberEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F1B1850E6073D414254855 /* SearchNumberEndPoint.swift */; };
 		BF7B74B2497062943DAB0D72 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39E9564068243164AE0397F4 /* EndPoint.swift */; };
 		C2D528B369D066456ADFD047 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B8FE33444F24DC3915A82C /* HTTPMethod.swift */; };
 /* End PBXBuildFile section */
@@ -32,13 +33,14 @@
 
 /* Begin PBXFileReference section */
 		17754DA0A8AF217686219AFF /* ApiClientService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientService.swift; sourceTree = "<group>"; };
+		18F1B1850E6073D414254855 /* SearchNumberEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNumberEndPoint.swift; sourceTree = "<group>"; };
 		26DF9FED1221312C46C36A20 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		30B8FE33444F24DC3915A82C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		39E9564068243164AE0397F4 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		423A93F1015E6C9CF4DB82B2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		564371F685EE5EF450EB138A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		5BF8FD5356F63B16B5286FB9 /* SearchUsersEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersEndPoint.swift; sourceTree = "<group>"; };
 		ADC9183B12D666BFB5351F52 /* NetworkService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE6AB156EE76421ABF8A491C /* SearchEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEndPoint.swift; sourceTree = "<group>"; };
 		BD5312BF635CBE4D99FAE162 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C463F8FAE8AE26DF76BDB73C /* NetworkService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "NetworkService-Info.plist"; sourceTree = "<group>"; };
 		D14C05E4D710518F379088FD /* HttpResponseStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseStatus.swift; sourceTree = "<group>"; };
@@ -141,7 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				39E9564068243164AE0397F4 /* EndPoint.swift */,
-				AE6AB156EE76421ABF8A491C /* SearchEndPoint.swift */,
+				18F1B1850E6073D414254855 /* SearchNumberEndPoint.swift */,
+				5BF8FD5356F63B16B5286FB9 /* SearchUsersEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -231,7 +234,8 @@
 			files = (
 				759753D185FBA434CB7A41B8 /* ApiClientService.swift in Sources */,
 				BF7B74B2497062943DAB0D72 /* EndPoint.swift in Sources */,
-				B86FD9DB5331E16CC3C1F78F /* SearchEndPoint.swift in Sources */,
+				8E666E5F7E2C013149F5F4BC /* SearchNumberEndPoint.swift in Sources */,
+				0B0DADFFC6FAAB2B83FABA79 /* SearchUsersEndPoint.swift in Sources */,
 				036B6550D85D013E9E45D716 /* ApiError.swift in Sources */,
 				C2D528B369D066456ADFD047 /* HTTPMethod.swift in Sources */,
 				5CD81B418DCC7667165005CA /* ApiClientServiceImp.swift in Sources */,

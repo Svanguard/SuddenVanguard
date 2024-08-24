@@ -13,6 +13,9 @@ public enum Scheme: String {
 }
 
 public protocol EndPoint {
+    var scheme: Scheme { get }
+    var host: String { get }
+    var port: String { get }
     var path: String { get }
     var query: [String: String] { get }
     var header: [String: String] { get }
@@ -21,18 +24,6 @@ public protocol EndPoint {
 }
 
 extension EndPoint {
-    public var scheme: Scheme {
-        .https
-    }
-    
-    public var host: String {
-        Bundle.main.object(forInfoDictionaryKey: "HOST_VALUE") as? String ?? ""
-    }
-    
-    public var port: String {
-        Bundle.main.object(forInfoDictionaryKey: "PORT_NUMBER") as? String ?? ""
-
-    }
     
     public var toURLRequest: URLRequest? {
         var urlComponent = URLComponents()

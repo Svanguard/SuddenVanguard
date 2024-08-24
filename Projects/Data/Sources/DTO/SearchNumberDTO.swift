@@ -1,5 +1,5 @@
 //
-//  SearchNickNameDTO.swift
+//  SearchNumberDTO.swift
 //  ProjectDescriptionHelpers
 //
 //  Created by 최동호 on 8/5/24.
@@ -8,7 +8,7 @@
 import Domain
 import Foundation
 
-public struct SearchNickNameDTO: Decodable {
+public struct SearchNumberDTO: Decodable {
     public let resultCode: Int
     public let resultMsg: String
     public let resultData: UserDTO
@@ -30,9 +30,9 @@ public struct UserDTO: Decodable {
     }
 }
 
-extension SearchNickNameDTO {
-    func toDomain() -> SearchNickNameResponse {
-        return SearchNickNameResponse(
+extension SearchNumberDTO {
+    func toDomain() -> SearchNumberResponse {
+        return SearchNumberResponse(
             suddenNumber: resultData.userNexonSn,
             userName: resultData.userNick,
             punishType: resultData.punishType,

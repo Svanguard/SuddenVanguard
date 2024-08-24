@@ -23,12 +23,20 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     func registerDependencies() {
         let apiClientService: ApiClientService = ApiClientServiceImp()
-        let searchRepository: SearchRepository = SearchRepositoryImp(apiClientService: apiClientService)
-        let searchUseCase: SearchUseCase = SearchUseCaseImp(searchRepository: searchRepository)
+        let searchNumberRepository: SearchNumberRepository = SearchNumberRepositoryImp(apiClientService: apiClientService)
+        let searchNumberUseCase: SearchNumberUseCase = SearchNumberUseCaseImp(searchNumberRepository: searchNumberRepository)
+        
+        let searchUsersRepository: SearchUsersRepository = SearchUsersRepositoryImp(apiClientService: apiClientService)
+        let searchUsersUseCase: SearchUsersUseCase = SearchUsersUseCaseImp(searchUsersRepository: searchUsersRepository)
         
         DIContainer.register(
-            type: SearchUseCase.self,
-            searchUseCase
+            type: SearchNumberUseCase.self,
+            searchNumberUseCase
+        )
+        
+        DIContainer.register(
+            type: SearchUsersUseCase.self,
+            searchUsersUseCase
         )
     }
 }

@@ -7,12 +7,12 @@
 
 import Foundation
 
-public struct SearchNickNameRequest {
-    public let userName: String
+public struct SearchNumberRequest {
+    public let suddenNumber: Int
     
     public init(
-        userName: String
+        suddenNumber: Int
     ) {
-        self.userName = userName
+        self.suddenNumber = suddenNumber
     }
 }

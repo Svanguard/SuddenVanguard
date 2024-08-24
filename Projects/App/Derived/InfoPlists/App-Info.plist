@@ -24,6 +24,8 @@
 	<string>$(HOST_VALUE)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NEXEN_URL</key>
+	<string>$(NEXEN_URL)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

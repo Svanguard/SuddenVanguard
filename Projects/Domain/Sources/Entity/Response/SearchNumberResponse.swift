@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct SearchNickNameResponse: Decodable {
+public struct SearchNumberResponse: Decodable {
     public let suddenNumber: Int
     public let userName: String
     public let punishType: String

@@ -55,7 +55,7 @@ struct UserSearchView: View {
             } else {
                 List(viewModel.users) { user in
                     NavigationLink(destination: {
-                        resultView(userNick: user.user_nick)
+                        resultView(userNick: user.userName)
                             .onAppear {
                                 viewModel.addUserToSearchHistory(user)
                             }
