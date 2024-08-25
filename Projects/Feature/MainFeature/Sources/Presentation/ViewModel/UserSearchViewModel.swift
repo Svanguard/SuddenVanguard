@@ -14,8 +14,11 @@ import SwiftUI
 
 @MainActor
 final class UserSearchViewModel: ObservableObject {
+    @Injected(SearchNumberUseCase.self)
+    public var numberUseCase: SearchNumberUseCase
+    
     @Injected(SearchUsersUseCase.self)
-    public var useCase: SearchUsersUseCase
+    public var usersUseCase: SearchUsersUseCase
     
     @Published var searchQuery = ""
     @Published var users: [SearchUserData] = []
@@ -43,7 +46,7 @@ final class UserSearchViewModel: ObservableObject {
         }
         isLoading = true
         do {
-            let response = try await useCase.searchUsers(request: .init(userName: searchQuery))
+            let response = try await usersUseCase.searchUsers(request: .init(userName: searchQuery))
             
             users = response.map { userResponse in
                 SearchUserData(
@@ -57,6 +60,19 @@ final class UserSearchViewModel: ObservableObject {
             users = []
         }
         isLoading = false
+    }
+    
+    func searchNumber(userSuddenNumber: Int) async {
+        guard userSuddenNumber != 0 else {
+            return
+        }
+        
+        do {
+            let response = try await numberUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     // 검색 기록에서 선택한 항목을 검색

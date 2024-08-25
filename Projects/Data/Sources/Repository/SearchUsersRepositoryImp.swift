@@ -29,5 +29,3 @@ public final class SearchUsersRepositoryImp: SearchUsersRepository {
         return response
     }
 }
-
-

@@ -23,7 +23,7 @@ public struct SearchUsersEndPoint: EndPoint {
     public var port: String = ""
     
     public var path: String {
-        "/api/Search/GetSearchAll/\(request.userName)/1"
+        "/api/Search/GetSearchAll/\(request.userName)"
     }
     
     public var query: [String : String] = [:]

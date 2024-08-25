@@ -9,8 +9,5 @@
 import Foundation
 
 public protocol SearchNumberUseCase {
-    func searchNumber(
-        request: SearchNumberRequest,
-        completion: @escaping(Result<SearchNumberResponse, Error>) -> Void
-    )
+    func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse
 }

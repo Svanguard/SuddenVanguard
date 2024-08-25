@@ -16,6 +16,6 @@ public struct SearchUsersUseCaseImp: SearchUsersUseCase {
     }
     
     public func searchUsers(request: SearchUsersRequest) async throws -> [SearchUsersResponse] {
-        return try await searchUsersRepository.searchUsers(request: request)
+        try await searchUsersRepository.searchUsers(request: request)
     }
 }

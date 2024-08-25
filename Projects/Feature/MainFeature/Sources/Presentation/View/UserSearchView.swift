@@ -50,13 +50,21 @@ struct UserSearchView: View {
                         .font(.body)
                         .padding()
                 } else {
-                    EmptyStateView(searchQuery: viewModel.searchQuery, searchHistory: viewModel.searchHistory, onTap: viewModel.performSearch, onDelete: viewModel.deleteSearchHistory)
+                    EmptyStateView(
+                        searchQuery: viewModel.searchQuery,
+                        searchHistory: viewModel.searchHistory,
+                        onTap: viewModel.performSearch,
+                        onDelete: viewModel.deleteSearchHistory
+                    )
                 }
             } else {
                 List(viewModel.users) { user in
                     NavigationLink(destination: {
                         resultView(userNick: user.userName)
                             .onAppear {
+                                Task {
+                                    await viewModel.searchNumber(userSuddenNumber: user.suddenNumber)
+                                }
                                 viewModel.addUserToSearchHistory(user)
                             }
                     }) {

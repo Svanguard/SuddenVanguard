@@ -13,7 +13,7 @@ public struct SearchNumberEndPoint: EndPoint {
     private let request: SearchNumberRequest
     
     public var scheme: Scheme {
-        .https
+        .http
     }
     
     public var host: String {
@@ -25,7 +25,7 @@ public struct SearchNumberEndPoint: EndPoint {
     }
     
     public var path: String {
-        "/api/v1/users/search/\(request.suddenNumber)"
+        "/api/v1/users/searchByNumber/\(request.suddenNumber)"
     }
     
     public var query: [String : String] = [:]

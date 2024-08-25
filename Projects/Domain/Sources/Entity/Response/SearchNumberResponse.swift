@@ -29,3 +29,4 @@ public struct SearchNumberResponse: Decodable {
         self.registerFg = registerFg
     }
 }
+

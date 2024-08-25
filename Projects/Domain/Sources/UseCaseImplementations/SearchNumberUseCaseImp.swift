@@ -15,13 +15,7 @@ public struct SearchNumberUseCaseImp: SearchNumberUseCase {
         self.searchNumberRepository = searchNumberRepository
     }
     
-    public func searchNumber(
-        request: SearchNumberRequest,
-        completion: @escaping (Result<SearchNumberResponse, Error>) -> Void
-    ) {
-        searchNumberRepository.searchNumber(
-            request: request,
-            completion: completion
-        )
+    public func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse {
+        try await searchNumberRepository.searchNumber(request: request)
     }
 }

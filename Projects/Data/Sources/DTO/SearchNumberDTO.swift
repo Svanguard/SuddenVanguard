@@ -29,7 +29,7 @@ public struct UserDTO: Decodable {
         case registerFg = "registerFg"
     }
 }
-
+ 
 extension SearchNumberDTO {
     func toDomain() -> SearchNumberResponse {
         return SearchNumberResponse(

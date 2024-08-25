@@ -23,3 +23,4 @@ public struct SearchUsersResponse: Decodable {
         self.userImage = userImage
     }
 }
+
