@@ -31,12 +31,31 @@ public struct MainView: View {
                         .fontWeight(.regular)
                         .padding(.top, 10)
                     
-                    NavigationLink {
-                        UserSearchView()
-                    } label: {
-                        SearchFieldView()
+                    HStack {
+                        Spacer()
+                        
+                        NavigationLink {
+                            UserSearchView()
+                        } label: {
+                            SearchFieldView(
+                                placeHolder: "닉네임으로 검색",
+                                opacityValue: 1.0
+                            )
+                        }
+                        
+                        Spacer()
+                        
+                        NavigationLink {
+                            UserSearchView()
+                        } label: {
+                            SearchFieldView(
+                                placeHolder: "병영번호로 검색",
+                                opacityValue: 0.2
+                            )
+                        }
+                        
+                        Spacer()
                     }
-                    
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 50)
