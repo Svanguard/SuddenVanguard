@@ -31,8 +31,8 @@ final class RankViewModel: ObservableObject {
     
     // MARK: 필터링 로직
     var filteredUsers: [RankUser] {
-        let sortedUsers = users.sorted { $0.frequency > $1.frequency }
-        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) || $0.userID.contains(text) }
+        let sortedUsers = users.sorted { $0.count > $1.count }
+        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) || $0.suddenNumber.contains(text) }
         
         return filtered
     }
@@ -70,6 +70,16 @@ final class RankViewModel: ObservableObject {
         do {
             let response = try await rankUseCase.getRankData()
             print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getProfileData(suddenNumber: Int) async {
+        do {
+            let response = try await rankUseCase.getProfileData(request: .init(suddenNumber: suddenNumber))
+            print(response)
+            
         } catch {
             print(error.localizedDescription)
         }

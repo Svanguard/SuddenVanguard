@@ -6,7 +6,6 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Common
 import Foundation
 
 public struct RankResponse {
@@ -23,4 +22,9 @@ public struct RankResponse {
         self.weeklyDatas = weeklyDatas
         self.monthlyDatas = monthlyDatas
     }
+}
+
+public struct UserCountData: Decodable {
+    public let userNexonSn: Int
+    public let count: Int
 }

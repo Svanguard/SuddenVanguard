@@ -11,47 +11,47 @@ import Foundation
 struct RankUser: Identifiable, Equatable {
     let id: UUID
     let username: String
-    let userID: String
-    var frequency: Int
-    var rank: Int?
+    let suddenNumber: String
+    let count: Int
+    let userImage: String
     
-    init(username: String, userID: String, frequency: Int, rank: Int? = nil) {
+    init(username: String, suddenNumber: String, count: Int, userImage: String) {
         self.id = UUID()
         self.username = username
-        self.userID = userID
-        self.frequency = frequency
-        self.rank = rank
+        self.suddenNumber = suddenNumber
+        self.count = count
+        self.userImage = userImage
     }
     
     // 더미 데이터
     static var dummyData: [RankUser] {
         return [
-            RankUser(username: "이창준", userID: "1828886846", frequency: 23),
-            RankUser(username: "강치우", userID: "554246255", frequency: 4122),
-            RankUser(username: "김희성", userID: "839379262", frequency: 2131),
-            RankUser(username: "최동호", userID: "2030679619", frequency: 4342),
-            RankUser(username: "노주영", userID: "1812070041", frequency: 324),
-            RankUser(username: "김명현", userID: "1359578496", frequency: 232),
-            RankUser(username: "황민채", userID: "553913652", frequency: 125),
-            RankUser(username: "이민영", userID: "403320873", frequency: 4566),
-            RankUser(username: "황성진", userID: "537014909", frequency: 9654),
+            RankUser(username: "이창준", suddenNumber: "1828886846", count: 23, userImage: ""),
+            RankUser(username: "강치우", suddenNumber: "554246255", count: 4122, userImage: ""),
+            RankUser(username: "김희성", suddenNumber: "839379262", count: 2131, userImage: ""),
+            RankUser(username: "최동호", suddenNumber: "2030679619", count: 4342, userImage: ""),
+            RankUser(username: "노주영", suddenNumber: "1812070041", count: 324, userImage: ""),
+            RankUser(username: "김명현", suddenNumber: "1359578496", count: 232, userImage: ""),
+            RankUser(username: "황민채", suddenNumber: "553913652", count: 125, userImage: ""),
+            RankUser(username: "이민영", suddenNumber: "403320873", count: 4566, userImage: ""),
+            RankUser(username: "황성진", suddenNumber: "537014909", count: 9654, userImage: ""),
             // MARK: 무한스크롤 테스트를 위한 더미 데이터
-            RankUser(username: "추가유저1", userID: "1122334455", frequency: 22),
-            RankUser(username: "추가유저2", userID: "2233445566", frequency: 21),
-            RankUser(username: "추가유저3", userID: "1122334455", frequency: 20),
-            RankUser(username: "추가유저4", userID: "2233445566", frequency: 19),
-            RankUser(username: "추가유저5", userID: "1122334455", frequency: 18),
-            RankUser(username: "추가유저6", userID: "2233445566", frequency: 17),
-            RankUser(username: "추가유저7", userID: "1122334455", frequency: 16),
-            RankUser(username: "추가유저8", userID: "2233445566", frequency: 15),
-            RankUser(username: "추가유저9", userID: "1122334455", frequency: 14),
-            RankUser(username: "추가유저10", userID: "2233445566", frequency: 13),
-            RankUser(username: "추가유저11", userID: "1122334455", frequency: 12),
-            RankUser(username: "추가유저12", userID: "2233445566", frequency: 11),
-            RankUser(username: "추가유저13", userID: "1122334455", frequency: 10),
-            RankUser(username: "추가유저14", userID: "2233445566", frequency: 9),
-            RankUser(username: "추가유저15", userID: "1122334455", frequency: 8),
-            RankUser(username: "추가유저16", userID: "2233445566", frequency: 7)
+            RankUser(username: "추가유저1", suddenNumber: "1122334455", count: 22, userImage: ""),
+            RankUser(username: "추가유저2", suddenNumber: "2233445566", count: 21, userImage: ""),
+            RankUser(username: "추가유저3", suddenNumber: "1122334455", count: 20, userImage: ""),
+            RankUser(username: "추가유저4", suddenNumber: "2233445566", count: 19, userImage: ""),
+            RankUser(username: "추가유저5", suddenNumber: "1122334455", count: 18, userImage: ""),
+            RankUser(username: "추가유저6", suddenNumber: "2233445566", count: 17, userImage: ""),
+            RankUser(username: "추가유저7", suddenNumber: "1122334455", count: 16, userImage: ""),
+            RankUser(username: "추가유저8", suddenNumber: "2233445566", count: 15, userImage: ""),
+            RankUser(username: "추가유저9", suddenNumber: "1122334455", count: 14, userImage: ""),
+            RankUser(username: "추가유저10", suddenNumber: "2233445566", count: 13, userImage: ""),
+            RankUser(username: "추가유저11", suddenNumber: "1122334455", count: 12, userImage: ""),
+            RankUser(username: "추가유저12", suddenNumber: "2233445566", count: 11, userImage: ""),
+            RankUser(username: "추가유저13", suddenNumber: "1122334455", count: 10, userImage: ""),
+            RankUser(username: "추가유저14", suddenNumber: "2233445566", count: 9, userImage: ""),
+            RankUser(username: "추가유저15", suddenNumber: "1122334455", count: 8, userImage: ""),
+            RankUser(username: "추가유저16", suddenNumber: "2233445566", count: 7, userImage: "")
         ]
     }
 }

@@ -10,4 +10,6 @@ import Foundation
 
 public protocol RankService {
     func getRankData() async throws -> RankResponse
+    
+    func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse
 }

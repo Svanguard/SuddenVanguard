@@ -1,5 +1,5 @@
 //
-//  RankUseCase.swift
+//  GetProfileDataRepository.swift
 //  Domain
 //
 //  Created by 최동호 on 8/29/24.
@@ -8,8 +8,6 @@
 
 import Foundation
 
-public protocol RankUseCase {
-    func getRankData() async throws -> RankResponse
-    
+public protocol GetProfileDataRepository {
     func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse
 }

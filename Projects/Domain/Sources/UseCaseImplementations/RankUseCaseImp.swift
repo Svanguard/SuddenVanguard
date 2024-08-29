@@ -19,4 +19,7 @@ public struct RankUseCaseImp: RankUseCase {
         try await rankService.getRankData()
     }
     
+    public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {
+        try await rankService.getProfileData(request: request)
+    }
 }

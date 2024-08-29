@@ -10,14 +10,22 @@ import Domain
 import Foundation
 
 public struct RankServiceImp: RankService {
-    private let repository: GetRankDataRepository
+    private let getRankDataRepository: GetRankDataRepository
+    private let getProfileDataRepository: GetProfileDataRepository
     
-    public init(repository: GetRankDataRepository) {
-        self.repository = repository
+    public init(
+        getRankDataRepository: GetRankDataRepository,
+        getProfileDataRepository: GetProfileDataRepository
+    ) {
+        self.getRankDataRepository = getRankDataRepository
+        self.getProfileDataRepository = getProfileDataRepository
     }
     
     public func getRankData() async throws -> RankResponse {
-        try await repository.getRankData()
+        try await getRankDataRepository.getRankData()
     }
 
+    public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {
+        try await getProfileDataRepository.getProfileData(request: request)
+    }
 }
