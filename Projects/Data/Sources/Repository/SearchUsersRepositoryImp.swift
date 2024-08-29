@@ -10,7 +10,7 @@ import Domain
 import NetworkService
 import Foundation
 
-public final class SearchUsersRepositoryImp: SearchUsersRepository {
+public struct SearchUsersRepositoryImp: SearchUsersRepository {
     let apiClientService: ApiClientService
     
     public init(apiClientService: ApiClientService) {

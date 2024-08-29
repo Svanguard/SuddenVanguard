@@ -16,7 +16,6 @@
 		A008A74C16400F4C352D614A /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF59E537DED595ABC4723375 /* FeatureDependency.framework */; };
 		A4D24FE4D242E49ECD3C22EF /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516FD13893B1A194C70AADB2 /* SearchResult.swift */; };
 		BD6855676DFECBBDAE197A95 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E13DD31FE759DC8D2DF8F3A /* ResultView.swift */; };
-		BE6C333354CB38471D704614 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C9FFFD97313091FBC0105 /* MainViewModel.swift */; };
 		EEA2F94DB39DDF1D1D973E4E /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D0FF876020EFD5EA6E96A /* UserSearchView.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +33,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		018C9FFFD97313091FBC0105 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		028067B5198A06189E74D594 /* MainFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MainFeature-Info.plist"; sourceTree = "<group>"; };
 		03CEDE374127E8E097B3E89F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRowView.swift; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 		D9511F88C5BA2161C63AE5BD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				018C9FFFD97313091FBC0105 /* MainViewModel.swift */,
 				B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */,
 			);
 			path = ViewModel;
@@ -244,7 +241,6 @@
 				BD6855676DFECBBDAE197A95 /* ResultView.swift in Sources */,
 				42B390CD42B569F003600E4B /* UserRowView.swift in Sources */,
 				EEA2F94DB39DDF1D1D973E4E /* UserSearchView.swift in Sources */,
-				BE6C333354CB38471D704614 /* MainViewModel.swift in Sources */,
 				5B33FC7C27DD730502BA593C /* UserSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

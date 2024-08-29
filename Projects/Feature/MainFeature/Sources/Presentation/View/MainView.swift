@@ -13,8 +13,6 @@ import SwiftUI
 public struct MainView: View {
     public init() { }
     
-    @StateObject var viewModel = MainViewModel()
-    
     public var body: some View {
         NavigationStack {
             VStack {

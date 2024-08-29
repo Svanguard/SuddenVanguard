@@ -11,3 +11,4 @@ import Foundation
 public protocol SearchNumberRepository {
     func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse
 }
+

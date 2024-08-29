@@ -14,11 +14,8 @@ import SwiftUI
 
 @MainActor
 final class UserSearchViewModel: ObservableObject {
-    @Injected(SearchNumberUseCase.self)
-    public var numberUseCase: SearchNumberUseCase
-    
-    @Injected(SearchUsersUseCase.self)
-    public var usersUseCase: SearchUsersUseCase
+    @Injected(SearchUseCase.self)
+    public var searchUseCase: SearchUseCase
     
     @Published var searchQuery = ""
     @Published var users: [SearchUserData] = []
@@ -46,7 +43,7 @@ final class UserSearchViewModel: ObservableObject {
         }
         isLoading = true
         do {
-            let response = try await usersUseCase.searchUsers(request: .init(userName: searchQuery))
+            let response = try await searchUseCase.searchUsers(request: .init(userName: searchQuery))
             
             users = response.map { userResponse in
                 SearchUserData(
@@ -68,7 +65,7 @@ final class UserSearchViewModel: ObservableObject {
         }
         
         do {
-            let response = try await numberUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
+            let response = try await searchUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
             print(response)
         } catch {
             print(error.localizedDescription)

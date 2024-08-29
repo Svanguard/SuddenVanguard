@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0BD4F83D7AE8DCE92161EE77 /* SearchNumberDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041E2F863ECC11AE7734CB84 /* SearchNumberDTO.swift */; };
 		0DBCAF3ECEE41D1C03C9E875 /* NetworkService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8A24EF2DA38A8911C0332 /* NetworkService.framework */; };
 		33C90A53912FA67A68AA0948 /* SearchUsersDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */; };
+		419A65A52C80976A00E88CD6 /* SearchServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419A65A42C80976A00E88CD6 /* SearchServiceImp.swift */; };
 		8A3EF9E4E592948CC259F8BF /* SearchUsersRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3212CF0E828A60B9D0FB0F2 /* SearchUsersRepositoryImp.swift */; };
 		C7F7725147C0DADD0F47F2C5 /* SearchNumberRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908FEFE2684E9ADDA0F1AC02 /* SearchNumberRepositoryImp.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		033B57EACF093CA22F91EAB9 /* Data-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Data-Info.plist"; sourceTree = "<group>"; };
 		041E2F863ECC11AE7734CB84 /* SearchNumberDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNumberDTO.swift; sourceTree = "<group>"; };
 		2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersDTO.swift; sourceTree = "<group>"; };
+		419A65A42C80976A00E88CD6 /* SearchServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceImp.swift; sourceTree = "<group>"; };
 		4E75197C294DE74F5162FAA7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		908FEFE2684E9ADDA0F1AC02 /* SearchNumberRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNumberRepositoryImp.swift; sourceTree = "<group>"; };
 		B284CD75BAD317D668DD797D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 				FAC8A24EF2DA38A8911C0332 /* NetworkService.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		419A65A32C80976000E88CD6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				419A65A42C80976A00E88CD6 /* SearchServiceImp.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		647255CD65221C9CD4A43DED /* DTO */ = {
@@ -115,6 +125,7 @@
 		C590795A2658F92D49B27E8D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				419A65A32C80976000E88CD6 /* Service */,
 				647255CD65221C9CD4A43DED /* DTO */,
 				73F3ED55BFDC2EF15878F5B6 /* Repository */,
 			);
@@ -160,8 +171,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = BDB112DA78B2B42275EC3A62 /* Build configuration list for PBXProject "Data" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -197,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD4F83D7AE8DCE92161EE77 /* SearchNumberDTO.swift in Sources */,
+				419A65A52C80976A00E88CD6 /* SearchServiceImp.swift in Sources */,
 				33C90A53912FA67A68AA0948 /* SearchUsersDTO.swift in Sources */,
 				C7F7725147C0DADD0F47F2C5 /* SearchNumberRepositoryImp.swift in Sources */,
 				8A3EF9E4E592948CC259F8BF /* SearchUsersRepositoryImp.swift in Sources */,
@@ -226,7 +236,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.Data;
 				PRODUCT_NAME = Data;
 				SDKROOT = iphoneos;
@@ -234,10 +247,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -267,7 +277,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.Data;
 				PRODUCT_NAME = Data;
 				SDKROOT = iphoneos;
