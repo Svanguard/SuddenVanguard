@@ -6,10 +6,16 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Core
+import Common
+import Domain
 import Combine
+import Foundation
 
 final class RankViewModel: ObservableObject {
+    @Injected(RankUseCase.self)
+    public var rankUseCase: RankUseCase
+    
     @Published var text: String = ""
     @Published var users: [RankUser] = []
     @Published var isLoading: Bool = true
@@ -57,6 +63,15 @@ final class RankViewModel: ObservableObject {
             let moreUsers = RankUser.dummyData[startIndex..<min(endIndex, RankUser.dummyData.count)]
             self.users.append(contentsOf: moreUsers)
             self.isLoadingMore = false
+        }
+    }
+    
+    func getRankData() async {
+        do {
+            let response = try await rankUseCase.getRankData()
+            print(response)
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

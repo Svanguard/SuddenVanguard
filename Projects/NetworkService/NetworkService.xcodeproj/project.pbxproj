@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		036B6550D85D013E9E45D716 /* ApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DF9FED1221312C46C36A20 /* ApiError.swift */; };
 		0422C1E028807B6222269C0E /* HttpResponseStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D14C05E4D710518F379088FD /* HttpResponseStatus.swift */; };
 		0B0DADFFC6FAAB2B83FABA79 /* SearchUsersEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF8FD5356F63B16B5286FB9 /* SearchUsersEndPoint.swift */; };
+		419A65A92C809A4500E88CD6 /* RankEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419A65A82C809A4500E88CD6 /* RankEndPoint.swift */; };
 		5CD81B418DCC7667165005CA /* ApiClientServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE374FAFF5AD8033061042B6 /* ApiClientServiceImp.swift */; };
 		6E603AA8BBD6517702881483 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD5312BF635CBE4D99FAE162 /* Domain.framework */; };
 		759753D185FBA434CB7A41B8 /* ApiClientService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17754DA0A8AF217686219AFF /* ApiClientService.swift */; };
@@ -37,6 +38,7 @@
 		26DF9FED1221312C46C36A20 /* ApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiError.swift; sourceTree = "<group>"; };
 		30B8FE33444F24DC3915A82C /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		39E9564068243164AE0397F4 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		419A65A82C809A4500E88CD6 /* RankEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankEndPoint.swift; sourceTree = "<group>"; };
 		423A93F1015E6C9CF4DB82B2 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		564371F685EE5EF450EB138A /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		5BF8FD5356F63B16B5286FB9 /* SearchUsersEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersEndPoint.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				39E9564068243164AE0397F4 /* EndPoint.swift */,
 				18F1B1850E6073D414254855 /* SearchNumberEndPoint.swift */,
 				5BF8FD5356F63B16B5286FB9 /* SearchUsersEndPoint.swift */,
+				419A65A82C809A4500E88CD6 /* RankEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -196,8 +199,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = FFC6118989876A9280B17F0F /* Build configuration list for PBXProject "NetworkService" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -232,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				419A65A92C809A4500E88CD6 /* RankEndPoint.swift in Sources */,
 				759753D185FBA434CB7A41B8 /* ApiClientService.swift in Sources */,
 				BF7B74B2497062943DAB0D72 /* EndPoint.swift in Sources */,
 				8E666E5F7E2C013149F5F4BC /* SearchNumberEndPoint.swift in Sources */,
@@ -266,7 +268,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.NetworkService;
 				PRODUCT_NAME = NetworkService;
 				SDKROOT = iphoneos;
@@ -303,7 +308,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.NetworkService;
 				PRODUCT_NAME = NetworkService;
 				SDKROOT = iphoneos;
@@ -311,10 +319,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

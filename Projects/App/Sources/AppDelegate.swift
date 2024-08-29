@@ -24,8 +24,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func registerDependencies() {
         let apiClientService: ApiClientService = ApiClientServiceImp()
         
+        // Search
         let searchNumberRepository: SearchNumberRepository = SearchNumberRepositoryImp(apiClientService: apiClientService)
-
         let searchUsersRepository: SearchUsersRepository = SearchUsersRepositoryImp(apiClientService: apiClientService)
         
         let searchService: SearchService = SearchServiceImp(
@@ -33,11 +33,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             searchUsersRepository: searchUsersRepository
         )
         
+        // Rank
+        let getRankDataRepository: GetRankDataRepository = GetRankDataRepositoryImp(apiClientService: apiClientService)
+        let rankService: RankService = RankServiceImp(repository: getRankDataRepository)
+        
+        // MARK: - UseCase
         let searchUseCase: SearchUseCase = SearchUseCaseImp(service: searchService)
-
+        let rankUseCase: RankUseCase = RankUseCaseImp(rankService: rankService)
+        
+        // MARK: - Register
         DIContainer.register(
             type: SearchUseCase.self,
             searchUseCase
+        )
+        
+        DIContainer.register(
+            type: RankUseCase.self,
+            rankUseCase
         )
     
     }

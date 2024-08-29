@@ -11,6 +11,9 @@
 		0DBCAF3ECEE41D1C03C9E875 /* NetworkService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8A24EF2DA38A8911C0332 /* NetworkService.framework */; };
 		33C90A53912FA67A68AA0948 /* SearchUsersDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */; };
 		419A65A52C80976A00E88CD6 /* SearchServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419A65A42C80976A00E88CD6 /* SearchServiceImp.swift */; };
+		419A65AB2C809AE000E88CD6 /* RankDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419A65AA2C809AE000E88CD6 /* RankDTO.swift */; };
+		419A65B72C80A48800E88CD6 /* GetRankDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419A65B62C80A48800E88CD6 /* GetRankDataRepositoryImp.swift */; };
+		419A65B92C80A5FA00E88CD6 /* RankServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419A65B82C80A5FA00E88CD6 /* RankServiceImp.swift */; };
 		8A3EF9E4E592948CC259F8BF /* SearchUsersRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3212CF0E828A60B9D0FB0F2 /* SearchUsersRepositoryImp.swift */; };
 		C7F7725147C0DADD0F47F2C5 /* SearchNumberRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908FEFE2684E9ADDA0F1AC02 /* SearchNumberRepositoryImp.swift */; };
 /* End PBXBuildFile section */
@@ -33,6 +36,9 @@
 		041E2F863ECC11AE7734CB84 /* SearchNumberDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNumberDTO.swift; sourceTree = "<group>"; };
 		2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersDTO.swift; sourceTree = "<group>"; };
 		419A65A42C80976A00E88CD6 /* SearchServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceImp.swift; sourceTree = "<group>"; };
+		419A65AA2C809AE000E88CD6 /* RankDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankDTO.swift; sourceTree = "<group>"; };
+		419A65B62C80A48800E88CD6 /* GetRankDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetRankDataRepositoryImp.swift; sourceTree = "<group>"; };
+		419A65B82C80A5FA00E88CD6 /* RankServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankServiceImp.swift; sourceTree = "<group>"; };
 		4E75197C294DE74F5162FAA7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		908FEFE2684E9ADDA0F1AC02 /* SearchNumberRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNumberRepositoryImp.swift; sourceTree = "<group>"; };
 		B284CD75BAD317D668DD797D /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -66,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				419A65A42C80976A00E88CD6 /* SearchServiceImp.swift */,
+				419A65B82C80A5FA00E88CD6 /* RankServiceImp.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -74,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				041E2F863ECC11AE7734CB84 /* SearchNumberDTO.swift */,
+				419A65AA2C809AE000E88CD6 /* RankDTO.swift */,
 				2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */,
 			);
 			path = DTO;
@@ -84,6 +92,7 @@
 			children = (
 				908FEFE2684E9ADDA0F1AC02 /* SearchNumberRepositoryImp.swift */,
 				E3212CF0E828A60B9D0FB0F2 /* SearchUsersRepositoryImp.swift */,
+				419A65B62C80A48800E88CD6 /* GetRankDataRepositoryImp.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -206,10 +215,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BD4F83D7AE8DCE92161EE77 /* SearchNumberDTO.swift in Sources */,
+				419A65B92C80A5FA00E88CD6 /* RankServiceImp.swift in Sources */,
 				419A65A52C80976A00E88CD6 /* SearchServiceImp.swift in Sources */,
 				33C90A53912FA67A68AA0948 /* SearchUsersDTO.swift in Sources */,
+				419A65AB2C809AE000E88CD6 /* RankDTO.swift in Sources */,
 				C7F7725147C0DADD0F47F2C5 /* SearchNumberRepositoryImp.swift in Sources */,
 				8A3EF9E4E592948CC259F8BF /* SearchUsersRepositoryImp.swift in Sources */,
+				419A65B72C80A48800E88CD6 /* GetRankDataRepositoryImp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

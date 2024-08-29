@@ -21,13 +21,6 @@ public struct UserDTO: Decodable {
     public let punishDate: String
     public let registerFg: Bool
     
-    enum CodingKeys: String, CodingKey {
-        case userNexonSn = "userNexonSn"
-        case userNick = "userNick"
-        case punishType = "punishType"
-        case punishDate = "punishDate"
-        case registerFg = "registerFg"
-    }
 }
  
 extension SearchNumberDTO {
