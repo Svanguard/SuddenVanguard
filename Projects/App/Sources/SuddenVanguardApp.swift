@@ -10,7 +10,8 @@ import SwiftUI
 
 @main
 struct SuddenVanguardApp: App {
-    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
             MainTabView()

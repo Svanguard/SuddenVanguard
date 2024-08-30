@@ -6,13 +6,19 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Core
+import Common
+import Domain
 import Combine
 import SwiftUI
 
 @MainActor
 final class UserSearchViewModel: ObservableObject {
+    @Injected(SearchUseCase.self)
+    public var searchUseCase: SearchUseCase
+    
     @Published var searchQuery = ""
-    @Published var users: [User] = []
+    @Published var users: [SearchUserData] = []
     @Published var isLoading = false
     @Published var searchHistory: [String] = []
     @Published var isSearchFieldFocused: Bool = true
@@ -22,7 +28,6 @@ final class UserSearchViewModel: ObservableObject {
     @Published var resultType: ResultType = .clean
 
     private var cancellables = Set<AnyCancellable>()
-    private let searchService = UserSearchService()
     
     private let debounceDelay: TimeInterval = 0.5
     
@@ -38,11 +43,33 @@ final class UserSearchViewModel: ObservableObject {
         }
         isLoading = true
         do {
-            users = try await searchService.searchNickname(searchQuery)
+            let response = try await searchUseCase.searchUsers(request: .init(userName: searchQuery))
+            
+            users = response.map { userResponse in
+                SearchUserData(
+                    suddenNumber: userResponse.suddenNumber,
+                    userName: userResponse.userName,
+                    userImage: userResponse.userImage
+                )
+            }
+            
         } catch {
             users = []
         }
         isLoading = false
+    }
+    
+    func searchNumber(userSuddenNumber: Int) async {
+        guard userSuddenNumber != 0 else {
+            return
+        }
+        
+        do {
+            let response = try await searchUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     // 검색 기록에서 선택한 항목을 검색
@@ -54,8 +81,8 @@ final class UserSearchViewModel: ObservableObject {
     }
 
     // 검색 기록에 유저 추가
-    func addUserToSearchHistory(_ user: User) {
-        let query = user.user_nick
+    func addUserToSearchHistory(_ user: SearchUserData) {
+        let query = user.userName
         updateSearchHistory(with: query)
     }
 

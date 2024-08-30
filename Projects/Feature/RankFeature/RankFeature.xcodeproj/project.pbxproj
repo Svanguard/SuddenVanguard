@@ -11,7 +11,7 @@
 		6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966368EE4EE0537440518A3 /* RankUserListCell.swift */; };
 		7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9101001570ABDE374806923 /* RankView.swift */; };
 		8614EB492142716EDD734FEB /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */; };
-		D612B512169DF0BF406B6923 /* RinkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA1CBFD11B2F5E1701822A2 /* RinkViewModel.swift */; };
+		B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E9639D3DC11D57E8DE1A16 /* RankViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,13 +29,13 @@
 
 /* Begin PBXFileReference section */
 		2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUser.swift; sourceTree = "<group>"; };
-		4EA1CBFD11B2F5E1701822A2 /* RinkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RinkViewModel.swift; sourceTree = "<group>"; };
 		5C0149663550FDF8DCA76869 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		7966368EE4EE0537440518A3 /* RankUserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserListCell.swift; sourceTree = "<group>"; };
 		86633602C5A33C8383427DBD /* RankFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RankFeature-Info.plist"; sourceTree = "<group>"; };
 		8CEB8A8080191539B85FE509 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		BFD708BEA19A1821DFE10F34 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC963FDC5BD2C440D9155223 /* RankFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RankFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6E9639D3DC11D57E8DE1A16 /* RankViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankViewModel.swift; sourceTree = "<group>"; };
 		E9101001570ABDE374806923 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +62,7 @@
 		19853B01CABA08AD817DD04C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				4EA1CBFD11B2F5E1701822A2 /* RinkViewModel.swift */,
+				E6E9639D3DC11D57E8DE1A16 /* RankViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 				6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */,
 				8614EB492142716EDD734FEB /* RankUser.swift in Sources */,
 				7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */,
-				D612B512169DF0BF406B6923 /* RinkViewModel.swift in Sources */,
+				B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

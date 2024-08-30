@@ -76,6 +76,3 @@ struct WebViewScreen: View {
     }
 }
 
-#Preview {
-    SettingView()
-}

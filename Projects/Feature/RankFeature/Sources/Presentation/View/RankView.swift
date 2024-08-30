@@ -65,6 +65,3 @@ public struct RankView: View {
     }
 }
 
-#Preview {
-    RankView()
-}

@@ -1,15 +1,21 @@
 //
-//  RinkViewModel.swift
+//  RankViewModel.swift
 //  RankFeature
 //
 //  Created by 강치우 on 8/6/24.
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Core
+import Common
+import Domain
 import Combine
+import Foundation
 
 final class RankViewModel: ObservableObject {
+    @Injected(RankUseCase.self)
+    public var rankUseCase: RankUseCase
+    
     @Published var text: String = ""
     @Published var users: [RankUser] = []
     @Published var isLoading: Bool = true
@@ -25,8 +31,8 @@ final class RankViewModel: ObservableObject {
     
     // MARK: 필터링 로직
     var filteredUsers: [RankUser] {
-        let sortedUsers = users.sorted { $0.frequency > $1.frequency }
-        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) || $0.userID.contains(text) }
+        let sortedUsers = users.sorted { $0.count > $1.count }
+        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) || $0.suddenNumber.contains(text) }
         
         return filtered
     }
@@ -57,6 +63,43 @@ final class RankViewModel: ObservableObject {
             let moreUsers = RankUser.dummyData[startIndex..<min(endIndex, RankUser.dummyData.count)]
             self.users.append(contentsOf: moreUsers)
             self.isLoadingMore = false
+        }
+    }
+    
+    func getDailyRankData() async {
+        do {
+            let response = try await rankUseCase.getRankData(request: .init(requestType: .daily))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getWeeklyRankData() async {
+        do {
+            let response = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getMonthlyRankData() async {
+        do {
+            let response = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getProfileData(suddenNumber: Int) async {
+        do {
+            let response = try await rankUseCase.getProfileData(request: .init(suddenNumber: suddenNumber))
+            print(response)
+            
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

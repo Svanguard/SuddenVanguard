@@ -6,39 +6,34 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Kingfisher
+
+import Common
 import SwiftUI
 
 struct UserRowView: View {
-    let user: User
+    let user: SearchUserData
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: user.user_img)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                case .failure:
+            KFImage(URL(string: user.userImage))
+                .placeholder { 
                     Image(systemName: "person.fill")
                         .resizable()
                         .scaledToFill()
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
-                @unknown default:
-                    EmptyView()
                 }
-            }
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
             
             VStack(alignment: .leading, spacing: 8) {
-                Text(user.user_nick)
+                Text(user.userName)
                     .font(.headline)
                 
-                let formattedNexonSN = String(user.user_nexon_sn).replacingOccurrences(of: ",", with: "")
+                let formattedNexonSN = String(user.suddenNumber).replacingOccurrences(of: ",", with: "")
                 Text("병영 번호: \(formattedNexonSN)")
                     .font(.subheadline)
                     .lineLimit(1)

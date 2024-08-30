@@ -11,20 +11,32 @@ import DesignSystem
 import SwiftUI
 
 struct SearchFieldView: View {
+    private let placeHolder: String
+    private let opacityValue: CGFloat
+    
+    init(
+        placeHolder: String,
+        opacityValue: CGFloat
+    ) {
+        self.placeHolder = placeHolder
+        self.opacityValue = opacityValue
+    }
+    
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.white)
             
-            Text("닉네임으로 검색하기")
+            Text(placeHolder)
                 .foregroundStyle(.gray)
             
             Spacer()
         }
-        .frame(width: UIScreen.main.bounds.width / 1.2)
+        .foregroundStyle(.gray)
+        .frame(width: UIScreen.main.bounds.width * 0.37)
         .padding()
         .border(DesignSystemAsset.searchBorderColor.swiftUIColor)
-        .background(DesignSystemAsset.searchColor.swiftUIColor)
+        .background(DesignSystemAsset.searchColor.swiftUIColor.opacity(opacityValue))
         .padding(.top, 20)
     }
 }

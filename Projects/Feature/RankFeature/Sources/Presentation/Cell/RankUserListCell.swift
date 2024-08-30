@@ -25,11 +25,11 @@ public struct RankUserListCell: View {
                     Text(user.username)
                         .font(.system(.subheadline, weight: .semibold))
                     
-                    Text(user.userID)
+                    Text(user.suddenNumber)
                         .font(.system(.footnote))
                         .foregroundStyle(Color(.systemGray))
                     
-                    Text("검색 횟수: \(user.frequency) 번")
+                    Text("검색 횟수: \(user.count) 번")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.top, 6)
@@ -62,7 +62,7 @@ public struct RankUserListCell: View {
                 }
                 .simultaneousGesture(TapGesture().onEnded { })
                 .sheet(isPresented: $showSafari) {
-                    SafariView(url: URL(string: "https://barracks.sa.nexon.com/\(user.userID)/match")!)
+                    SafariView(url: URL(string: "https://barracks.sa.nexon.com/\(user.suddenNumber)/match")!)
                 }
             }
         }
@@ -81,8 +81,4 @@ struct SafariView: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {}
-}
-
-#Preview {
-    RankView()
 }
