@@ -12,12 +12,15 @@ import Domain
 import Combine
 import Foundation
 
+@MainActor
 final class RankViewModel: ObservableObject {
     @Injected(RankUseCase.self)
     public var rankUseCase: RankUseCase
     
     @Published var text: String = ""
-    @Published var users: [RankUser] = []
+    @Published var dailyRankUsers: [RankUser] = []
+    @Published var weeklyRankUsers: [RankUser] = []
+    @Published var monthlyRankUsers: [RankUser] = []
     @Published var isLoading: Bool = true
     @Published var isLoadingMore: Bool = false
     @Published var showActionSheet = false
@@ -28,78 +31,80 @@ final class RankViewModel: ObservableObject {
     private let pageSize: Int = 10
     
     init() {
-        loadData(for: .monthly)
+        Task {
+            await loadData(for: .monthly)
+        }
     }
     
     // MARK: 필터링 로직
     var filteredUsers: [RankUser] {
+        let users: [RankUser]
+        
+        switch selectedPeriod {
+        case .daily:
+            users = dailyRankUsers
+        case .weekly:
+            users = weeklyRankUsers
+        case .monthly:
+            users = monthlyRankUsers
+        }
+        
         let sortedUsers = users.sorted { $0.count > $1.count }
-        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) || $0.suddenNumber.contains(text) }
+        
+        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter {
+            $0.username.contains(text) || $0.suddenNumber.contains(text)
+        }
         
         return filtered
     }
-    
     var isSearching: Bool {
         return !text.isEmpty
     }
     
     // MARK: 선택된 기간에 따른 데이터 로드
-    func loadData(for period: RankPeriod) {
+    func loadData(for period: RankPeriod) async {
         isLoading = true
         
-        switch period {
-        case .daily:
-            getDailyRankData()
-        case .weekly:
-            getWeeklyRankData()
-        case .monthly:
-            getMonthlyRankData()
+        Task {
+            switch period {
+            case .daily:
+                await getDailyRankData()
+            case .weekly:
+                await getWeeklyRankData()
+            case .monthly:
+                await getMonthlyRankData()
+            }
         }
     }
     
     // MARK: 새로고침 로직
     func refreshData() {
-        loadData(for: .monthly) // 예시로 월간 데이터를 새로 로드
-    }
-    
-    /// MARK: - 일,주,월간별로 더미데이터 넣어둠
-    /// 밑에 함수 만들어둔거 확인했음 로직 완성하고 바꾸면 될듯
-    func getDailyRankData() {
-        // 일간 데이터 로드 로직
-        users = RankUser.dummyData.shuffled().prefix(pageSize).map { $0 }
-        isLoading = false
-    }
-    
-    func getWeeklyRankData() {
-        // 주간 데이터 로드 로직
-        users = RankUser.dummyData.shuffled().prefix(pageSize).map { $0 }
-        isLoading = false
-    }
-    
-    func getMonthlyRankData() {
-        // 월간 데이터 로드 로직
-        users = RankUser.dummyData.shuffled().prefix(pageSize).map { $0 }
-        isLoading = false
+//        loadData(for: .monthly) // 예시로 월간 데이터를 새로 로드
     }
     
     // MARK: 무한 스크롤 로직
     func loadMoreData() {
-        guard !isLoadingMore else { return }
-        isLoadingMore = true
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            let startIndex = self.users.count
-            let endIndex = startIndex + self.pageSize
-            let moreUsers = RankUser.dummyData[startIndex..<min(endIndex, RankUser.dummyData.count)]
-            self.users.append(contentsOf: moreUsers)
-            self.isLoadingMore = false
-        }
+//        guard !isLoadingMore else { return }
+//        isLoadingMore = true
+//        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            let startIndex = self.users.count
+//            let endIndex = startIndex + self.pageSize
+//            let moreUsers = RankUser.dummyData[startIndex..<min(endIndex, RankUser.dummyData.count)]
+//            self.users.append(contentsOf: moreUsers)
+//            self.isLoadingMore = false
+//        }
     }
     
     func getDailyRankData() async {
         do {
             let response = try await rankUseCase.getRankData(request: .init(requestType: .daily))
-            print(response)
+            dailyRankUsers = []
+            for userData in response.rankDatas {
+                await fetchAndAppendProfileData(userData: userData, period: .daily)
+            }
+            
+            isLoading = false
         } catch {
             print(error.localizedDescription)
         }
@@ -108,7 +113,12 @@ final class RankViewModel: ObservableObject {
     func getWeeklyRankData() async {
         do {
             let response = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
-            print(response)
+            weeklyRankUsers = []
+            for userData in response.rankDatas {
+                await fetchAndAppendProfileData(userData: userData, period: .weekly)
+            }
+            
+            isLoading = false
         } catch {
             print(error.localizedDescription)
         }
@@ -117,19 +127,41 @@ final class RankViewModel: ObservableObject {
     func getMonthlyRankData() async {
         do {
             let response = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
-            print(response)
+            monthlyRankUsers = []
+            for userData in response.rankDatas {
+                await fetchAndAppendProfileData(userData: userData, period: .monthly)
+            }
+            
+            isLoading = false
+            print(monthlyRankUsers)
         } catch {
             print(error.localizedDescription)
         }
     }
     
-    func getProfileData(suddenNumber: Int) async {
+    private func fetchAndAppendProfileData(userData: UserCountData, period: RankPeriod) async {
         do {
-            let response = try await rankUseCase.getProfileData(request: .init(suddenNumber: suddenNumber))
-            print(response)
+            let profileResponse = try await rankUseCase.getProfileData(request: .init(suddenNumber: userData.userNexonSn))
+            let newRankUser = RankUser(
+                username: profileResponse.userName,
+                suddenNumber: String(userData.userNexonSn),
+                count: userData.count,
+                userImage: profileResponse.userImage
+            )
+            
+            DispatchQueue.main.async {
+                switch period {
+                case .daily:
+                    self.dailyRankUsers.append(newRankUser)
+                case .weekly:
+                    self.weeklyRankUsers.append(newRankUser)
+                case .monthly:
+                    self.monthlyRankUsers.append(newRankUser)
+                }
+            }
             
         } catch {
-            print(error.localizedDescription)
+            print("\(userData.userNexonSn) 프로필 데이터 패치 실패: \(error.localizedDescription)")
         }
     }
 }

@@ -59,14 +59,11 @@ public struct RankView: View {
             }
             .navigationTitle("실시간순위")
             .navigationBarTitleDisplayMode(.large)
-            .onAppear {
-                viewModel.loadData(for: viewModel.selectedPeriod)
-            }
             .confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden, actions: {
                 Button {
                     viewModel.selectedPeriod = .daily
-                    DispatchQueue.main.async {
-                        viewModel.loadData(for: viewModel.selectedPeriod)
+                    Task {
+                        await viewModel.loadData(for: viewModel.selectedPeriod)
                     }
                 } label: {
                     Text("일간")
@@ -74,8 +71,8 @@ public struct RankView: View {
                 
                 Button {
                     viewModel.selectedPeriod = .weekly
-                    DispatchQueue.main.async {
-                        viewModel.loadData(for: viewModel.selectedPeriod)
+                    Task {
+                        await viewModel.loadData(for: viewModel.selectedPeriod)
                     }
                 } label: {
                     Text("주간")
@@ -83,8 +80,8 @@ public struct RankView: View {
                 
                 Button {
                     viewModel.selectedPeriod = .monthly
-                    DispatchQueue.main.async {
-                        viewModel.loadData(for: viewModel.selectedPeriod)
+                    Task {
+                        await viewModel.loadData(for: viewModel.selectedPeriod)
                     }
                 } label: {
                     Text("월간")

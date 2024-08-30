@@ -42,6 +42,11 @@ public struct ApiClientServiceImp: ApiClientService {
     }
     
     private func decodeModel<T: Decodable>(data: Data) throws -> T {
+        if let jsonString = String(data: data, encoding: .utf8) {
+              print("JSON 응답 데이터: \(jsonString)")
+          } else {
+              print("data to string 변환 실패")
+          }
         let decoder = JSONDecoder()
         let model = try? decoder.decode(T.self, from: data)
         guard let model = model else { throw ApiError.errorDecoding }
