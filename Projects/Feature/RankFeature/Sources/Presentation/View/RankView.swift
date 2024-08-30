@@ -17,6 +17,13 @@ public struct RankView: View {
     public var body: some View {
         NavigationStack {
             VStack {
+                HStack {
+                    filterButton
+                        .padding(.horizontal)
+                    
+                    Spacer()
+                }
+                
                 if viewModel.isLoading {
                     Spacer()
                     
@@ -53,8 +60,54 @@ public struct RankView: View {
             .navigationTitle("실시간순위")
             .navigationBarTitleDisplayMode(.large)
             .onAppear {
-                viewModel.loadData()
+                viewModel.loadData(for: viewModel.selectedPeriod)
             }
+            .confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden, actions: {
+                Button {
+                    viewModel.selectedPeriod = .daily
+                    DispatchQueue.main.async {
+                        viewModel.loadData(for: viewModel.selectedPeriod)
+                    }
+                } label: {
+                    Text("일간")
+                }
+                
+                Button {
+                    viewModel.selectedPeriod = .weekly
+                    DispatchQueue.main.async {
+                        viewModel.loadData(for: viewModel.selectedPeriod)
+                    }
+                } label: {
+                    Text("주간")
+                }
+                
+                Button {
+                    viewModel.selectedPeriod = .monthly
+                    DispatchQueue.main.async {
+                        viewModel.loadData(for: viewModel.selectedPeriod)
+                    }
+                } label: {
+                    Text("월간")
+                }
+                
+                Button("닫기", role: .cancel) { }
+            })
+        }
+    }
+    
+    private var filterButton: some View {
+        Button {
+            viewModel.showActionSheet = true
+        } label: {
+            HStack(spacing: 2) {
+                Text(viewModel.selectedPeriod.displayName)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    
+                Image(systemName: "chevron.down")
+                    .font(.caption2)
+            }
+            .foregroundStyle(Color(.systemGray))
         }
     }
     
@@ -64,4 +117,3 @@ public struct RankView: View {
             .fontWeight(.semibold)
     }
 }
-

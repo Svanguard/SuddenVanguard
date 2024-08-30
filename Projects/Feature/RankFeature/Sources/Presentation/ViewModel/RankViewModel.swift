@@ -20,13 +20,15 @@ final class RankViewModel: ObservableObject {
     @Published var users: [RankUser] = []
     @Published var isLoading: Bool = true
     @Published var isLoadingMore: Bool = false
+    @Published var showActionSheet = false
+    @Published var selectedPeriod: RankPeriod = .monthly
     
     private var cancellables = Set<AnyCancellable>()
     private var currentPage: Int = 1
     private let pageSize: Int = 10
     
     init() {
-        loadData()
+        loadData(for: .monthly)
     }
     
     // MARK: 필터링 로직
@@ -41,15 +43,43 @@ final class RankViewModel: ObservableObject {
         return !text.isEmpty
     }
     
-    // MARK: 처음 보여줄 데이터
-    func loadData() {
-        self.users = Array(RankUser.dummyData.prefix(pageSize))
-        self.isLoading = false
+    // MARK: 선택된 기간에 따른 데이터 로드
+    func loadData(for period: RankPeriod) {
+        isLoading = true
+        
+        switch period {
+        case .daily:
+            getDailyRankData()
+        case .weekly:
+            getWeeklyRankData()
+        case .monthly:
+            getMonthlyRankData()
+        }
     }
     
     // MARK: 새로고침 로직
     func refreshData() {
-        
+        loadData(for: .monthly) // 예시로 월간 데이터를 새로 로드
+    }
+    
+    /// MARK: - 일,주,월간별로 더미데이터 넣어둠
+    /// 밑에 함수 만들어둔거 확인했음 로직 완성하고 바꾸면 될듯
+    func getDailyRankData() {
+        // 일간 데이터 로드 로직
+        users = RankUser.dummyData.shuffled().prefix(pageSize).map { $0 }
+        isLoading = false
+    }
+    
+    func getWeeklyRankData() {
+        // 주간 데이터 로드 로직
+        users = RankUser.dummyData.shuffled().prefix(pageSize).map { $0 }
+        isLoading = false
+    }
+    
+    func getMonthlyRankData() {
+        // 월간 데이터 로드 로직
+        users = RankUser.dummyData.shuffled().prefix(pageSize).map { $0 }
+        isLoading = false
     }
     
     // MARK: 무한 스크롤 로직
