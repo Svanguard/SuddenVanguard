@@ -15,8 +15,8 @@ public struct RankUseCaseImp: RankUseCase {
         self.rankService = rankService
     }
     
-    public func getRankData() async throws -> RankResponse {
-        try await rankService.getRankData()
+    public func getRankData(request: RankRequest) async throws -> RankResponse {
+        try await rankService.getRankData(request: request)
     }
     
     public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {

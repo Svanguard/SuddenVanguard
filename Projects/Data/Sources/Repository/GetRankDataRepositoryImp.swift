@@ -18,8 +18,8 @@ public struct GetRankDataRepositoryImp: GetRankDataRepository {
         self.apiClientService = apiClientService
     }
     
-    public func getRankData() async throws -> RankResponse {
-        let endPoint = RankEndPoint()
+    public func getRankData(request: RankRequest) async throws -> RankResponse {
+        let endPoint = RankEndPoint(request: request)
         
         guard let urlRequest = endPoint.toURLRequest else {
             throw ApiError.errorInUrl

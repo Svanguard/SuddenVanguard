@@ -28,6 +28,7 @@ public struct ApiClientServiceImp: ApiClientService {
             throw ApiError.unknownError
         }
         
+        print(httpResponse)
         switch httpResponse.statusCode {
         case HttpResponseStatus.ok:
             return try decodeModel(data: data)

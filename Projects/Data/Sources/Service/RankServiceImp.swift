@@ -21,8 +21,8 @@ public struct RankServiceImp: RankService {
         self.getProfileDataRepository = getProfileDataRepository
     }
     
-    public func getRankData() async throws -> RankResponse {
-        try await getRankDataRepository.getRankData()
+    public func getRankData(request: RankRequest) async throws -> RankResponse {
+        try await getRankDataRepository.getRankData(request: request)
     }
 
     public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {

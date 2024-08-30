@@ -1,5 +1,5 @@
 //
-//  RinkViewModel.swift
+//  RankViewModel.swift
 //  RankFeature
 //
 //  Created by 강치우 on 8/6/24.
@@ -66,9 +66,27 @@ final class RankViewModel: ObservableObject {
         }
     }
     
-    func getRankData() async {
+    func getDailyRankData() async {
         do {
-            let response = try await rankUseCase.getRankData()
+            let response = try await rankUseCase.getRankData(request: .init(requestType: .daily))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getWeeklyRankData() async {
+        do {
+            let response = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
+            print(response)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getMonthlyRankData() async {
+        do {
+            let response = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
             print(response)
         } catch {
             print(error.localizedDescription)

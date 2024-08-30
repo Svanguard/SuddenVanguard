@@ -9,18 +9,12 @@
 import Foundation
 
 public struct RankResponse {
-    public let dailyDatas: [UserCountData]
-    public let weeklyDatas: [UserCountData]
-    public let monthlyDatas: [UserCountData]
+    public let rankDatas: [UserCountData]
     
     public init(
-        dailyDatas: [UserCountData],
-        weeklyDatas: [UserCountData],
-        monthlyDatas: [UserCountData]
+        rankDatas: [UserCountData]
     ) {
-        self.dailyDatas = dailyDatas
-        self.weeklyDatas = weeklyDatas
-        self.monthlyDatas = monthlyDatas
+        self.rankDatas = rankDatas
     }
 }
 

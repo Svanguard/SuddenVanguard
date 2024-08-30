@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol GetRankDataRepository {
-    func getRankData() async throws -> RankResponse
+    func getRankData(request: RankRequest) async throws -> RankResponse
 }

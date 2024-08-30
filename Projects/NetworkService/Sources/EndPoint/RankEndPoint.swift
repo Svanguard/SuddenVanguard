@@ -10,6 +10,8 @@ import Domain
 import Foundation
 
 public struct RankEndPoint: EndPoint {
+    private let request: RankRequest
+    
     public var scheme: Scheme {
         .http
     }
@@ -23,7 +25,7 @@ public struct RankEndPoint: EndPoint {
     }
     
     public var path: String {
-        "/api/v1/users/rankings"
+        "/api/v1/users/rankings/\(request.requestType)"
     }
     
     public var query: [String : String] = [:]
@@ -34,5 +36,7 @@ public struct RankEndPoint: EndPoint {
     
     public var method: HTTPMethod = .get
     
-    public init() { }
+    public init(request: RankRequest) {
+        self.request = request
+    }
 }
