@@ -26,8 +26,14 @@ final class RankViewModel: ObservableObject {
     @Published var showActionSheet = false
     @Published var selectedPeriod: RankPeriod = .monthly
     
+    private var dailyResponse: RankResponse = .init(rankDatas: [])
+    private var weeklyResponse: RankResponse = .init(rankDatas: [])
+    private var monthlyResponse: RankResponse = .init(rankDatas: [])
+    
     private var cancellables = Set<AnyCancellable>()
-    private var currentPage: Int = 1
+    private var currentDailyPage: Int = 0
+    private var currentWeeklyPage: Int = 0
+    private var currentMonthlyPage: Int = 0
     private let pageSize: Int = 10
     
     init() {
@@ -49,9 +55,7 @@ final class RankViewModel: ObservableObject {
             users = monthlyRankUsers
         }
         
-        let sortedUsers = users.sorted { $0.count > $1.count }
-        
-        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter {
+        let filtered = text.isEmpty ? users : users.filter {
             $0.username.contains(text) || $0.suddenNumber.contains(text)
         }
         
@@ -68,11 +72,25 @@ final class RankViewModel: ObservableObject {
         Task {
             switch period {
             case .daily:
-                await getDailyRankData()
+                guard dailyRankUsers.isEmpty else {
+                    isLoading = false
+                    return
+                }
+                checkIsRankResponse(period: period)
+
             case .weekly:
-                await getWeeklyRankData()
+                guard weeklyRankUsers.isEmpty else {
+                    isLoading = false
+                    return
+                }
+                checkIsRankResponse(period: period)
+ 
             case .monthly:
-                await getMonthlyRankData()
+                guard monthlyRankUsers.isEmpty else {
+                    isLoading = false
+                    return
+                }
+                checkIsRankResponse(period: period)
             }
         }
     }
@@ -82,86 +100,169 @@ final class RankViewModel: ObservableObject {
 //        loadData(for: .monthly) // 예시로 월간 데이터를 새로 로드
     }
     
-    // MARK: 무한 스크롤 로직
-    func loadMoreData() {
-//        guard !isLoadingMore else { return }
-//        isLoadingMore = true
-//        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//            let startIndex = self.users.count
-//            let endIndex = startIndex + self.pageSize
-//            let moreUsers = RankUser.dummyData[startIndex..<min(endIndex, RankUser.dummyData.count)]
-//            self.users.append(contentsOf: moreUsers)
-//            self.isLoadingMore = false
-//        }
+    private func checkIsRankResponse(period: RankPeriod) {
+        Task {
+            switch period {
+            case .daily:
+                guard dailyResponse.rankDatas.isEmpty else { return }
+                await getRankData(period: period)
+            case .weekly:
+                guard weeklyResponse.rankDatas.isEmpty else { return }
+                await getRankData(period: period)
+            case .monthly:
+                guard monthlyResponse.rankDatas.isEmpty else { return }
+                await getRankData(period: period)
+            }
+        }
+    }
+    
+    func getRankData(period: RankPeriod) async {
+        do {
+            switch period {
+            case .daily:
+                dailyResponse = try await rankUseCase.getRankData(request: .init(requestType: .daily))
+                await getDailyRankData()
+            case .weekly:
+                weeklyResponse = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
+                await getWeeklyRankData()
+            case .monthly:
+                monthlyResponse = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
+                await getMonthlyRankData()
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     func getDailyRankData() async {
-        do {
-            let response = try await rankUseCase.getRankData(request: .init(requestType: .daily))
-            dailyRankUsers = []
-            for userData in response.rankDatas {
-                await fetchAndAppendProfileData(userData: userData, period: .daily)
+        var tempUsers: [Int: RankUser] = [:]
+        
+        await withTaskGroup(of: (Int, RankUser?).self) { group in
+            for (index, userData) in dailyResponse.rankDatas.prefix(20).enumerated() {
+                group.addTask {
+                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
+                    return (index, rankUser)
+                }
             }
             
-            isLoading = false
-        } catch {
-            print(error.localizedDescription)
+            for await (index, rankUser) in group {
+                if let rankUser = rankUser {
+                    tempUsers[index] = rankUser
+                }
+            }
         }
+        
+        dailyRankUsers = (0..<tempUsers.count).compactMap { tempUsers[$0] }
+        isLoading = false
+        
     }
     
     func getWeeklyRankData() async {
-        do {
-            let response = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
-            weeklyRankUsers = []
-            for userData in response.rankDatas {
-                await fetchAndAppendProfileData(userData: userData, period: .weekly)
+        var tempUsers: [Int: RankUser] = [:]
+        
+        await withTaskGroup(of: (Int, RankUser?).self) { group in
+            for (index, userData) in weeklyResponse.rankDatas.prefix(20).enumerated() {
+                group.addTask {
+                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
+                    return (index, rankUser)
+                }
             }
             
-            isLoading = false
-        } catch {
-            print(error.localizedDescription)
+            for await (index, rankUser) in group {
+                if let rankUser = rankUser {
+                    tempUsers[index] = rankUser
+                }
+            }
         }
+        weeklyRankUsers = (0..<tempUsers.count).compactMap { tempUsers[$0] }
+        isLoading = false
     }
     
     func getMonthlyRankData() async {
-        do {
-            let response = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
-            monthlyRankUsers = []
-            for userData in response.rankDatas {
-                await fetchAndAppendProfileData(userData: userData, period: .monthly)
+        var tempUsers: [Int: RankUser] = [:]
+        
+        await withTaskGroup(of: (Int, RankUser?).self) { group in
+            for (index, userData) in monthlyResponse.rankDatas.prefix(20).enumerated() {
+                group.addTask {
+                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
+                    return (index, rankUser)
+                }
             }
             
-            isLoading = false
-            print(monthlyRankUsers)
-        } catch {
-            print(error.localizedDescription)
+            for await (index, rankUser) in group {
+                if let rankUser = rankUser {
+                    tempUsers[index] = rankUser
+                }
+            }
         }
+        monthlyRankUsers = (0..<tempUsers.count).compactMap { tempUsers[$0] }
+        isLoading = false
     }
     
-    private func fetchAndAppendProfileData(userData: UserCountData, period: RankPeriod) async {
+    private func fetchAndCreateRankUser(userData: UserCountData) async -> RankUser? {
         do {
             let profileResponse = try await rankUseCase.getProfileData(request: .init(suddenNumber: userData.userNexonSn))
-            let newRankUser = RankUser(
+            return RankUser(
                 username: profileResponse.userName,
                 suddenNumber: String(userData.userNexonSn),
                 count: userData.count,
                 userImage: profileResponse.userImage
             )
-            
-            DispatchQueue.main.async {
-                switch period {
-                case .daily:
-                    self.dailyRankUsers.append(newRankUser)
-                case .weekly:
-                    self.weeklyRankUsers.append(newRankUser)
-                case .monthly:
-                    self.monthlyRankUsers.append(newRankUser)
-                }
-            }
-            
         } catch {
             print("\(userData.userNexonSn) 프로필 데이터 패치 실패: \(error.localizedDescription)")
         }
+        return nil
+    }
+}
+
+// MARK: - 무한스크롤
+extension RankViewModel {
+    
+    // MARK: 무한 스크롤 로직
+    func loadMoreData(for period: RankPeriod) async {
+        guard !isLoadingMore else { return }
+        isLoadingMore = true
+        
+        switch period {
+        case .daily:
+            currentDailyPage += 1
+            let rankDatas = await loadMoreRankData(response: dailyResponse)
+            dailyRankUsers.append(contentsOf: (0..<rankDatas.count).compactMap { rankDatas[$0] })
+
+        case .weekly:
+            currentWeeklyPage += 1
+            let rankDatas = await loadMoreRankData(response: weeklyResponse)
+            weeklyRankUsers.append(contentsOf: (0..<rankDatas.count).compactMap { rankDatas[$0] })
+
+        case .monthly:
+            currentMonthlyPage += 1
+            let rankDatas = await loadMoreRankData(response: monthlyResponse)
+            monthlyRankUsers.append(contentsOf: (0..<rankDatas.count).compactMap { rankDatas[$0] })
+        }
+        
+        isLoadingMore = false
+    }
+
+    func loadMoreRankData(response: RankResponse) async -> [Int: RankUser] {
+
+        
+        var tempUsers: [Int: RankUser] = [:]
+        
+        await withTaskGroup(of: (Int, RankUser?).self) { group in
+            for (index, userData) in response.rankDatas.suffix(pageSize).enumerated() {
+                group.addTask {
+                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
+                    return (index, rankUser)
+                }
+            }
+            
+            for await (index, rankUser) in group {
+                if let rankUser = rankUser {
+                    tempUsers[index] = rankUser
+                }
+            }
+        }
+        
+        return tempUsers
     }
 }

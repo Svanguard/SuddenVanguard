@@ -38,8 +38,10 @@ public struct RankView: View {
                             Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
                                 RankUserListCell(user: user)
                                     .onAppear {
-                                        if viewModel.filteredUsers.last == user {
-                                            viewModel.loadMoreData()
+                                        Task {
+                                            if viewModel.filteredUsers.last == user {
+                                                await viewModel.loadMoreData(for: viewModel.selectedPeriod)
+                                            }
                                         }
                                     }
                             }
