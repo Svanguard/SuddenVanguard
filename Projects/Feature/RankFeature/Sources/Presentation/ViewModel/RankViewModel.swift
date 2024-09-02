@@ -105,12 +105,15 @@ final class RankViewModel: ObservableObject {
     func refreshData() async {
         switch selectedPeriod {
         case .daily:
+            currentDailyPage = 0
             dailyResponse = .init(rankDatas: [])
             await getRankData()
         case .weekly:
+            currentWeeklyPage = 0
             weeklyResponse = .init(rankDatas: [])
             await getRankData()
         case .monthly:
+            currentMonthlyPage = 0
             monthlyResponse = .init(rankDatas: [])
             await getRankData()
         }
