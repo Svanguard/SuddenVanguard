@@ -37,25 +37,25 @@ public struct RankView: View {
                         ForEach(viewModel.filteredUsers.enumerated().map({ $0 }), id: \.1.id) { index, user in
                             Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
                                 RankUserListCell(user: user)
-                                    .onAppear {
-                                        Task {
-                                            if viewModel.filteredUsers.last == user {
-                                                await viewModel.loadMoreData(for: viewModel.selectedPeriod)
-                                            }
-                                        }
-                                    }
                             }
                         }
                         
-                        if viewModel.isLoadingMore {
+                        if viewModel.showMoreProgressView() {
                             ProgressView()
                                 .frame(maxWidth: .infinity, alignment: .center)
+                                .onAppear {
+                                    Task {
+                                        await viewModel.loadMoreData()
+                                    }
+                                }
                         }
                     }
                     .listStyle(.plain)
                     .searchable(text: $viewModel.text, placement: .navigationBarDrawer(displayMode: .always), prompt: "검색")
                     .refreshable {
-                        viewModel.refreshData()
+                        Task {
+                           await viewModel.refreshData()
+                        }
                     }
                 }
             }
@@ -65,7 +65,7 @@ public struct RankView: View {
                 Button {
                     viewModel.selectedPeriod = .daily
                     Task {
-                        await viewModel.loadData(for: viewModel.selectedPeriod)
+                        await viewModel.loadData()
                     }
                 } label: {
                     Text("일간")
@@ -74,7 +74,7 @@ public struct RankView: View {
                 Button {
                     viewModel.selectedPeriod = .weekly
                     Task {
-                        await viewModel.loadData(for: viewModel.selectedPeriod)
+                        await viewModel.loadData()
                     }
                 } label: {
                     Text("주간")
@@ -83,7 +83,7 @@ public struct RankView: View {
                 Button {
                     viewModel.selectedPeriod = .monthly
                     Task {
-                        await viewModel.loadData(for: viewModel.selectedPeriod)
+                        await viewModel.loadData()
                     }
                 } label: {
                     Text("월간")

@@ -34,11 +34,15 @@ final class RankViewModel: ObservableObject {
     private var currentDailyPage: Int = 0
     private var currentWeeklyPage: Int = 0
     private var currentMonthlyPage: Int = 0
+    
+    private var remainDailyPage: Bool = true
+    private var remainWeeklyPage: Bool = true
+    private var remainMonthlyPage: Bool = true
     private let pageSize: Int = 10
     
     init() {
         Task {
-            await loadData(for: .monthly)
+            await loadData()
         }
     }
     
@@ -55,75 +59,88 @@ final class RankViewModel: ObservableObject {
             users = monthlyRankUsers
         }
         
-        let filtered = text.isEmpty ? users : users.filter {
+        let sortedUsers = users.sorted { $0.count > $1.count }
+        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter {
             $0.username.contains(text) || $0.suddenNumber.contains(text)
         }
         
         return filtered
     }
+    
     var isSearching: Bool {
         return !text.isEmpty
     }
     
     // MARK: 선택된 기간에 따른 데이터 로드
-    func loadData(for period: RankPeriod) async {
+    func loadData() async {
         isLoading = true
         
         Task {
-            switch period {
+            switch selectedPeriod {
             case .daily:
                 guard dailyRankUsers.isEmpty else {
                     isLoading = false
                     return
                 }
-                checkIsRankResponse(period: period)
+                checkIsRankResponse()
 
             case .weekly:
                 guard weeklyRankUsers.isEmpty else {
                     isLoading = false
                     return
                 }
-                checkIsRankResponse(period: period)
+                checkIsRankResponse()
  
             case .monthly:
                 guard monthlyRankUsers.isEmpty else {
                     isLoading = false
                     return
                 }
-                checkIsRankResponse(period: period)
+                checkIsRankResponse()
             }
         }
     }
     
     // MARK: 새로고침 로직
-    func refreshData() {
-//        loadData(for: .monthly) // 예시로 월간 데이터를 새로 로드
+    func refreshData() async {
+        switch selectedPeriod {
+        case .daily:
+            dailyResponse = .init(rankDatas: [])
+            await getRankData()
+        case .weekly:
+            weeklyResponse = .init(rankDatas: [])
+            await getRankData()
+        case .monthly:
+            monthlyResponse = .init(rankDatas: [])
+            await getRankData()
+        }
     }
     
-    private func checkIsRankResponse(period: RankPeriod) {
+    private func checkIsRankResponse() {
         Task {
-            switch period {
+            switch selectedPeriod {
             case .daily:
                 guard dailyResponse.rankDatas.isEmpty else { return }
-                await getRankData(period: period)
+                await getRankData()
             case .weekly:
                 guard weeklyResponse.rankDatas.isEmpty else { return }
-                await getRankData(period: period)
+                await getRankData()
             case .monthly:
                 guard monthlyResponse.rankDatas.isEmpty else { return }
-                await getRankData(period: period)
+                await getRankData()
             }
         }
     }
     
-    func getRankData(period: RankPeriod) async {
+    func getRankData() async {
         do {
-            switch period {
+            switch selectedPeriod {
             case .daily:
                 dailyResponse = try await rankUseCase.getRankData(request: .init(requestType: .daily))
                 await getDailyRankData()
             case .weekly:
                 weeklyResponse = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
+                
                 await getWeeklyRankData()
             case .monthly:
                 monthlyResponse = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
@@ -137,6 +154,7 @@ final class RankViewModel: ObservableObject {
     func getDailyRankData() async {
         var tempUsers: [Int: RankUser] = [:]
         
+        currentDailyPage += 2
         await withTaskGroup(of: (Int, RankUser?).self) { group in
             for (index, userData) in dailyResponse.rankDatas.prefix(20).enumerated() {
                 group.addTask {
@@ -160,6 +178,7 @@ final class RankViewModel: ObservableObject {
     func getWeeklyRankData() async {
         var tempUsers: [Int: RankUser] = [:]
         
+        currentWeeklyPage += 2
         await withTaskGroup(of: (Int, RankUser?).self) { group in
             for (index, userData) in weeklyResponse.rankDatas.prefix(20).enumerated() {
                 group.addTask {
@@ -181,6 +200,7 @@ final class RankViewModel: ObservableObject {
     func getMonthlyRankData() async {
         var tempUsers: [Int: RankUser] = [:]
         
+        currentMonthlyPage += 2
         await withTaskGroup(of: (Int, RankUser?).self) { group in
             for (index, userData) in monthlyResponse.rankDatas.prefix(20).enumerated() {
                 group.addTask {
@@ -217,39 +237,91 @@ final class RankViewModel: ObservableObject {
 
 // MARK: - 무한스크롤
 extension RankViewModel {
-    
     // MARK: 무한 스크롤 로직
-    func loadMoreData(for period: RankPeriod) async {
+    func loadMoreData() async {
         guard !isLoadingMore else { return }
         isLoadingMore = true
+        var rankDatas: [Int: RankUser] = [:]
         
-        switch period {
+        switch selectedPeriod {
         case .daily:
             currentDailyPage += 1
-            let rankDatas = await loadMoreRankData(response: dailyResponse)
-            dailyRankUsers.append(contentsOf: (0..<rankDatas.count).compactMap { rankDatas[$0] })
-
+            rankDatas = await loadMoreRankData(
+                response: dailyResponse,
+                period: .daily,
+                page: currentDailyPage
+            )
+            dailyRankUsers.append(contentsOf: rankDatas.values)
+            
         case .weekly:
             currentWeeklyPage += 1
-            let rankDatas = await loadMoreRankData(response: weeklyResponse)
-            weeklyRankUsers.append(contentsOf: (0..<rankDatas.count).compactMap { rankDatas[$0] })
-
+            print("현재 주별 페이지: \(currentWeeklyPage)")
+            rankDatas = await loadMoreRankData(
+                response: weeklyResponse,
+                period: .weekly,
+                page: currentWeeklyPage
+            )
+            weeklyRankUsers.append(contentsOf: rankDatas.values)
+            print("주별 데이터 추가됨: \(rankDatas.count)개")
+            
         case .monthly:
             currentMonthlyPage += 1
-            let rankDatas = await loadMoreRankData(response: monthlyResponse)
-            monthlyRankUsers.append(contentsOf: (0..<rankDatas.count).compactMap { rankDatas[$0] })
+            rankDatas = await loadMoreRankData(
+                response: monthlyResponse,
+                period: .monthly,
+                page: currentMonthlyPage
+            )
+            monthlyRankUsers.append(contentsOf: rankDatas.values)
+        }
+        
+        if rankDatas.isEmpty {
+            updateRemainPage(hasMoreData: false)
         }
         
         isLoadingMore = false
     }
-
-    func loadMoreRankData(response: RankResponse) async -> [Int: RankUser] {
-
-        
+    
+    func showMoreProgressView() -> Bool {
+        checkOwnResponse() && checkRemainData()
+    }
+    
+    private func checkOwnResponse() -> Bool {
+        switch selectedPeriod {
+        case .daily:
+            !dailyResponse.rankDatas.isEmpty
+        case .weekly:
+            !weeklyResponse.rankDatas.isEmpty
+        case .monthly:
+            !monthlyResponse.rankDatas.isEmpty
+        }
+    }
+    
+    private func checkRemainData() -> Bool {
+        switch selectedPeriod {
+        case .daily:
+            return remainDailyPage
+        case .weekly:
+            return remainWeeklyPage
+        case .monthly:
+            return remainMonthlyPage
+        }
+    }
+    
+    private func loadMoreRankData(response: RankResponse, period: RankPeriod, page: Int) async -> [Int: RankUser] {
         var tempUsers: [Int: RankUser] = [:]
         
+        let startIndex = (page - 1) * pageSize
+        let endIndex = min(page * pageSize, response.rankDatas.count)
+        
+        guard startIndex < endIndex else {
+            updateRemainPage(hasMoreData: false)
+            return tempUsers
+        }
+        
+        let rankDataSlice = response.rankDatas[startIndex..<endIndex]
+        
         await withTaskGroup(of: (Int, RankUser?).self) { group in
-            for (index, userData) in response.rankDatas.suffix(pageSize).enumerated() {
+            for (index, userData) in rankDataSlice.enumerated() {
                 group.addTask {
                     let rankUser = await self.fetchAndCreateRankUser(userData: userData)
                     return (index, rankUser)
@@ -258,11 +330,22 @@ extension RankViewModel {
             
             for await (index, rankUser) in group {
                 if let rankUser = rankUser {
-                    tempUsers[index] = rankUser
+                    tempUsers[startIndex + index] = rankUser
                 }
             }
         }
         
         return tempUsers
+    }
+    
+    private func updateRemainPage(hasMoreData: Bool) {
+        switch selectedPeriod {
+        case .daily:
+            remainDailyPage = hasMoreData
+        case .weekly:
+            remainWeeklyPage = hasMoreData
+        case .monthly:
+            remainMonthlyPage = hasMoreData
+        }
     }
 }
