@@ -6,8 +6,8 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Combine
 import Domain
-import Foundation
 
 public struct SearchServiceImp: SearchService {
     private let searchNumberRepository: SearchNumberRepository
@@ -21,12 +21,11 @@ public struct SearchServiceImp: SearchService {
         self.searchUsersRepository = searchUsersRepository
     }
     
-    public func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse {
-        try await searchNumberRepository.searchNumber(request: request)
+    public func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error> {
+        return searchNumberRepository.searchNumber(request: request)
     }
     
-    public func searchUsers(request: SearchUsersRequest) async throws -> [SearchUsersResponse] {
-        try await searchUsersRepository.searchUsers(request: request)
+    public func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error> {
+        return searchUsersRepository.searchUsers(request: request)
     }
-
 }

@@ -22,24 +22,30 @@ public struct SearchResults: Decodable {
 }
 
 public struct UserData: Decodable {
-    public let user_nexon_sn: Int
-    public let user_nick: String
-    public let user_img: String
+    public let userNexonSn: Int
+    public let userNick: String
+    public let userImg: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case userNexonSn = "user_nexon_sn"
+        case userNick = "user_nick"
+        case userImg = "user_img"
+    }
 }
 
 extension SearchUsersDTO {
     func toDomain() -> [SearchUsersResponse] {
         var tmp: [SearchUsersResponse] = []
         result.characterInfo.forEach { userData in
-            let suddenNumber = userData.user_nexon_sn
-            let userName = userData.user_nick
-            let user_img = userData.user_img
+            let suddenNumber = userData.userNexonSn
+            let userName = userData.userNick
+            let userImg = userData.userImg
             
             tmp.append(
                 .init(
                     suddenNumber: suddenNumber,
                     userName: userName,
-                    userImage: user_img
+                    userImage: userImg
                 )
             )
         }

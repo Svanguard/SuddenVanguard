@@ -6,9 +6,9 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Combine
 import Domain
 import NetworkService
-import Foundation
 
 public struct SearchUsersRepositoryImp: SearchUsersRepository {
     let apiClientService: ApiClientService
@@ -17,15 +17,15 @@ public struct SearchUsersRepositoryImp: SearchUsersRepository {
         self.apiClientService = apiClientService
     }
 
-    public func searchUsers(request: SearchUsersRequest) async throws -> [SearchUsersResponse] {
-        let endPoint = SearchUsersEndPoint(request: request)
-        
-        guard let urlRequest = endPoint.toURLRequest else {
-            throw ApiError.errorInUrl
-        }
-        
-        let response: [SearchUsersResponse] = try await apiClientService.request(request: urlRequest, type: SearchUsersDTO.self).toDomain()
-        
-        return response
-    }
+    public func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error> {
+           let endPoint = SearchUsersEndPoint(request: request)
+           
+           guard let urlRequest = endPoint.toURLRequest else {
+               return Fail(error: ApiError.errorInUrl).eraseToAnyPublisher()
+           }
+           
+           return apiClientService.requestPublisher(request: urlRequest, type: SearchUsersDTO.self)
+               .map { $0.toDomain() }
+               .eraseToAnyPublisher()
+       }
 }

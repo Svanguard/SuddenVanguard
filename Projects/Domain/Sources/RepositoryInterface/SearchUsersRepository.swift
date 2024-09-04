@@ -6,8 +6,8 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public protocol SearchUsersRepository {
-    func searchUsers(request: SearchUsersRequest) async throws -> [SearchUsersResponse]
+    func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error>
 }

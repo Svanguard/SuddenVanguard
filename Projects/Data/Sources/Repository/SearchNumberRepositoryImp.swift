@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Combine
 import Domain
 import NetworkService
 import Foundation
@@ -17,15 +18,15 @@ public struct SearchNumberRepositoryImp: SearchNumberRepository {
         self.apiClientService = apiClientService
     }
     
-    public func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse {
+    public func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error> {
         let endPoint = SearchNumberEndPoint(request: request)
         
         guard let urlRequest = endPoint.toURLRequest else {
-            throw ApiError.errorInUrl
+            return Fail(error: ApiError.errorInUrl).eraseToAnyPublisher()
         }
         
-        let response: SearchNumberResponse = try await apiClientService.request(request: urlRequest, type: SearchNumberDTO.self).toDomain()
-        
-        return response
+        return apiClientService.requestPublisher(request: urlRequest, type: SearchNumberDTO.self)
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 }

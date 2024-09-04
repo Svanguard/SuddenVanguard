@@ -6,7 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public struct SearchUseCaseImp: SearchUseCase {
     private let service: SearchService
@@ -15,11 +15,11 @@ public struct SearchUseCaseImp: SearchUseCase {
         self.service = service
     }
     
-    public func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse {
-        try await service.searchNumber(request: request)
+    public func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error> {
+        return service.searchNumber(request: request).eraseToAnyPublisher()
     }
     
-    public func searchUsers(request: SearchUsersRequest) async throws -> [SearchUsersResponse] {
-        try await service.searchUsers(request: request)
-    }
+    public func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error> {
+         return service.searchUsers(request: request).eraseToAnyPublisher()
+     }
 }

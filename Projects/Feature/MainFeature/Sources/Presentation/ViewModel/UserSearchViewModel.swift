@@ -42,21 +42,25 @@ final class UserSearchViewModel: ObservableObject {
             return
         }
         isLoading = true
-        do {
-            let response = try await searchUseCase.searchUsers(request: .init(userName: searchQuery))
-            
-            users = response.map { userResponse in
-                SearchUserData(
-                    suddenNumber: userResponse.suddenNumber,
-                    userName: userResponse.userName,
-                    userImage: userResponse.userImage
-                )
+        searchUseCase.searchUsers(request: .init(userName: searchQuery))
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    
+                    self?.showAlert = true
+                    print("검색 실패 에러: \(error)")
+                }
+            } receiveValue: { [weak self] response in
+                self?.users = response.map { userResponse in
+                    SearchUserData(
+                        suddenNumber: userResponse.suddenNumber,
+                        userName: userResponse.userName,
+                        userImage: userResponse.userImage
+                    )
+                }
             }
-            
-        } catch {
-            users = []
-        }
-        isLoading = false
+            .store(in: &cancellables)
     }
     
     func searchNumber(userSuddenNumber: Int) async {
@@ -64,12 +68,19 @@ final class UserSearchViewModel: ObservableObject {
             return
         }
         
-        do {
-            let response = try await searchUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
-            print(response)
-        } catch {
-            print(error.localizedDescription)
-        }
+        searchUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    self?.showAlert = true
+                    print("번호로 서버에서 데이터 가져오기 에러: \(error)")
+                }
+            } receiveValue: { response in
+                print(response)
+                // response를 이용한 추가 처리
+            }
+            .store(in: &cancellables)
     }
 
     // 검색 기록에서 선택한 항목을 검색

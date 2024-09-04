@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Combine
 import Foundation
 
 public struct ApiClientServiceImp: ApiClientService {
@@ -18,6 +19,15 @@ public struct ApiClientServiceImp: ApiClientService {
     public func request<T: Decodable>(request: URLRequest, type: T.Type) async throws -> T where T : Decodable {
         let (data, response) = try await session.data(for: request)
         return try validateResponse(data: data, response: response)
+    }
+    
+    
+    public func requestPublisher<T: Decodable>(request: URLRequest, type: T.Type) -> AnyPublisher<T, Error> {
+        return session.dataTaskPublisher(for: request)
+            .tryMap { (data, response) in
+                try self.validateResponse(data: data, response: response)
+            }
+            .eraseToAnyPublisher()
     }
     
     private func validateResponse<T: Decodable>(

@@ -6,9 +6,9 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public protocol SearchNumberRepository {
-    func searchNumber(request: SearchNumberRequest) async throws -> SearchNumberResponse
+    func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error>
 }
 
