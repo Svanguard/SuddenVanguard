@@ -7,6 +7,7 @@
 //
 
 import Combine
+import Common
 
 public struct RankUseCaseImp: RankUseCase {
     private let rankService: RankService
@@ -15,15 +16,15 @@ public struct RankUseCaseImp: RankUseCase {
         self.rankService = rankService
     }
     
-    public func getPunishData(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error> {
-        rankService.getPunishData(request: request).eraseToAnyPublisher()
+    public func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error> {
+        return rankService.getPunishData(request: request)
     }
     
     public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {
-        rankService.getRankData(request: request)
+        return rankService.getRankData(request: request)
     }
     
     public func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error> {
-        rankService.getProfileData(request: request)
+        return rankService.getProfileData(request: request)
     }
 }

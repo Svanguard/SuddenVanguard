@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		386C29C67EAF157519A5A9F3 /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD708BEA19A1821DFE10F34 /* FeatureDependency.framework */; };
-		52A4A087C6B3E7EA3E1571B9 /* RankPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579CF486A9EBC4FE57819AE7 /* RankPeriod.swift */; };
 		6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966368EE4EE0537440518A3 /* RankUserListCell.swift */; };
 		7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9101001570ABDE374806923 /* RankView.swift */; };
 		B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E9639D3DC11D57E8DE1A16 /* RankViewModel.swift */; };
@@ -28,7 +27,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		579CF486A9EBC4FE57819AE7 /* RankPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPeriod.swift; sourceTree = "<group>"; };
 		5C0149663550FDF8DCA76869 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		7966368EE4EE0537440518A3 /* RankUserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserListCell.swift; sourceTree = "<group>"; };
 		86633602C5A33C8383427DBD /* RankFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RankFeature-Info.plist"; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 			isa = PBXGroup;
 			children = (
 				A9F3096419396CEB9DAF38D3 /* Cell */,
-				9D9C867B935AA8F50F95FCF5 /* Model */,
 				828E66130473EBB98EE588D9 /* View */,
 				19853B01CABA08AD817DD04C /* ViewModel */,
 			);
@@ -121,14 +118,6 @@
 			);
 			name = Config;
 			path = ../../../Config;
-			sourceTree = "<group>";
-		};
-		9D9C867B935AA8F50F95FCF5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				579CF486A9EBC4FE57819AE7 /* RankPeriod.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		9E6D48C3F0031B46E8703045 /* Sources */ = {
@@ -221,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */,
-				52A4A087C6B3E7EA3E1571B9 /* RankPeriod.swift in Sources */,
 				7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */,
 				B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */,
 			);

@@ -396,25 +396,11 @@ extension RankViewModel {
                 if case .failure(let error) = completion {
                     print("번호로 서버에서 데이터 가져오기 에러: \(error)")
                 }
-            } receiveValue: { [weak self] response in
+            } receiveValue: { [weak self] (resultType, punishDate) in
                 guard let self = self else { return }
-
-                print(response)
-                switch response.punishType {
-                case "restriction":
-                    self.resultType = .restriction
-                    self.userPunishDate = response.punishDate
-                case "protection":
-                    self.resultType = .protection
-                    self.userPunishDate = response.punishDate
-                default:
-                    switch response.registerFg {
-                    case true:
-                        self.resultType = .success
-                    case false:
-                        self.resultType = .clean
-                    }
-                }
+                self.resultType = resultType
+                self.userPunishDate = punishDate
+                self.userFetchLoading = false
                
                 self.userFetchLoading = false
             }

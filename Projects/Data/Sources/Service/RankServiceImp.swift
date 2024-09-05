@@ -7,6 +7,7 @@
 //
 
 import Combine
+import Common
 import Domain
 
 public struct RankServiceImp: RankService {
@@ -24,8 +25,31 @@ public struct RankServiceImp: RankService {
         self.getProfileDataRepository = getProfileDataRepository
     }
     
-    public func getPunishData(request: Domain.SearchNumberRequest) -> AnyPublisher<Domain.SearchNumberResponse, Error> {
-        searchNumberRepository.searchNumber(request: request)
+    public func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error> {
+        return searchNumberRepository.searchNumber(request: request)
+            .map { response in
+                let resultType: PunishResultType
+                let punishDate: String
+                
+                switch response.punishType {
+                case "restriction":
+                    resultType = .restriction
+                    punishDate = response.punishDate
+                case "protection":
+                    resultType = .protection
+                    punishDate = response.punishDate
+                default:
+                    if response.registerFg {
+                        resultType = .success
+                    } else {
+                        resultType = .clean
+                    }
+                    punishDate = ""
+                }
+                
+                return (resultType, punishDate)
+            }
+            .eraseToAnyPublisher()
     }
     
     public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {

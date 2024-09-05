@@ -7,9 +7,10 @@
 //
 
 import Combine
+import Common
 
 public protocol RankService {
-    func getPunishData(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error>
+    func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error>
     func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error>
     func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error>
 }

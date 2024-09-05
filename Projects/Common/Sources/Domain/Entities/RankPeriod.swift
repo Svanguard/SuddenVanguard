@@ -1,19 +1,19 @@
 //
 //  RankPeriod.swift
-//  RankFeature
+//  Common
 //
-//  Created by 강치우 on 8/30/24.
+//  Created by 최동호 on 9/6/24.
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
 import Foundation
 
-enum RankPeriod: String, CaseIterable {
+public enum RankPeriod: String, CaseIterable {
     case daily
     case weekly
     case monthly
     
-    var displayName: String {
+    public var displayName: String {
         switch self {
         case .daily:
             return "일간"
