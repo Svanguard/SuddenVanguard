@@ -44,7 +44,7 @@ public struct MainView: View {
                         Spacer()
                         
                         NavigationLink {
-                            UserSearchView()
+                            NumberSearchView()
                         } label: {
                             SearchFieldView(
                                 placeHolder: "병영번호로 검색",
