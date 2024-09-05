@@ -12,20 +12,21 @@ import Domain
 import Combine
 import SwiftUI
 
-@MainActor
 final class UserSearchViewModel: ObservableObject {
     @Injected(SearchUseCase.self)
     public var searchUseCase: SearchUseCase
     
     @Published var searchQuery = ""
     @Published var users: [SearchUserData] = []
+    @Published var userPunishDate = ""
     @Published var isLoading = false
+    @Published var userFetchLoading = false
     @Published var searchHistory: [String] = []
     @Published var isSearchFieldFocused: Bool = true
     @Published var showAlert = false
     
     @Published var showResult = false
-    @Published var resultType: ResultType = .clean
+    @Published var resultType: PunishResultType = .clean
 
     private var cancellables = Set<AnyCancellable>()
     
@@ -36,48 +37,53 @@ final class UserSearchViewModel: ObservableObject {
         setupSearchDebounce()
     }
 
-    func searchUsers() async {
+    func searchUsers() {
         guard !searchQuery.isEmpty else {
             users = []
             return
         }
         isLoading = true
-        do {
-            let response = try await searchUseCase.searchUsers(request: .init(userName: searchQuery))
-            
-            users = response.map { userResponse in
-                SearchUserData(
-                    suddenNumber: userResponse.suddenNumber,
-                    userName: userResponse.userName,
-                    userImage: userResponse.userImage
-                )
+        searchUseCase.searchUsers(userName: searchQuery)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                self?.isLoading = false
+                if case .failure(let error) = completion {
+                    print("검색 실패 에러: \(error)")
+                }
+            } receiveValue: { [weak self] mappedUsers in
+                self?.users = mappedUsers
             }
-            
-        } catch {
-            users = []
-        }
-        isLoading = false
+            .store(in: &cancellables)
     }
     
-    func searchNumber(userSuddenNumber: Int) async {
+    func searchNumber(userSuddenNumber: Int) {
         guard userSuddenNumber != 0 else {
             return
         }
         
-        do {
-            let response = try await searchUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
-            print(response)
-        } catch {
-            print(error.localizedDescription)
-        }
+        userFetchLoading = true
+        
+        searchUseCase.searchNumberToServer(suddenNumber: userSuddenNumber)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                self.userFetchLoading = false
+                if case .failure(let error) = completion {
+                    print("병영번호로 서버에서 데이터 가져오기 에러: \(error)")
+                }
+            } receiveValue: { [weak self] (resultType, punishDate) in
+                guard let self = self else { return }
+                self.resultType = resultType
+                self.userPunishDate = punishDate
+                self.userFetchLoading = false
+            }
+            .store(in: &cancellables)
     }
 
     // 검색 기록에서 선택한 항목을 검색
     func performSearch(for query: String) {
         searchQuery = query
-        Task {
-            await searchUsers()
-        }
+        searchUsers()
     }
 
     // 검색 기록에 유저 추가
@@ -118,18 +124,13 @@ final class UserSearchViewModel: ObservableObject {
         saveSearchHistory()
     }
 
-    /// 디바운싱(Debouncing)
-    /// 디바운싱 적용한 이유: searchable 같은 자음 모음마다 리스트가 업데이트 되는 검색기능이 있는 경우, 디바운싱 처리를 해서 딜레이를 걸어줘야 리스트가 정상적으로 업데이트됨.
-    /// 딜레이 안걸어주면 리스트가 업데이트 과부하 걸려서 빈 셀을 반환한다는 오류뱉음
     private func setupSearchDebounce() {
         $searchQuery
             .debounce(for: .seconds(debounceDelay), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink { [weak self] query in
                 guard let self = self else { return }
-                Task {
-                    await self.searchUsers()
-                }
+                self.searchUsers()
             }
             .store(in: &cancellables)
     }

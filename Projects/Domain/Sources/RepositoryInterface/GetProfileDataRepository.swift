@@ -6,8 +6,8 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public protocol GetProfileDataRepository {
-    func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse
+    func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error>
 }

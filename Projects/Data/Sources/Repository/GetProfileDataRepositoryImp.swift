@@ -6,9 +6,9 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Combine
 import Domain
 import NetworkService
-import Foundation
 
 public struct GetProfileDataRepositoryImp: GetProfileDataRepository {
     private let apiClientService: ApiClientService
@@ -17,15 +17,16 @@ public struct GetProfileDataRepositoryImp: GetProfileDataRepository {
         self.apiClientService = apiClientService
     }
     
-    public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {
+    public func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error> {
         let endPoint = ProfileEndPoint(request: request)
         
         guard let urlRequest = endPoint.toURLRequest else {
-            throw ApiError.errorInUrl
+            return Fail(error: ApiError.errorInUrl).eraseToAnyPublisher()
         }
         
-        let response: ProfileResponse = try await apiClientService.request(request: urlRequest, type: ProfileDTO.self).toDomain()
-        
-        return response
+        return apiClientService
+            .requestPublisher(request: urlRequest, type: ProfileDTO.self)
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 }

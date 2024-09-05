@@ -6,10 +6,11 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
+import Common
 
 public protocol RankService {
-    func getRankData(request: RankRequest) async throws -> RankResponse
-    
-    func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse
+    func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error>
+    func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error>
+    func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error>
 }

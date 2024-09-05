@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D7BE6158FA8E1047D546FB6 /* PunishResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CFAF8D0EC180C278543100 /* PunishResultType.swift */; };
 		24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4906F43F6A038295B5589D3 /* ViewValues.swift */; };
 		2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170170CE0C43F0B37C75808F /* AppLocalized.swift */; };
+		8A722F523E198A38F5745AD2 /* RankPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B9E58F99352B1959C0688 /* RankPeriod.swift */; };
+		93B4564AF7501CC16CB08140 /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC753CBD6A7B0D62A60E08B /* RankUser.swift */; };
 		9F03D3C993AEE0B9BE094100 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */; };
 		A0AA45BD6EA7A98003408B63 /* SearchUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A36F8CDC71501059F6DEA /* SearchUserData.swift */; };
 /* End PBXBuildFile section */
@@ -29,7 +32,10 @@
 /* Begin PBXFileReference section */
 		001A25FFDF0BDDCF6CD12BD7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		170170CE0C43F0B37C75808F /* AppLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalized.swift; sourceTree = "<group>"; };
+		2AC753CBD6A7B0D62A60E08B /* RankUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUser.swift; sourceTree = "<group>"; };
+		2B9B9E58F99352B1959C0688 /* RankPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPeriod.swift; sourceTree = "<group>"; };
 		3354DE7E2B4F1877FECB508B /* Common-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Common-Info.plist"; sourceTree = "<group>"; };
+		37CFAF8D0EC180C278543100 /* PunishResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunishResultType.swift; sourceTree = "<group>"; };
 		3DA77FB5518DC2177F7CDB4F /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B6A36F8CDC71501059F6DEA /* SearchUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserData.swift; sourceTree = "<group>"; };
 		BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
@@ -61,6 +67,8 @@
 		3776CD0C6AD6889FB7A8902D /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				2B9B9E58F99352B1959C0688 /* RankPeriod.swift */,
+				2AC753CBD6A7B0D62A60E08B /* RankUser.swift */,
 				7B6A36F8CDC71501059F6DEA /* SearchUserData.swift */,
 			);
 			path = Entities;
@@ -72,6 +80,7 @@
 				989AAFF8E0DAACA4DBC33D99 /* Constants */,
 				9A51E59071CEFD36F7385E94 /* Domain */,
 				DC3D86362E126B6146A10BDE /* Localize */,
+				92ECF75AA7F417A731A163CF /* Presentation */,
 				E37D73CBD651BC5CDFF7476E /* Utilities */,
 			);
 			path = Sources;
@@ -91,6 +100,14 @@
 				FA1B67454C7AEA0D639CD237 /* Project */,
 				94BAEE6F1D9EB35E2614AE54 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		92ECF75AA7F417A731A163CF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				EBB697E2190ACACA6B918C61 /* Model */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		94BAEE6F1D9EB35E2614AE54 /* Products */ = {
@@ -139,6 +156,14 @@
 				BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		EBB697E2190ACACA6B918C61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				37CFAF8D0EC180C278543100 /* PunishResultType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FA1B67454C7AEA0D639CD237 /* Project */ = {
@@ -217,8 +242,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */,
+				8A722F523E198A38F5745AD2 /* RankPeriod.swift in Sources */,
+				93B4564AF7501CC16CB08140 /* RankUser.swift in Sources */,
 				A0AA45BD6EA7A98003408B63 /* SearchUserData.swift in Sources */,
 				2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */,
+				1D7BE6158FA8E1047D546FB6 /* PunishResultType.swift in Sources */,
 				9F03D3C993AEE0B9BE094100 /* HapticFeedbackManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

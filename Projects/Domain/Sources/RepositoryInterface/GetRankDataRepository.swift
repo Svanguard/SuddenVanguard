@@ -6,8 +6,8 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public protocol GetRankDataRepository {
-    func getRankData(request: RankRequest) async throws -> RankResponse
+    func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error>
 }

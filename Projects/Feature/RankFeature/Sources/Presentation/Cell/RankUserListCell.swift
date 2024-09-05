@@ -6,9 +6,11 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+
 import Common
 import SafariServices
 import SwiftUI
+import Kingfisher
 
 public struct RankUserListCell: View {
     let user: RankUser
@@ -18,14 +20,24 @@ public struct RankUserListCell: View {
     public var body: some View {
         VStack {
             HStack(alignment: .top) {
-                Circle()
+                KFImage(URL(string: user.userImage))
+                    .placeholder {
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                    }
+                    .resizable()
+                    .scaledToFill()
                     .frame(width: 44, height: 44)
+                    .clipShape(Circle())
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(user.username)
                         .font(.system(.subheadline, weight: .semibold))
                     
-                    Text(user.suddenNumber)
+                    Text(String(user.suddenNumber))
                         .font(.system(.footnote))
                         .foregroundStyle(Color(.systemGray))
                     
@@ -67,9 +79,6 @@ public struct RankUserListCell: View {
             }
         }
         .contentShape(Rectangle())
-        .onTapGesture {
-            // MARK: 셀 터치 이벤트를 구분 (아무런 동작을 하지 않도록 설정)
-        }
     }
 }
 

@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C83F8919F7A3F155DB29127 /* NumberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F0E3FBEB3AABE88A4ACACF /* NumberSearchView.swift */; };
 		207721AE8DA59E974D50A8A9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CEDE374127E8E097B3E89F /* MainView.swift */; };
 		42B390CD42B569F003600E4B /* UserRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */; };
-		4E539C0F7D1C12279250AE9B /* ResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3945D9022376EEE5C38B65 /* ResultType.swift */; };
+		47588FC8656AB9505B75FE4C /* NumberSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6368822D1A37CE9AB4944 /* NumberSearchViewModel.swift */; };
 		5B33FC7C27DD730502BA593C /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */; };
 		66791E684A86C85BB8400E32 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58110B654265101F478CE2A6 /* EmptyStateView.swift */; };
 		810544508663E9E88932D00A /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69121D4DE8B9149A253BC79 /* SearchFieldView.swift */; };
 		A008A74C16400F4C352D614A /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF59E537DED595ABC4723375 /* FeatureDependency.framework */; };
 		A4D24FE4D242E49ECD3C22EF /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516FD13893B1A194C70AADB2 /* SearchResult.swift */; };
-		BD6855676DFECBBDAE197A95 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E13DD31FE759DC8D2DF8F3A /* ResultView.swift */; };
 		EEA2F94DB39DDF1D1D973E4E /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D0FF876020EFD5EA6E96A /* UserSearchView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,16 +36,16 @@
 		028067B5198A06189E74D594 /* MainFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MainFeature-Info.plist"; sourceTree = "<group>"; };
 		03CEDE374127E8E097B3E89F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRowView.swift; sourceTree = "<group>"; };
+		2FC6368822D1A37CE9AB4944 /* NumberSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSearchViewModel.swift; sourceTree = "<group>"; };
+		32F0E3FBEB3AABE88A4ACACF /* NumberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSearchView.swift; sourceTree = "<group>"; };
 		412DEA5C9D73808BEA29B72A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		4A4646C564432D5BB7376920 /* MainFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C7D0FF876020EFD5EA6E96A /* UserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchView.swift; sourceTree = "<group>"; };
 		516FD13893B1A194C70AADB2 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		58110B654265101F478CE2A6 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		5E13DD31FE759DC8D2DF8F3A /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		A69121D4DE8B9149A253BC79 /* SearchFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
 		B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
 		E88239E3C16860C07494EEE2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		ED3945D9022376EEE5C38B65 /* ResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultType.swift; sourceTree = "<group>"; };
 		FF59E537DED595ABC4723375 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -82,7 +82,7 @@
 			children = (
 				58110B654265101F478CE2A6 /* EmptyStateView.swift */,
 				03CEDE374127E8E097B3E89F /* MainView.swift */,
-				5E13DD31FE759DC8D2DF8F3A /* ResultView.swift */,
+				32F0E3FBEB3AABE88A4ACACF /* NumberSearchView.swift */,
 				1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */,
 				4C7D0FF876020EFD5EA6E96A /* UserSearchView.swift */,
 			);
@@ -137,7 +137,6 @@
 		AB5A4E85DE9C8C41C968F766 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED3945D9022376EEE5C38B65 /* ResultType.swift */,
 				516FD13893B1A194C70AADB2 /* SearchResult.swift */,
 			);
 			path = Model;
@@ -146,6 +145,7 @@
 		D9511F88C5BA2161C63AE5BD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2FC6368822D1A37CE9AB4944 /* NumberSearchViewModel.swift */,
 				B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */,
 			);
 			path = ViewModel;
@@ -236,13 +236,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				810544508663E9E88932D00A /* SearchFieldView.swift in Sources */,
-				4E539C0F7D1C12279250AE9B /* ResultType.swift in Sources */,
 				A4D24FE4D242E49ECD3C22EF /* SearchResult.swift in Sources */,
 				66791E684A86C85BB8400E32 /* EmptyStateView.swift in Sources */,
 				207721AE8DA59E974D50A8A9 /* MainView.swift in Sources */,
-				BD6855676DFECBBDAE197A95 /* ResultView.swift in Sources */,
+				1C83F8919F7A3F155DB29127 /* NumberSearchView.swift in Sources */,
 				42B390CD42B569F003600E4B /* UserRowView.swift in Sources */,
 				EEA2F94DB39DDF1D1D973E4E /* UserSearchView.swift in Sources */,
+				47588FC8656AB9505B75FE4C /* NumberSearchViewModel.swift in Sources */,
 				5B33FC7C27DD730502BA593C /* UserSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

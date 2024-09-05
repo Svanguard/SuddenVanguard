@@ -3,15 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		386C29C67EAF157519A5A9F3 /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD708BEA19A1821DFE10F34 /* FeatureDependency.framework */; };
-		63F5B2B32C81AFE200DF364B /* RankPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F5B2B22C81AFE200DF364B /* RankPeriod.swift */; };
 		6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966368EE4EE0537440518A3 /* RankUserListCell.swift */; };
 		7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9101001570ABDE374806923 /* RankView.swift */; };
-		8614EB492142716EDD734FEB /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */; };
 		B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E9639D3DC11D57E8DE1A16 /* RankViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,9 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUser.swift; sourceTree = "<group>"; };
 		5C0149663550FDF8DCA76869 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		63F5B2B22C81AFE200DF364B /* RankPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPeriod.swift; sourceTree = "<group>"; };
 		7966368EE4EE0537440518A3 /* RankUserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserListCell.swift; sourceTree = "<group>"; };
 		86633602C5A33C8383427DBD /* RankFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RankFeature-Info.plist"; sourceTree = "<group>"; };
 		8CEB8A8080191539B85FE509 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -73,7 +69,6 @@
 			isa = PBXGroup;
 			children = (
 				A9F3096419396CEB9DAF38D3 /* Cell */,
-				9D9C867B935AA8F50F95FCF5 /* Model */,
 				828E66130473EBB98EE588D9 /* View */,
 				19853B01CABA08AD817DD04C /* ViewModel */,
 			);
@@ -123,15 +118,6 @@
 			);
 			name = Config;
 			path = ../../../Config;
-			sourceTree = "<group>";
-		};
-		9D9C867B935AA8F50F95FCF5 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */,
-				63F5B2B22C81AFE200DF364B /* RankPeriod.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		9E6D48C3F0031B46E8703045 /* Sources */ = {
@@ -187,6 +173,8 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = 8586D9D5B1981841FA991236 /* Build configuration list for PBXProject "RankFeature" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -222,9 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */,
-				8614EB492142716EDD734FEB /* RankUser.swift in Sources */,
 				7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */,
-				63F5B2B32C81AFE200DF364B /* RankPeriod.swift in Sources */,
 				B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,10 +238,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.RankFeature;
 				PRODUCT_NAME = RankFeature;
 				SDKROOT = iphoneos;
@@ -292,10 +275,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "$(inherited) -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.RankFeature;
 				PRODUCT_NAME = RankFeature;
 				SDKROOT = iphoneos;
@@ -303,7 +283,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4288F5B555587A91E8DACF93 /* UIFont+TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62C700FB34E2E83D970827F /* UIFont+TextStyle.swift */; };
 		9F30DE75B528B4B225BD818A /* NavigationViewStyleHelper+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4884868E566491EFA3C020B6 /* NavigationViewStyleHelper+.swift */; };
+		9FE970C9A83A234E1D0EEB41 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 750C3E63FF4DCC8968176C08 /* ResultView.swift */; };
 		ABB14811E13F7B1ECCF8B086 /* TuistAssets+DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5263BC75B281154AC0B5A7B /* TuistAssets+DesignSystem.swift */; };
 		D2E21543F5B3B63472BE98A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F6AF114A38FDBD9663A6B1B /* Assets.xcassets */; };
 		F6018B5F7748E322214C52D6 /* TuistBundle+DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4AD9735556ECA8C8008FEC /* TuistBundle+DesignSystem.swift */; };
@@ -31,6 +32,7 @@
 		4884868E566491EFA3C020B6 /* NavigationViewStyleHelper+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationViewStyleHelper+.swift"; sourceTree = "<group>"; };
 		4F6AF114A38FDBD9663A6B1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69B7BBEAD5472C7195924AC8 /* DesignSystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DesignSystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		750C3E63FF4DCC8968176C08 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		7516C9F8F52188417896B438 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		8937FA9427EEA938B58C5B3E /* DesignSystem-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "DesignSystem-Info.plist"; sourceTree = "<group>"; };
 		A5263BC75B281154AC0B5A7B /* TuistAssets+DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+DesignSystem.swift"; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				DADCA588D3E296D27BE4E9DD /* Extension */,
+				886F251B9E5A79002E70F823 /* View */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -94,6 +97,14 @@
 				D5FD3537E28AE857DC09D214 /* Sources */,
 			);
 			path = Derived;
+			sourceTree = "<group>";
+		};
+		886F251B9E5A79002E70F823 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				750C3E63FF4DCC8968176C08 /* ResultView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		9C29548CCBEAF62FB7951500 /* Resources */ = {
@@ -208,6 +219,7 @@
 				F6018B5F7748E322214C52D6 /* TuistBundle+DesignSystem.swift in Sources */,
 				9F30DE75B528B4B225BD818A /* NavigationViewStyleHelper+.swift in Sources */,
 				4288F5B555587A91E8DACF93 /* UIFont+TextStyle.swift in Sources */,
+				9FE970C9A83A234E1D0EEB41 /* ResultView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
