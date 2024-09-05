@@ -36,9 +36,7 @@ struct UserSearchView: View {
     @ViewBuilder
     private var UserSearch: some View {
         VStack {
-            if viewModel.isLoading {
-                ProgressView()
-            } else if viewModel.users.isEmpty {
+            if viewModel.users.isEmpty {
                 if viewModel.searchQuery.isEmpty && viewModel.searchHistory.isEmpty {
                     Text("최근 검색어 내역이 없습니다")
                         .foregroundColor(.gray)

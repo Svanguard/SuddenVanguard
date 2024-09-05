@@ -6,7 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Foundation
+import Combine
 
 public struct RankUseCaseImp: RankUseCase {
     private let rankService: RankService
@@ -15,11 +15,11 @@ public struct RankUseCaseImp: RankUseCase {
         self.rankService = rankService
     }
     
-    public func getRankData(request: RankRequest) async throws -> RankResponse {
-        try await rankService.getRankData(request: request)
+    public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {
+        rankService.getRankData(request: request)
     }
     
-    public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {
-        try await rankService.getProfileData(request: request)
+    public func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error> {
+        rankService.getProfileData(request: request)
     }
 }

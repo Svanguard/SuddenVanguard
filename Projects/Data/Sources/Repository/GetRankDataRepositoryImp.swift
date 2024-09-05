@@ -6,10 +6,9 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
-import Common
+import Combine
 import Domain
 import NetworkService
-import Foundation
 
 public struct GetRankDataRepositoryImp: GetRankDataRepository {
     private let apiClientService: ApiClientService
@@ -18,15 +17,16 @@ public struct GetRankDataRepositoryImp: GetRankDataRepository {
         self.apiClientService = apiClientService
     }
     
-    public func getRankData(request: RankRequest) async throws -> RankResponse {
+    public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {
         let endPoint = RankEndPoint(request: request)
         
         guard let urlRequest = endPoint.toURLRequest else {
-            throw ApiError.errorInUrl
+            return Fail(error: ApiError.errorInUrl).eraseToAnyPublisher()
         }
         
-        let response: RankResponse = try await apiClientService.request(request: urlRequest, type: RankDTO.self).toDomain()
-        
-        return response
+        return apiClientService
+            .requestPublisher(request: urlRequest, type: RankDTO.self)
+            .map { $0.toDomain() }
+            .eraseToAnyPublisher()
     }
 }

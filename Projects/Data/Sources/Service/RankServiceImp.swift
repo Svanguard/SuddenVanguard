@@ -6,8 +6,8 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Combine
 import Domain
-import Foundation
 
 public struct RankServiceImp: RankService {
     private let getRankDataRepository: GetRankDataRepository
@@ -21,11 +21,11 @@ public struct RankServiceImp: RankService {
         self.getProfileDataRepository = getProfileDataRepository
     }
     
-    public func getRankData(request: RankRequest) async throws -> RankResponse {
-        try await getRankDataRepository.getRankData(request: request)
+    public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {
+        getRankDataRepository.getRankData(request: request)
     }
 
-    public func getProfileData(request: GetProfileRequest) async throws -> ProfileResponse {
-        try await getProfileDataRepository.getProfileData(request: request)
+    public func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error> {
+        getProfileDataRepository.getProfileData(request: request)
     }
 }

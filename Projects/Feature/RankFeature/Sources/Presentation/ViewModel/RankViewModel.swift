@@ -41,9 +41,7 @@ final class RankViewModel: ObservableObject {
     private let pageSize: Int = 10
     
     init() {
-        Task {
-            await loadData()
-        }
+        loadData()
     }
     
     // MARK: 필터링 로직
@@ -72,218 +70,230 @@ final class RankViewModel: ObservableObject {
     }
     
     // MARK: 선택된 기간에 따른 데이터 로드
-    func loadData() async {
+    func loadData() {
         isLoading = true
-        
-        Task {
-            switch selectedPeriod {
-            case .daily:
-                guard dailyRankUsers.isEmpty else {
-                    isLoading = false
-                    return
-                }
-                checkIsRankResponse()
-
-            case .weekly:
-                guard weeklyRankUsers.isEmpty else {
-                    isLoading = false
-                    return
-                }
-                checkIsRankResponse()
- 
-            case .monthly:
-                guard monthlyRankUsers.isEmpty else {
-                    isLoading = false
-                    return
-                }
-                checkIsRankResponse()
-            }
+        if !isEmptyRankUsers() {
+            isLoading = false
+        } else {
+            checkIsRankResponse()
+                .receive(on: DispatchQueue.main)
+                .sink(receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        print("랭크 데이터 패치 실패: \(error)")
+                        self?.isLoading = false
+                    }
+                }, receiveValue: { [weak self] in
+                    self?.isLoading = false
+                })
+                .store(in: &cancellables)
         }
     }
     
     // MARK: 새로고침 로직
-    func refreshData() async {
+    func refreshData() {
         switch selectedPeriod {
         case .daily:
             currentDailyPage = 0
             dailyResponse = .init(rankDatas: [])
-            await getRankData()
         case .weekly:
             currentWeeklyPage = 0
             weeklyResponse = .init(rankDatas: [])
-            await getRankData()
         case .monthly:
             currentMonthlyPage = 0
             monthlyResponse = .init(rankDatas: [])
-            await getRankData()
         }
+        loadData()
     }
     
-    private func checkIsRankResponse() {
-        Task {
-            switch selectedPeriod {
+    // MARK: Rank 데이터 가져오기
+    func getRankData() -> AnyPublisher<Void, Error> {
+        let rankPublisher: AnyPublisher<RankResponse, Error>
+
+        switch selectedPeriod {
+        case .daily:
+            rankPublisher = rankUseCase.getRankData(request: .init(requestType: .daily))
+        case .weekly:
+            rankPublisher = rankUseCase.getRankData(request: .init(requestType: .weekly))
+        case .monthly:
+            rankPublisher = rankUseCase.getRankData(request: .init(requestType: .monthly))
+        }
+        
+        return rankPublisher
+            .map { [weak self] response in
+                guard let self = self else { return }
+                self.updateRankResponse(response: response)
+            }
+            .flatMap { [weak self] in
+                self?.getRankDataByPeriod() ?? Empty().eraseToAnyPublisher()
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    // MARK: 선택된 기간에 따라 Rank 데이터 저장
+    private func updateRankResponse(response: RankResponse) {
+          switch selectedPeriod {
+          case .daily:
+              dailyResponse = response
+          case .weekly:
+              weeklyResponse = response
+          case .monthly:
+              monthlyResponse = response
+          }
+      }
+    
+    // MARK: 기간에 따른 Rank 사용자 데이터 가져오기
+    private func getRankDataByPeriod() -> AnyPublisher<Void, Error> {
+           let rankDataPublisher: AnyPublisher<[RankUser], Error>
+
+           switch selectedPeriod {
+           case .daily:
+               rankDataPublisher = getRankUsers(rankDatas: dailyResponse.rankDatas, period: .daily)
+               currentDailyPage += 2
+           case .weekly:
+               rankDataPublisher = getRankUsers(rankDatas: weeklyResponse.rankDatas, period: .weekly)
+               currentWeeklyPage += 2
+           case .monthly:
+               rankDataPublisher = getRankUsers(rankDatas: monthlyResponse.rankDatas, period: .monthly)
+               currentMonthlyPage += 2
+           }
+
+           return rankDataPublisher
+               .map { [weak self] users in
+                   guard let self = self else { return }
+                   self.updateRankUsers(users: users)
+               }
+               .eraseToAnyPublisher()
+       }
+    
+    // MARK: 선택된 기간에 따른 Rank 데이터 체크
+    private func checkIsRankResponse() -> AnyPublisher<Void, Error> {
+        let rankPublisher: AnyPublisher<Void, Error>
+        switch selectedPeriod {
             case .daily:
-                guard dailyResponse.rankDatas.isEmpty else { return }
-                await getRankData()
+                rankPublisher = dailyResponse.rankDatas.isEmpty ?
+            getRankData().map { _ in () }.eraseToAnyPublisher() :
+            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
             case .weekly:
-                guard weeklyResponse.rankDatas.isEmpty else { return }
-                await getRankData()
+                rankPublisher = weeklyResponse.rankDatas.isEmpty ?
+            getRankData().map { _ in () }.eraseToAnyPublisher() :
+            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
             case .monthly:
-                guard monthlyResponse.rankDatas.isEmpty else { return }
-                await getRankData()
+                rankPublisher = monthlyResponse.rankDatas.isEmpty ?
+            getRankData().map { _ in () }.eraseToAnyPublisher() :
+            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
             }
-        }
+        return rankPublisher
     }
     
-    func getRankData() async {
-        do {
-            switch selectedPeriod {
-            case .daily:
-                dailyResponse = try await rankUseCase.getRankData(request: .init(requestType: .daily))
-                await getDailyRankData()
-            case .weekly:
-                weeklyResponse = try await rankUseCase.getRankData(request: .init(requestType: .weekly))
-                
-                await getWeeklyRankData()
-            case .monthly:
-                monthlyResponse = try await rankUseCase.getRankData(request: .init(requestType: .monthly))
-                await getMonthlyRankData()
-            }
-        } catch {
-            print(error.localizedDescription)
+    // Rank 사용자 데이터 업데이트
+    private func updateRankUsers(users: [RankUser]) {
+        switch selectedPeriod {
+        case .daily:
+            dailyRankUsers = users
+        case .weekly:
+            weeklyRankUsers = users
+        case .monthly:
+            monthlyRankUsers = users
         }
-    }
-    
-    func getDailyRankData() async {
-        var tempUsers: [Int: RankUser] = [:]
-        
-        currentDailyPage += 2
-        await withTaskGroup(of: (Int, RankUser?).self) { group in
-            for (index, userData) in dailyResponse.rankDatas.prefix(20).enumerated() {
-                group.addTask {
-                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
-                    return (index, rankUser)
-                }
-            }
-            
-            for await (index, rankUser) in group {
-                if let rankUser = rankUser {
-                    tempUsers[index] = rankUser
-                }
-            }
-        }
-        
-        dailyRankUsers = (0..<tempUsers.count).compactMap { tempUsers[$0] }
-        isLoading = false
-        
-    }
-    
-    func getWeeklyRankData() async {
-        var tempUsers: [Int: RankUser] = [:]
-        
-        currentWeeklyPage += 2
-        await withTaskGroup(of: (Int, RankUser?).self) { group in
-            for (index, userData) in weeklyResponse.rankDatas.prefix(20).enumerated() {
-                group.addTask {
-                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
-                    return (index, rankUser)
-                }
-            }
-            
-            for await (index, rankUser) in group {
-                if let rankUser = rankUser {
-                    tempUsers[index] = rankUser
-                }
-            }
-        }
-        weeklyRankUsers = (0..<tempUsers.count).compactMap { tempUsers[$0] }
         isLoading = false
     }
     
-    func getMonthlyRankData() async {
-        var tempUsers: [Int: RankUser] = [:]
-        
-        currentMonthlyPage += 2
-        await withTaskGroup(of: (Int, RankUser?).self) { group in
-            for (index, userData) in monthlyResponse.rankDatas.prefix(20).enumerated() {
-                group.addTask {
-                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
-                    return (index, rankUser)
-                }
+    // Rank 사용자 가져오기
+    private func getRankUsers(
+        rankDatas: [UserCountData],
+        period: RankPeriod
+    ) -> AnyPublisher<[RankUser], Error> {
+         let fetchRankUserPublishers = rankDatas.prefix(20).enumerated().map { index, userData in
+             self.fetchAndCreateRankUser(userData: userData)
+                 .map { user in (index, user) }
+                 .eraseToAnyPublisher()
+         }
+         
+         return Publishers.MergeMany(fetchRankUserPublishers)
+             .collect()
+             .map { $0.compactMap { $0.1 }.sorted { $0.count > $1.count } }
+             .receive(on: DispatchQueue.main)
+             .eraseToAnyPublisher()
+     }
+    
+    // RankUser 객체 생성
+    private func fetchAndCreateRankUser(
+        userData: UserCountData
+    ) -> AnyPublisher<RankUser?, Error> {
+        rankUseCase.getProfileData(request: .init(suddenNumber: userData.userNexonSn))
+            .map { profileResponse in
+                RankUser(
+                    username: profileResponse.userName,
+                    suddenNumber: String(userData.userNexonSn),
+                    count: userData.count,
+                    userImage: profileResponse.userImage
+                )
             }
-            
-            for await (index, rankUser) in group {
-                if let rankUser = rankUser {
-                    tempUsers[index] = rankUser
-                }
-            }
-        }
-        monthlyRankUsers = (0..<tempUsers.count).compactMap { tempUsers[$0] }
-        isLoading = false
+            .receive(on: DispatchQueue.main)
+            .catch { _ in Just(nil).setFailureType(to: Error.self) }
+            .eraseToAnyPublisher()
     }
     
-    private func fetchAndCreateRankUser(userData: UserCountData) async -> RankUser? {
-        do {
-            let profileResponse = try await rankUseCase.getProfileData(request: .init(suddenNumber: userData.userNexonSn))
-            return RankUser(
-                username: profileResponse.userName,
-                suddenNumber: String(userData.userNexonSn),
-                count: userData.count,
-                userImage: profileResponse.userImage
-            )
-        } catch {
-            print("\(userData.userNexonSn) 프로필 데이터 패치 실패: \(error.localizedDescription)")
+    // Rank 사용자 데이터가 비어있는지 확인
+    private func isEmptyRankUsers() -> Bool {
+        switch selectedPeriod {
+        case .daily:
+            return dailyRankUsers.isEmpty
+        case .weekly:
+            return weeklyRankUsers.isEmpty
+        case .monthly:
+            return monthlyRankUsers.isEmpty
         }
-        return nil
     }
 }
 
 // MARK: - 무한스크롤
 extension RankViewModel {
     // MARK: 무한 스크롤 로직
-    func loadMoreData() async {
+    func loadMoreData() {
         guard !isLoadingMore else { return }
         isLoadingMore = true
-        var rankDatas: [Int: RankUser] = [:]
         
+        let loadPublisher: AnyPublisher<[Int: RankUser], Error>
+
         switch selectedPeriod {
         case .daily:
             currentDailyPage += 1
-            rankDatas = await loadMoreRankData(
-                response: dailyResponse,
-                period: .daily,
-                page: currentDailyPage
-            )
-            dailyRankUsers.append(contentsOf: rankDatas.values)
+            loadPublisher = loadMoreRankData(response: dailyResponse, period: .daily, page: currentDailyPage)
             
         case .weekly:
             currentWeeklyPage += 1
-            print("현재 주별 페이지: \(currentWeeklyPage)")
-            rankDatas = await loadMoreRankData(
-                response: weeklyResponse,
-                period: .weekly,
-                page: currentWeeklyPage
-            )
-            weeklyRankUsers.append(contentsOf: rankDatas.values)
-            print("주별 데이터 추가됨: \(rankDatas.count)개")
+            loadPublisher = loadMoreRankData(response: weeklyResponse, period: .weekly, page: currentWeeklyPage)
             
         case .monthly:
             currentMonthlyPage += 1
-            rankDatas = await loadMoreRankData(
-                response: monthlyResponse,
-                period: .monthly,
-                page: currentMonthlyPage
-            )
-            monthlyRankUsers.append(contentsOf: rankDatas.values)
+            loadPublisher = loadMoreRankData(response: monthlyResponse, period: .monthly, page: currentMonthlyPage)
         }
         
-        if rankDatas.isEmpty {
-            updateRemainPage(hasMoreData: false)
-        }
-        
-        isLoadingMore = false
+        loadPublisher
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                guard let self = self else { return }
+                if case .failure = completion {
+                    self.updateRemainPage(hasMoreData: false)
+                }
+            }, receiveValue: { [weak self] newRankDatas in
+                guard let self = self else { return }
+                switch self.selectedPeriod {
+                case .daily:
+                    self.dailyRankUsers.append(contentsOf: newRankDatas.values)
+                case .weekly:
+                    self.weeklyRankUsers.append(contentsOf: newRankDatas.values)
+                case .monthly:
+                    self.monthlyRankUsers.append(contentsOf: newRankDatas.values)
+                }
+                self.isLoadingMore = false
+            })
+            .store(in: &cancellables)
     }
     
+    // MARK: 추가 데이터가 있으면 Progress Show
     func showMoreProgressView() -> Bool {
         checkOwnResponse() && checkRemainData()
     }
@@ -310,37 +320,37 @@ extension RankViewModel {
         }
     }
     
-    private func loadMoreRankData(response: RankResponse, period: RankPeriod, page: Int) async -> [Int: RankUser] {
-        var tempUsers: [Int: RankUser] = [:]
-        
-        let startIndex = (page - 1) * pageSize
-        let endIndex = min(page * pageSize, response.rankDatas.count)
-        
-        guard startIndex < endIndex else {
-            updateRemainPage(hasMoreData: false)
-            return tempUsers
-        }
-        
-        let rankDataSlice = response.rankDatas[startIndex..<endIndex]
-        
-        await withTaskGroup(of: (Int, RankUser?).self) { group in
-            for (index, userData) in rankDataSlice.enumerated() {
-                group.addTask {
-                    let rankUser = await self.fetchAndCreateRankUser(userData: userData)
-                    return (index, rankUser)
-                }
-            }
-            
-            for await (index, rankUser) in group {
-                if let rankUser = rankUser {
-                    tempUsers[startIndex + index] = rankUser
-                }
-            }
-        }
-        
-        return tempUsers
-    }
+    // MARK: 추가 Rank 데이터 로드
+    private func loadMoreRankData(response: RankResponse, period: RankPeriod, page: Int) -> AnyPublisher<[Int: RankUser], Error> {
+         let startIndex = (page - 1) * pageSize
+         let endIndex = min(page * pageSize, response.rankDatas.count)
+
+         guard startIndex < endIndex else {
+             updateRemainPage(hasMoreData: false)
+             return Just([:]).setFailureType(to: Error.self).eraseToAnyPublisher()
+         }
+
+         let rankDataSlice = response.rankDatas[startIndex..<endIndex]
+
+         let fetchRankUserPublishers = rankDataSlice.enumerated().map { (index, userData) in
+             fetchAndCreateRankUser(userData: userData)
+                 .map { (startIndex + index, $0) }
+                 .eraseToAnyPublisher()
+         }
+
+         return Publishers.MergeMany(fetchRankUserPublishers)
+             .collect()
+             .map { results in
+                 results.reduce(into: [Int: RankUser]()) { (dict, tuple) in
+                     if let user = tuple.1 {
+                         dict[tuple.0] = user
+                     }
+                 }
+             }
+             .eraseToAnyPublisher()
+     }
     
+    // MARK: 남은 페이지 업데이트
     private func updateRemainPage(hasMoreData: Bool) {
         switch selectedPeriod {
         case .daily:
