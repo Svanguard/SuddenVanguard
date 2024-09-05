@@ -6,10 +6,13 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Common
 import Combine
 
 public protocol SearchUseCase {
-    func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error>
+    func searchNumberToServer(suddenNumber: Int) -> AnyPublisher<(PunishResultType, String), Error>
+    
+    func searchNumberToSudden(suddenNumber: Int) -> AnyPublisher<SearchUserData, Error>
 
-    func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error>
+    func searchUsers(userName: String) -> AnyPublisher<[SearchUserData], Error> 
 }

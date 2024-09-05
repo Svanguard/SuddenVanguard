@@ -7,10 +7,12 @@
 //
 
 import Combine
-import Foundation
+import Common
 
 public protocol SearchService {
-    func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error>
+    func searchNumberToServer(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error>
+    
+    func searchNumberToSudden(request: GetProfileRequest) -> AnyPublisher<SearchUserData, Error>
 
-    func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error>
+    func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUserData], Error>
 }

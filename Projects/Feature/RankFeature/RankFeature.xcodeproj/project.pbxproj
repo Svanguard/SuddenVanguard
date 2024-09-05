@@ -11,7 +11,6 @@
 		52A4A087C6B3E7EA3E1571B9 /* RankPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579CF486A9EBC4FE57819AE7 /* RankPeriod.swift */; };
 		6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7966368EE4EE0537440518A3 /* RankUserListCell.swift */; };
 		7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9101001570ABDE374806923 /* RankView.swift */; };
-		8614EB492142716EDD734FEB /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */; };
 		B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E9639D3DC11D57E8DE1A16 /* RankViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,7 +28,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUser.swift; sourceTree = "<group>"; };
 		579CF486A9EBC4FE57819AE7 /* RankPeriod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPeriod.swift; sourceTree = "<group>"; };
 		5C0149663550FDF8DCA76869 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		7966368EE4EE0537440518A3 /* RankUserListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUserListCell.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				579CF486A9EBC4FE57819AE7 /* RankPeriod.swift */,
-				2BCDC97A2B4085B6DBBAA424 /* RankUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -225,7 +222,6 @@
 			files = (
 				6CCC5D180CC25432E8429243 /* RankUserListCell.swift in Sources */,
 				52A4A087C6B3E7EA3E1571B9 /* RankPeriod.swift in Sources */,
-				8614EB492142716EDD734FEB /* RankUser.swift in Sources */,
 				7323BB1ACE9C9677B2069BFB /* RankView.swift in Sources */,
 				B441B1CB7EFBB79A4C754247 /* RankViewModel.swift in Sources */,
 			);

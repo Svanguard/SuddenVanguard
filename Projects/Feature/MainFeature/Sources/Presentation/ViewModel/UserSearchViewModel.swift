@@ -18,7 +18,7 @@ final class UserSearchViewModel: ObservableObject {
     
     @Published var searchQuery = ""
     @Published var users: [SearchUserData] = []
-    @Published var userPunishDate: String = ""
+    @Published var userPunishDate = ""
     @Published var isLoading = false
     @Published var userFetchLoading = false
     @Published var searchHistory: [String] = []
@@ -43,21 +43,15 @@ final class UserSearchViewModel: ObservableObject {
             return
         }
         isLoading = true
-        searchUseCase.searchUsers(request: .init(userName: searchQuery))
+        searchUseCase.searchUsers(userName: searchQuery)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     print("검색 실패 에러: \(error)")
                 }
-            } receiveValue: { [weak self] response in
-                self?.users = response.map { userResponse in
-                    SearchUserData(
-                        suddenNumber: userResponse.suddenNumber,
-                        userName: userResponse.userName,
-                        userImage: userResponse.userImage
-                    )
-                }
+            } receiveValue: { [weak self] mappedUsers in
+                self?.users = mappedUsers
             }
             .store(in: &cancellables)
     }
@@ -69,34 +63,18 @@ final class UserSearchViewModel: ObservableObject {
         
         userFetchLoading = true
         
-        searchUseCase.searchNumber(request: .init(suddenNumber: userSuddenNumber))
+        searchUseCase.searchNumberToServer(suddenNumber: userSuddenNumber)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self = self else { return }
                 self.userFetchLoading = false
                 if case .failure(let error) = completion {
-                    print("번호로 서버에서 데이터 가져오기 에러: \(error)")
+                    print("병영번호로 서버에서 데이터 가져오기 에러: \(error)")
                 }
-            } receiveValue: { [weak self] response in
+            } receiveValue: { [weak self] (resultType, punishDate) in
                 guard let self = self else { return }
-
-                print(response)
-                switch response.punishType {
-                case "restriction":
-                    self.resultType = .restriction
-                    self.userPunishDate = response.punishDate
-                case "protection":
-                    self.resultType = .protection
-                    self.userPunishDate = response.punishDate
-                default:
-                    switch response.registerFg {
-                    case true:
-                        self.resultType = .success
-                    case false:
-                        self.resultType = .clean
-                    }
-                }
-               
+                self.resultType = resultType
+                self.userPunishDate = punishDate
                 self.userFetchLoading = false
             }
             .store(in: &cancellables)

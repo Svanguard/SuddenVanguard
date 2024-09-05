@@ -7,6 +7,7 @@
 //
 
 import Combine
+import Common
 
 public struct SearchUseCaseImp: SearchUseCase {
     private let service: SearchService
@@ -15,11 +16,15 @@ public struct SearchUseCaseImp: SearchUseCase {
         self.service = service
     }
     
-    public func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error> {
-        return service.searchNumber(request: request).eraseToAnyPublisher()
-    }
-    
-    public func searchUsers(request: SearchUsersRequest) -> AnyPublisher<[SearchUsersResponse], Error> {
-         return service.searchUsers(request: request).eraseToAnyPublisher()
-     }
+    public func searchNumberToServer(suddenNumber: Int) -> AnyPublisher<(PunishResultType, String), Error> {
+          return service.searchNumberToServer(request: .init(suddenNumber: suddenNumber))
+      }
+      
+      public func searchNumberToSudden(suddenNumber: Int) -> AnyPublisher<SearchUserData, Error> {
+          return service.searchNumberToSudden(request: .init(suddenNumber: suddenNumber))
+      }
+      
+      public func searchUsers(userName: String) -> AnyPublisher<[SearchUserData], Error> {
+          return service.searchUsers(request: .init(userName: userName))
+      }
 }

@@ -12,7 +12,6 @@ import Domain
 import Combine
 import Foundation
 
-@MainActor
 final class RankViewModel: ObservableObject {
     @Injected(RankUseCase.self)
     public var rankUseCase: RankUseCase
@@ -174,19 +173,31 @@ final class RankViewModel: ObservableObject {
     private func checkIsRankResponse() -> AnyPublisher<Void, Error> {
         let rankPublisher: AnyPublisher<Void, Error>
         switch selectedPeriod {
-            case .daily:
-                rankPublisher = dailyResponse.rankDatas.isEmpty ?
-            getRankData().map { _ in () }.eraseToAnyPublisher() :
-            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
-            case .weekly:
-                rankPublisher = weeklyResponse.rankDatas.isEmpty ?
-            getRankData().map { _ in () }.eraseToAnyPublisher() :
-            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
-            case .monthly:
-                rankPublisher = monthlyResponse.rankDatas.isEmpty ?
-            getRankData().map { _ in () }.eraseToAnyPublisher() :
-            Just(()).setFailureType(to: Error.self).eraseToAnyPublisher()
-            }
+        case .daily:
+            rankPublisher = dailyResponse.rankDatas.isEmpty ?
+            getRankData()
+                .eraseToAnyPublisher()
+            :
+            Just(())
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        case .weekly:
+            rankPublisher = weeklyResponse.rankDatas.isEmpty ?
+            getRankData()
+                .eraseToAnyPublisher()
+            :
+            Just(())
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        case .monthly:
+            rankPublisher = monthlyResponse.rankDatas.isEmpty ?
+            getRankData()
+                .eraseToAnyPublisher()
+            :
+            Just(())
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
         return rankPublisher
     }
     
@@ -326,15 +337,17 @@ extension RankViewModel {
     
     // MARK: 추가 Rank 데이터 로드
     private func loadMoreRankData(response: RankResponse, period: RankPeriod, page: Int) -> AnyPublisher<[Int: RankUser], Error> {
-         let startIndex = (page - 1) * pageSize
-         let endIndex = min(page * pageSize, response.rankDatas.count)
-
-         guard startIndex < endIndex else {
-             updateRemainPage(hasMoreData: false)
-             return Just([:]).setFailureType(to: Error.self).eraseToAnyPublisher()
-         }
-
-         let rankDataSlice = response.rankDatas[startIndex..<endIndex]
+        let startIndex = (page - 1) * pageSize
+        let endIndex = min(page * pageSize, response.rankDatas.count)
+        
+        guard startIndex < endIndex else {
+            updateRemainPage(hasMoreData: false)
+            return Just([:])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+        
+        let rankDataSlice = response.rankDatas[startIndex..<endIndex]
 
          let fetchRankUserPublishers = rankDataSlice.enumerated().map { (index, userData) in
              fetchAndCreateRankUser(userData: userData)

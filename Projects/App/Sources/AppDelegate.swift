@@ -24,19 +24,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func registerDependencies() {
         let apiClientService: ApiClientService = ApiClientServiceImp()
         
-        // Search
+        // MARK: - Repository
         let searchNumberRepository: SearchNumberRepository = SearchNumberRepositoryImp(apiClientService: apiClientService)
         let searchUsersRepository: SearchUsersRepository = SearchUsersRepositoryImp(apiClientService: apiClientService)
-        
-        let searchService: SearchService = SearchServiceImp(
-            searchNumberRepository: searchNumberRepository,
-            searchUsersRepository: searchUsersRepository
-        )
-        
-        // Rank
         let getRankDataRepository: GetRankDataRepository = GetRankDataRepositoryImp(apiClientService: apiClientService)
         let getProfileDataRepository: GetProfileDataRepository = GetProfileDataRepositoryImp(apiClientService: apiClientService)
         
+        
+        // MARK: - Service
+        let searchService: SearchService = SearchServiceImp(
+            searchNumberRepository: searchNumberRepository,
+            searchUsersRepository: searchUsersRepository,
+            getProfileDataRepository: getProfileDataRepository
+        )
         let rankService: RankService = RankServiceImp(
             searchNumberRepository: searchNumberRepository,
             getRankDataRepository: getRankDataRepository,
