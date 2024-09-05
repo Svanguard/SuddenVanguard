@@ -38,6 +38,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let getProfileDataRepository: GetProfileDataRepository = GetProfileDataRepositoryImp(apiClientService: apiClientService)
         
         let rankService: RankService = RankServiceImp(
+            searchNumberRepository: searchNumberRepository,
             getRankDataRepository: getRankDataRepository,
             getProfileDataRepository: getProfileDataRepository
         )

@@ -26,6 +26,11 @@ final class RankViewModel: ObservableObject {
     @Published var showActionSheet = false
     @Published var selectedPeriod: RankPeriod = .monthly
     
+    @Published var user: SearchUserData = .init(suddenNumber: 0, userName: "", userImage: "")
+    @Published var resultType: PunishResultType = .clean
+    @Published var userPunishDate: String = ""
+    @Published var userFetchLoading = false
+    
     private var dailyResponse: RankResponse = .init(rankDatas: [])
     private var weeklyResponse: RankResponse = .init(rankDatas: [])
     private var monthlyResponse: RankResponse = .init(rankDatas: [])
@@ -58,9 +63,7 @@ final class RankViewModel: ObservableObject {
         }
         
         let sortedUsers = users.sorted { $0.count > $1.count }
-        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter {
-            $0.username.contains(text) || $0.suddenNumber.contains(text)
-        }
+        let filtered = text.isEmpty ? sortedUsers : sortedUsers.filter { $0.username.contains(text) }
         
         return filtered
     }
@@ -70,9 +73,9 @@ final class RankViewModel: ObservableObject {
     }
     
     // MARK: 선택된 기간에 따른 데이터 로드
-    func loadData() {
+    func loadData(forceLoad: Bool = false) {
         isLoading = true
-        if !isEmptyRankUsers() {
+        if !isEmptyRankUsers() && !forceLoad {
             isLoading = false
         } else {
             checkIsRankResponse()
@@ -102,7 +105,8 @@ final class RankViewModel: ObservableObject {
             currentMonthlyPage = 0
             monthlyResponse = .init(rankDatas: [])
         }
-        loadData()
+
+        loadData(forceLoad: true)
     }
     
     // MARK: Rank 데이터 가져오기
@@ -225,7 +229,7 @@ final class RankViewModel: ObservableObject {
             .map { profileResponse in
                 RankUser(
                     username: profileResponse.userName,
-                    suddenNumber: String(userData.userNexonSn),
+                    suddenNumber: userData.userNexonSn,
                     count: userData.count,
                     userImage: profileResponse.userImage
                 )
@@ -360,5 +364,47 @@ extension RankViewModel {
         case .monthly:
             remainMonthlyPage = hasMoreData
         }
+    }
+}
+
+// MARK: - 제재이력 검사
+extension RankViewModel {
+    func searchNumber(userSuddenNumber: Int) {
+        guard userSuddenNumber != 0 else {
+            return
+        }
+        userFetchLoading = true
+        
+        rankUseCase.getPunishData(request: .init(suddenNumber: userSuddenNumber))
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] completion in
+                guard let self = self else { return }
+                self.userFetchLoading = false
+                if case .failure(let error) = completion {
+                    print("번호로 서버에서 데이터 가져오기 에러: \(error)")
+                }
+            } receiveValue: { [weak self] response in
+                guard let self = self else { return }
+
+                print(response)
+                switch response.punishType {
+                case "restriction":
+                    self.resultType = .restriction
+                    self.userPunishDate = response.punishDate
+                case "protection":
+                    self.resultType = .protection
+                    self.userPunishDate = response.punishDate
+                default:
+                    switch response.registerFg {
+                    case true:
+                        self.resultType = .success
+                    case false:
+                        self.resultType = .clean
+                    }
+                }
+               
+                self.userFetchLoading = false
+            }
+            .store(in: &cancellables)
     }
 }

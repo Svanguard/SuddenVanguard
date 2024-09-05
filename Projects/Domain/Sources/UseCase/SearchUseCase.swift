@@ -7,7 +7,6 @@
 //
 
 import Combine
-import Foundation
 
 public protocol SearchUseCase {
     func searchNumber(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error>

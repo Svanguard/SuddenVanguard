@@ -15,6 +15,10 @@ public struct RankUseCaseImp: RankUseCase {
         self.rankService = rankService
     }
     
+    public func getPunishData(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error> {
+        rankService.getPunishData(request: request).eraseToAnyPublisher()
+    }
+    
     public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {
         rankService.getRankData(request: request)
     }

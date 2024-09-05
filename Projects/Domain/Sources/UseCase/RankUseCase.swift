@@ -9,6 +9,7 @@
 import Combine
 
 public protocol RankUseCase {
+    func getPunishData(request: SearchNumberRequest) -> AnyPublisher<SearchNumberResponse, Error>
     func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error>
     func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error>
 }

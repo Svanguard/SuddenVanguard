@@ -1,19 +1,29 @@
 //
 //  ResultView.swift
-//  MainFeature
+//  DesignSystem
 //
-//  Created by 강치우 on 8/20/24.
+//  Created by 최동호 on 9/5/24.
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
 import SwiftUI
 
-struct ResultView: View {
+public struct ResultView: View {
     let title: String
     let content: String
     let image: Config
     
-    var body: some View {
+    public init(
+        title: String,
+        content: String,
+        image: Config
+    ) {
+        self.title = title
+        self.content = content
+        self.image = image
+    }
+    
+    public var body: some View {
         VStack(spacing: 15) {
             Image(systemName: image.content)
                 .font(.title)
@@ -43,11 +53,22 @@ struct ResultView: View {
         }
         .shadow(color: .black.opacity(0.12), radius: 8)
         .padding(.horizontal, 15)
+        
     }
     
-    struct Config {
+    public struct Config {
         let content: String
         let tint: Color
         let foreground: Color
+        
+        public init(
+            content: String,
+            tint: Color,
+            foreground: Color
+        ) {
+            self.content = content
+            self.tint = tint
+            self.foreground = foreground
+        }
     }
 }

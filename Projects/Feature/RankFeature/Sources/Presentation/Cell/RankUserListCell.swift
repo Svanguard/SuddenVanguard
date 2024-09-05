@@ -37,7 +37,7 @@ public struct RankUserListCell: View {
                     Text(user.username)
                         .font(.system(.subheadline, weight: .semibold))
                     
-                    Text(user.suddenNumber)
+                    Text(String(user.suddenNumber))
                         .font(.system(.footnote))
                         .foregroundStyle(Color(.systemGray))
                     
@@ -79,9 +79,6 @@ public struct RankUserListCell: View {
             }
         }
         .contentShape(Rectangle())
-        .onTapGesture {
-            // MARK: 셀 터치 이벤트를 구분 (아무런 동작을 하지 않도록 설정)
-        }
     }
 }
 

@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4906F43F6A038295B5589D3 /* ViewValues.swift */; };
 		2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170170CE0C43F0B37C75808F /* AppLocalized.swift */; };
+		418F01962C899FB60022E42A /* PunishResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418F01952C899FB60022E42A /* PunishResultType.swift */; };
 		9F03D3C993AEE0B9BE094100 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */; };
 		A0AA45BD6EA7A98003408B63 /* SearchUserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6A36F8CDC71501059F6DEA /* SearchUserData.swift */; };
 /* End PBXBuildFile section */
@@ -31,6 +32,7 @@
 		170170CE0C43F0B37C75808F /* AppLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLocalized.swift; sourceTree = "<group>"; };
 		3354DE7E2B4F1877FECB508B /* Common-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Common-Info.plist"; sourceTree = "<group>"; };
 		3DA77FB5518DC2177F7CDB4F /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		418F01952C899FB60022E42A /* PunishResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunishResultType.swift; sourceTree = "<group>"; };
 		7B6A36F8CDC71501059F6DEA /* SearchUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserData.swift; sourceTree = "<group>"; };
 		BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		E4906F43F6A038295B5589D3 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -69,12 +71,29 @@
 		414CC905DAA5F4BA01D19B1D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				418F01932C899FA40022E42A /* Presentation */,
 				989AAFF8E0DAACA4DBC33D99 /* Constants */,
 				9A51E59071CEFD36F7385E94 /* Domain */,
 				DC3D86362E126B6146A10BDE /* Localize */,
 				E37D73CBD651BC5CDFF7476E /* Utilities */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		418F01932C899FA40022E42A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				418F01942C899FAC0022E42A /* Model */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		418F01942C899FAC0022E42A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				418F01952C899FB60022E42A /* PunishResultType.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		46B7570B57064E55A860C478 /* InfoPlists */ = {
@@ -180,8 +199,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 7A960902591CDB4F68854742 /* Build configuration list for PBXProject "Common" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -216,6 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				418F01962C899FB60022E42A /* PunishResultType.swift in Sources */,
 				24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */,
 				A0AA45BD6EA7A98003408B63 /* SearchUserData.swift in Sources */,
 				2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */,
@@ -246,7 +264,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.Common;
 				PRODUCT_NAME = Common;
 				SDKROOT = iphoneos;
@@ -342,7 +363,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.Common;
 				PRODUCT_NAME = Common;
 				SDKROOT = iphoneos;
@@ -350,10 +374,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
