@@ -47,15 +47,15 @@ public struct SettingView: View {
                         Text("서든뱅가드 정보")
                     }
                     
-                    Section {
-                        NavigationLink {
-                            // 평가하기 화면으로 이동
-                        } label: {
-                            Text("평가하기")
-                        }
-                    } header: {
-                        Text("고객지원")
-                    }
+//                    Section {
+//                        NavigationLink {
+//                            // 평가하기 화면으로 이동
+//                        } label: {
+//                            Text("평가하기")
+//                        }
+//                    } header: {
+//                        Text("고객지원")
+//                    }
                 }
                 .listStyle(.grouped)
             }
