@@ -61,6 +61,15 @@ final class RankViewModel: ObservableObject {
     
     // MARK: 선택된 기간에 따른 데이터 로드
     func loadData() {
+        switch selectedPeriod {
+        case .daily:
+            guard dailyRankUsers.isEmpty else { return }
+        case .weekly:
+            guard weeklyRankUsers.isEmpty else { return }
+        case .monthly:
+            guard monthlyRankUsers.isEmpty else { return }
+        }
+        
         isLoading = true
         rankUseCase.loadRankData(period: selectedPeriod)
             .receive(on: DispatchQueue.main)

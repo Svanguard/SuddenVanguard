@@ -87,7 +87,6 @@ public final class RankServiceImp: RankService {
         return loadRankData(period: period)
     }
     
-    
     public func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error> {
         return searchNumberRepository.searchNumber(request: request)
             .map { response in
