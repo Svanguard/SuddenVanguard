@@ -17,7 +17,9 @@ public struct MainView: View {
         NavigationStack {
             VStack {
                 VStack {
-                    Image(uiImage: DesignSystemAsset.logo.image)
+                    
+                    Spacer()
+                    Image(uiImage: DesignSystemAsset.logoimg.image)
                         .resizable()
                         .scaledToFit()
                         .frame(height: 100)
@@ -54,33 +56,34 @@ public struct MainView: View {
                         
                         Spacer()
                     }
+                    
+                    Spacer()
                 }
                 .padding(.horizontal, 20)
-                .padding(.top, 50)
+                .padding(.bottom, 50)
                 .background(
                     Image(uiImage: DesignSystemAsset.bg.image)
                         .resizable()
                         .scaledToFill()
                         .ignoresSafeArea()
-                        .padding(.bottom, -70)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                 )
                 
                 Spacer()
                 
-                ScrollView {
-                    ForEach(0..<7) { index in
-                        Rectangle()
-                            .frame(height: 100)
-                            .foregroundStyle(Color(.darkGray))
-                            .overlay {
-                                Text("광고 문의")
-                                    .foregroundColor(.white)
-                            }
-                    }
-                }
-                .padding(.top, 62)
-                .scrollIndicators(.hidden)
-                
+//                ScrollView {
+//                    ForEach(0..<7) { index in
+//                        Rectangle()
+//                            .frame(height: 100)
+//                            .foregroundStyle(Color(.darkGray))
+//                            .overlay {
+//                                Text("광고 문의")
+//                                    .foregroundColor(.white)
+//                            }
+//                    }
+//                }
+//                .padding(.top, 62)
+//                .scrollIndicators(.hidden)
             }
         }
     }

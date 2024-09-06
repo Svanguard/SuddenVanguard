@@ -5,6 +5,7 @@
 //  Created by 최동호 on 8/3/24.
 //
 
+import DesignSystem
 import MainFeature
 import RankFeature
 import ReportFeature
@@ -13,34 +14,71 @@ import SettingFeature
 import SwiftUI
 
 public struct MainTabView: View {
-    public init() { }
+    public init() {
+        setupTabBarAppearance()
+    }
+    
+    @State private var showTab = 0
     
     public var body: some View {
         TabView {
             MainView()
                 .tabItem {
-                    Label("전과자", systemImage: "person.slash")
+                    VStack {
+                        Image(uiImage: DesignSystemAsset.vanguard.image)
+                            .resizable()
+                            .scaledToFit()
+                        Text("뱅가드")
+                            .font(.body)
+                    }
                 }
             
             RankView()
                 .tabItem {
-                    Label("실시간순위", systemImage: "trophy")
+                    VStack {
+                        Image(uiImage: DesignSystemAsset.flame.image)
+                            .resizable()
+                            .scaledToFit()
+                        Text("실시간순위")
+                            .font(.body)
+                    }
                 }
             
             ReportView()
                 .tabItem {
-                    Label("제보하기", systemImage: "light.beacon.max")
+                    VStack {
+                        Image(uiImage: DesignSystemAsset.mail.image)
+                            .resizable()
+                            .scaledToFit()
+                        Text("제보하기")
+                            .font(.body)
+                    }
                 }
             
             SettingView()
                 .tabItem {
-                    Label("설정", systemImage: "gearshape")
+                    VStack {
+                        Image(systemName: "gearshape")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 18, height: 18)
+                        Text("설정")
+                            .font(.body)
+                    }
                 }
         }
         .tint(.primary)
     }
-}
-
-#Preview {
-    MainTabView()
+    
+    private func setupTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
+        // 구분선 색상 설정
+        appearance.shadowColor = UIColor.darkGray // 원하는 색상으로 구분선 설정
+        
+        // appearance를 탭바에 적용
+        UITabBar.appearance().standardAppearance = appearance
+        UITabBar.appearance().scrollEdgeAppearance = appearance
+    }
 }

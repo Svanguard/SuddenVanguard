@@ -32,7 +32,7 @@ struct MailContent {
                 """
         
         return MailContent(
-            recipients: ["support@example.com"],
+            recipients: ["suddenvanguard@gmail.com"],
             subject: "핵 의심 유저 제보",
             body: body
         )
