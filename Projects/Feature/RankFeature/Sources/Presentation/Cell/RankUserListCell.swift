@@ -8,6 +8,7 @@
 
 
 import Common
+import DesignSystem
 import SafariServices
 import SwiftUI
 import Kingfisher
@@ -22,7 +23,7 @@ public struct RankUserListCell: View {
             HStack(alignment: .top) {
                 KFImage(URL(string: user.userImage))
                     .placeholder {
-                        Image(systemName: "person.fill")
+                        Image(uiImage: DesignSystemAsset.userimg.image)
                             .resizable()
                             .scaledToFill()
                             .frame(width: 50, height: 50)

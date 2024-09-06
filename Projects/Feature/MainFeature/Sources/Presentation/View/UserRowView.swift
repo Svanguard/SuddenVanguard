@@ -8,6 +8,7 @@
 
 import Kingfisher
 
+import DesignSystem
 import Common
 import SwiftUI
 
@@ -18,9 +19,10 @@ struct UserRowView: View {
         HStack {
             KFImage(URL(string: user.userImage))
                 .placeholder { 
-                    Image(systemName: "person.fill")
+                    Image(uiImage: DesignSystemAsset.userimg.image)
                         .resizable()
                         .scaledToFill()
+                        .foregroundStyle(.white)
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
                 }

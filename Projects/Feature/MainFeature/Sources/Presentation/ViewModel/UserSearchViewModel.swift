@@ -119,11 +119,6 @@ final class UserSearchViewModel: ObservableObject {
         saveSearchHistory()
     }
 
-    func clearSearchHistory() {
-        searchHistory.removeAll()
-        saveSearchHistory()
-    }
-
     private func setupSearchDebounce() {
         $searchQuery
             .debounce(for: .seconds(debounceDelay), scheduler: DispatchQueue.main)

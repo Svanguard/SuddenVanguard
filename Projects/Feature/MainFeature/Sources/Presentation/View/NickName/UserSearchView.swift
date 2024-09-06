@@ -31,16 +31,6 @@ struct UserSearchView: View {
                     )
             }
         }
-        .alert(isPresented: $viewModel.showAlert) {
-            Alert(
-                title: Text("전체 삭제"),
-                message: Text("최근 검색어를 모두 삭제하시겠습니까?"),
-                primaryButton: .destructive(Text("삭제")) {
-                    viewModel.clearSearchHistory()
-                },
-                secondaryButton: .cancel(Text("취소"))
-            )
-        }
     }
     
     @ViewBuilder
@@ -49,12 +39,12 @@ struct UserSearchView: View {
             if viewModel.users.isEmpty {
                 if viewModel.searchQuery.isEmpty && viewModel.searchHistory.isEmpty {
                     Text("최근 검색어 내역이 없습니다")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                         .font(.body)
                         .padding()
                 } else if !viewModel.searchQuery.isEmpty && viewModel.users.isEmpty {
                     Text("검색 결과가 없습니다")
-                        .foregroundColor(.gray)
+                        .foregroundStyle(.gray)
                         .font(.body)
                         .padding()
                 } else {

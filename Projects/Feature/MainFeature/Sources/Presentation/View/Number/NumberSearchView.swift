@@ -22,6 +22,7 @@ struct NumberSearchView: View {
                     placement: .navigationBarDrawer(displayMode: .always),
                     prompt: "병영번호 검색"
                 )
+                .keyboardType(.numberPad)
         } else {
             NumberSearch
                 .searchable(
@@ -29,62 +30,33 @@ struct NumberSearchView: View {
                     placement: .navigationBarDrawer(displayMode: .always),
                     prompt: "병영번호 검색"
                 )
+                .keyboardType(.numberPad)
         }
     }
     
     @ViewBuilder
     private var NumberSearch: some View {
         VStack {
-            if viewModel.isLoading {
-                ProgressView()
-            } else if viewModel.searchQuery.isEmpty {
-                NoSearch
+            if viewModel.searchQuery.isEmpty {
+                Text("병영번호로 핵의심 유저를 검색하세요")
+                    .foregroundStyle(.gray)
+                    .font(.body)
+                    .padding()
             } else {
                 VStack {
-                    UserProfile
-                    resultView(userNick: viewModel.userData.userName)
+                    List {
+                        NavigationLink(destination: {
+                            resultView(userNick: viewModel.userData.userName)
+                        }) {
+                            UserRowView(user: viewModel.userData)
+                        }
+                    }
+                    .listStyle(.plain)
                 }
             }
         }
         .navigationTitle("병영번호 검색")
         .navigationBarTitleDisplayMode(.inline)
-    }
-    
-    @ViewBuilder
-    private var NoSearch: some View {
-        VStack {
-            Text("병영번호로 핵의심 유저를 검색하세요")
-        }
-    }
-    
-    @ViewBuilder
-    private var UserProfile: some View {
-        HStack {
-            KFImage(URL(string: viewModel.userData.userImage))
-                .placeholder {
-                    Image(systemName: "person.fill")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 100, height: 100)
-                        .clipShape(Circle())
-                }
-                .resizable()
-                .scaledToFill()
-                .frame(width: 100, height: 100)
-                .clipShape(Circle())
-            
-            VStack(alignment: .leading, spacing: 8) {
-                Text(viewModel.userData.userName)
-                    .font(.headline)
-                
-                let formattedNexonSN = String(viewModel.userData.suddenNumber).replacingOccurrences(of: ",", with: "")
-                Text("병영 번호: \(formattedNexonSN)")
-                    .font(.subheadline)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.5)
-            }
-            .padding(.leading, 8)
-        }
     }
     
     @ViewBuilder
@@ -154,9 +126,6 @@ struct NumberSearchView: View {
             )
             .presentationDetents([.height(330)])
             .interactiveDismissDisabled()
-            
-            
-            
         }
     }
 }
