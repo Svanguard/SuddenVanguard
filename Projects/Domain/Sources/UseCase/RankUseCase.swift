@@ -10,7 +10,8 @@ import Combine
 import Common
 
 public protocol RankUseCase {
+    func loadRankData(period: RankPeriod) -> AnyPublisher<([RankUser], Bool), Error>
+    func refreshRankData(period: RankPeriod) -> AnyPublisher<([RankUser], Bool), Error>
+    func loadMoreRankData(period: RankPeriod) -> AnyPublisher<([RankUser], Bool), Error>
     func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error>
-    func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error>
-    func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error>
 }

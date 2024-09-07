@@ -21,28 +21,16 @@ final class RankViewModel: ObservableObject {
     @Published var weeklyRankUsers: [RankUser] = []
     @Published var monthlyRankUsers: [RankUser] = []
     @Published var isLoading: Bool = true
-    @Published var isLoadingMore: Bool = false
     @Published var showActionSheet = false
     @Published var selectedPeriod: RankPeriod = .monthly
+    @Published var hasMoreData: Bool = false
     
     @Published var user: SearchUserData = .init(suddenNumber: 0, userName: "", userImage: "")
     @Published var resultType: PunishResultType = .clean
     @Published var userPunishDate: String = ""
     @Published var userFetchLoading = false
     
-    private var dailyResponse: RankResponse = .init(rankDatas: [])
-    private var weeklyResponse: RankResponse = .init(rankDatas: [])
-    private var monthlyResponse: RankResponse = .init(rankDatas: [])
-    
     private var cancellables = Set<AnyCancellable>()
-    private var currentDailyPage: Int = 0
-    private var currentWeeklyPage: Int = 0
-    private var currentMonthlyPage: Int = 0
-    
-    private var remainDailyPage: Bool = true
-    private var remainWeeklyPage: Bool = true
-    private var remainMonthlyPage: Bool = true
-    private let pageSize: Int = 10
     
     init() {
         loadData()
@@ -72,316 +60,68 @@ final class RankViewModel: ObservableObject {
     }
     
     // MARK: 선택된 기간에 따른 데이터 로드
-    func loadData(forceLoad: Bool = false) {
+    func loadData() {
+        switch selectedPeriod {
+        case .daily:
+            guard dailyRankUsers.isEmpty else { return }
+        case .weekly:
+            guard weeklyRankUsers.isEmpty else { return }
+        case .monthly:
+            guard monthlyRankUsers.isEmpty else { return }
+        }
+        
         isLoading = true
-        if !isEmptyRankUsers() && !forceLoad {
-            isLoading = false
-        } else {
-            checkIsRankResponse()
-                .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { [weak self] completion in
-                    if case .failure(let error) = completion {
-                        print("랭크 데이터 패치 실패: \(error)")
-                        self?.isLoading = false
-                    }
-                }, receiveValue: { [weak self] in
-                    self?.isLoading = false
-                })
-                .store(in: &cancellables)
-        }
-    }
-    
-    // MARK: 새로고침 로직
-    func refreshData() {
-        switch selectedPeriod {
-        case .daily:
-            currentDailyPage = 0
-            dailyResponse = .init(rankDatas: [])
-        case .weekly:
-            currentWeeklyPage = 0
-            weeklyResponse = .init(rankDatas: [])
-        case .monthly:
-            currentMonthlyPage = 0
-            monthlyResponse = .init(rankDatas: [])
-        }
-
-        loadData(forceLoad: true)
-    }
-    
-    // MARK: Rank 데이터 가져오기
-    func getRankData() -> AnyPublisher<Void, Error> {
-        let rankPublisher: AnyPublisher<RankResponse, Error>
-
-        switch selectedPeriod {
-        case .daily:
-            rankPublisher = rankUseCase.getRankData(request: .init(requestType: .daily))
-        case .weekly:
-            rankPublisher = rankUseCase.getRankData(request: .init(requestType: .weekly))
-        case .monthly:
-            rankPublisher = rankUseCase.getRankData(request: .init(requestType: .monthly))
-        }
-        
-        return rankPublisher
-            .map { [weak self] response in
-                guard let self = self else { return }
-                self.updateRankResponse(response: response)
-            }
-            .flatMap { [weak self] in
-                self?.getRankDataByPeriod() ?? Empty().eraseToAnyPublisher()
-            }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-    
-    // MARK: 선택된 기간에 따라 Rank 데이터 저장
-    private func updateRankResponse(response: RankResponse) {
-          switch selectedPeriod {
-          case .daily:
-              dailyResponse = response
-          case .weekly:
-              weeklyResponse = response
-          case .monthly:
-              monthlyResponse = response
-          }
-      }
-    
-    // MARK: 기간에 따른 Rank 사용자 데이터 가져오기
-    private func getRankDataByPeriod() -> AnyPublisher<Void, Error> {
-           let rankDataPublisher: AnyPublisher<[RankUser], Error>
-
-           switch selectedPeriod {
-           case .daily:
-               rankDataPublisher = getRankUsers(rankDatas: dailyResponse.rankDatas, period: .daily)
-               currentDailyPage += 2
-           case .weekly:
-               rankDataPublisher = getRankUsers(rankDatas: weeklyResponse.rankDatas, period: .weekly)
-               currentWeeklyPage += 2
-           case .monthly:
-               rankDataPublisher = getRankUsers(rankDatas: monthlyResponse.rankDatas, period: .monthly)
-               currentMonthlyPage += 2
-           }
-
-           return rankDataPublisher
-               .map { [weak self] users in
-                   guard let self = self else { return }
-                   self.updateRankUsers(users: users)
-               }
-               .eraseToAnyPublisher()
-       }
-    
-    // MARK: 선택된 기간에 따른 Rank 데이터 체크
-    private func checkIsRankResponse() -> AnyPublisher<Void, Error> {
-        let rankPublisher: AnyPublisher<Void, Error>
-        switch selectedPeriod {
-        case .daily:
-            rankPublisher = dailyResponse.rankDatas.isEmpty ?
-            getRankData()
-                .eraseToAnyPublisher()
-            :
-            Just(())
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        case .weekly:
-            rankPublisher = weeklyResponse.rankDatas.isEmpty ?
-            getRankData()
-                .eraseToAnyPublisher()
-            :
-            Just(())
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        case .monthly:
-            rankPublisher = monthlyResponse.rankDatas.isEmpty ?
-            getRankData()
-                .eraseToAnyPublisher()
-            :
-            Just(())
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-        return rankPublisher
-    }
-    
-    // Rank 사용자 데이터 업데이트
-    private func updateRankUsers(users: [RankUser]) {
-        switch selectedPeriod {
-        case .daily:
-            dailyRankUsers = users
-        case .weekly:
-            weeklyRankUsers = users
-        case .monthly:
-            monthlyRankUsers = users
-        }
-        isLoading = false
-    }
-    
-    // Rank 사용자 가져오기
-    private func getRankUsers(
-        rankDatas: [UserCountData],
-        period: RankPeriod
-    ) -> AnyPublisher<[RankUser], Error> {
-         let fetchRankUserPublishers = rankDatas.prefix(20).enumerated().map { index, userData in
-             self.fetchAndCreateRankUser(userData: userData)
-                 .map { user in (index, user) }
-                 .eraseToAnyPublisher()
-         }
-         
-         return Publishers.MergeMany(fetchRankUserPublishers)
-             .collect()
-             .map { $0.compactMap { $0.1 }.sorted { $0.count > $1.count } }
-             .receive(on: DispatchQueue.main)
-             .eraseToAnyPublisher()
-     }
-    
-    // RankUser 객체 생성
-    private func fetchAndCreateRankUser(
-        userData: UserCountData
-    ) -> AnyPublisher<RankUser?, Error> {
-        rankUseCase.getProfileData(request: .init(suddenNumber: userData.userNexonSn))
-            .map { profileResponse in
-                RankUser(
-                    username: profileResponse.userName,
-                    suddenNumber: userData.userNexonSn,
-                    count: userData.count,
-                    userImage: profileResponse.userImage
-                )
-            }
-            .receive(on: DispatchQueue.main)
-            .catch { _ in Just(nil).setFailureType(to: Error.self) }
-            .eraseToAnyPublisher()
-    }
-    
-    // Rank 사용자 데이터가 비어있는지 확인
-    private func isEmptyRankUsers() -> Bool {
-        switch selectedPeriod {
-        case .daily:
-            return dailyRankUsers.isEmpty
-        case .weekly:
-            return weeklyRankUsers.isEmpty
-        case .monthly:
-            return monthlyRankUsers.isEmpty
-        }
-    }
-}
-
-// MARK: - 무한스크롤
-extension RankViewModel {
-    // MARK: 무한 스크롤 로직
-    func loadMoreData() {
-        guard !isLoadingMore else { return }
-        isLoadingMore = true
-        
-        let loadPublisher: AnyPublisher<[Int: RankUser], Error>
-
-        switch selectedPeriod {
-        case .daily:
-            currentDailyPage += 1
-            loadPublisher = loadMoreRankData(response: dailyResponse, period: .daily, page: currentDailyPage)
-            
-        case .weekly:
-            currentWeeklyPage += 1
-            loadPublisher = loadMoreRankData(response: weeklyResponse, period: .weekly, page: currentWeeklyPage)
-            
-        case .monthly:
-            currentMonthlyPage += 1
-            loadPublisher = loadMoreRankData(response: monthlyResponse, period: .monthly, page: currentMonthlyPage)
-        }
-        
-        loadPublisher
+        rankUseCase.loadRankData(period: selectedPeriod)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
-                guard let self = self else { return }
-                if case .failure = completion {
-                    self.updateRemainPage(hasMoreData: false)
+                if case .failure(let error) = completion {
+                    print("랭크 데이터 패치 실패: \(error)")
+                    self?.isLoading = false
                 }
-            }, receiveValue: { [weak self] newRankDatas in
-                guard let self = self else { return }
-                switch self.selectedPeriod {
-                case .daily:
-                    self.dailyRankUsers.append(contentsOf: newRankDatas.values)
-                case .weekly:
-                    self.weeklyRankUsers.append(contentsOf: newRankDatas.values)
-                case .monthly:
-                    self.monthlyRankUsers.append(contentsOf: newRankDatas.values)
-                }
-                self.isLoadingMore = false
+            }, receiveValue: { [weak self] (rankUsers, hasMoreData) in
+                self?.updateRankUsers(users: rankUsers)
+                self?.hasMoreData = hasMoreData
+                self?.isLoading = false
             })
             .store(in: &cancellables)
     }
     
-    // MARK: 추가 데이터가 있으면 Progress Show
-    func showMoreProgressView() -> Bool {
-        checkOwnResponse() && checkRemainData()
+    // MARK: 새로고침 로직
+    func refreshData() {
+        isLoading = true
+        rankUseCase.refreshRankData(period: selectedPeriod)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                if case .failure(let error) = completion {
+                    print("랭크 데이터 새로고침 실패: \(error)")
+                    self?.isLoading = false
+                }
+            }, receiveValue: { [weak self] (rankUsers, hasMoreData) in
+                self?.updateRankUsers(users: rankUsers)
+                self?.hasMoreData = hasMoreData
+                self?.isLoading = false
+            })
+            .store(in: &cancellables)
     }
     
-    private func checkOwnResponse() -> Bool {
-        switch selectedPeriod {
-        case .daily:
-            !dailyResponse.rankDatas.isEmpty
-        case .weekly:
-            !weeklyResponse.rankDatas.isEmpty
-        case .monthly:
-            !monthlyResponse.rankDatas.isEmpty
-        }
-    }
-    
-    private func checkRemainData() -> Bool {
-        switch selectedPeriod {
-        case .daily:
-            return remainDailyPage
-        case .weekly:
-            return remainWeeklyPage
-        case .monthly:
-            return remainMonthlyPage
-        }
-    }
-    
-    // MARK: 추가 Rank 데이터 로드
-    private func loadMoreRankData(response: RankResponse, period: RankPeriod, page: Int) -> AnyPublisher<[Int: RankUser], Error> {
-        let startIndex = (page - 1) * pageSize
-        let endIndex = min(page * pageSize, response.rankDatas.count)
+    // MARK: 무한 스크롤 로직
+    func loadMoreData() {
+        guard hasMoreData else { return }
         
-        guard startIndex < endIndex else {
-            updateRemainPage(hasMoreData: false)
-            return Just([:])
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-        
-        let rankDataSlice = response.rankDatas[startIndex..<endIndex]
-
-         let fetchRankUserPublishers = rankDataSlice.enumerated().map { (index, userData) in
-             fetchAndCreateRankUser(userData: userData)
-                 .map { (startIndex + index, $0) }
-                 .eraseToAnyPublisher()
-         }
-
-         return Publishers.MergeMany(fetchRankUserPublishers)
-             .collect()
-             .map { results in
-                 results.reduce(into: [Int: RankUser]()) { (dict, tuple) in
-                     if let user = tuple.1 {
-                         dict[tuple.0] = user
-                     }
-                 }
-             }
-             .eraseToAnyPublisher()
-     }
-    
-    // MARK: 남은 페이지 업데이트
-    private func updateRemainPage(hasMoreData: Bool) {
-        switch selectedPeriod {
-        case .daily:
-            remainDailyPage = hasMoreData
-        case .weekly:
-            remainWeeklyPage = hasMoreData
-        case .monthly:
-            remainMonthlyPage = hasMoreData
-        }
+        rankUseCase.loadMoreRankData(period: selectedPeriod)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                if case .failure = completion {
+                    print("추가 데이터 로드 실패")
+                }
+            }, receiveValue: { [weak self] (newRankUsers, hasMoreData) in
+                self?.appendRankUsers(newUsers: newRankUsers)
+                self?.hasMoreData = hasMoreData
+            })
+            .store(in: &cancellables)
     }
-}
-
-// MARK: - 제재이력 검사
-extension RankViewModel {
+    
+    // MARK: - 제재이력 검사
     func searchNumber(userSuddenNumber: Int) {
         guard userSuddenNumber != 0 else {
             return
@@ -401,9 +141,33 @@ extension RankViewModel {
                 self.resultType = resultType
                 self.userPunishDate = punishDate
                 self.userFetchLoading = false
-               
+                
                 self.userFetchLoading = false
             }
             .store(in: &cancellables)
+    }
+    
+    // MARK: Rank 사용자 데이터 업데이트
+    private func updateRankUsers(users: [RankUser]) {
+        switch selectedPeriod {
+        case .daily:
+            dailyRankUsers = users
+        case .weekly:
+            weeklyRankUsers = users
+        case .monthly:
+            monthlyRankUsers = users
+        }
+    }
+    
+    // MARK: Rank 사용자 데이터 추가 (무한스크롤)
+    private func appendRankUsers(newUsers: [RankUser]) {
+        switch selectedPeriod {
+        case .daily:
+            dailyRankUsers.append(contentsOf: newUsers)
+        case .weekly:
+            weeklyRankUsers.append(contentsOf: newUsers)
+        case .monthly:
+            monthlyRankUsers.append(contentsOf: newUsers)
+        }
     }
 }

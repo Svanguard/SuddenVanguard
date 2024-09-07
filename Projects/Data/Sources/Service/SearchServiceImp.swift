@@ -10,7 +10,7 @@ import Combine
 import Common
 import Domain
 
-public struct SearchServiceImp: SearchService {
+public final class SearchServiceImp: SearchService {
     private let searchNumberRepository: SearchNumberRepository
     private let searchUsersRepository: SearchUsersRepository
     private let getProfileDataRepository: GetProfileDataRepository

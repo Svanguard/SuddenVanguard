@@ -30,6 +30,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let getRankDataRepository: GetRankDataRepository = GetRankDataRepositoryImp(apiClientService: apiClientService)
         let getProfileDataRepository: GetProfileDataRepository = GetProfileDataRepositoryImp(apiClientService: apiClientService)
         
+        // MARK: - Store
+        let rankDataStore: RankDataStore = RankDataStoreImp()
         
         // MARK: - Service
         let searchService: SearchService = SearchServiceImp(
@@ -40,7 +42,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let rankService: RankService = RankServiceImp(
             searchNumberRepository: searchNumberRepository,
             getRankDataRepository: getRankDataRepository,
-            getProfileDataRepository: getProfileDataRepository
+            getProfileDataRepository: getProfileDataRepository, 
+            rankDataStore: rankDataStore
         )
         
         // MARK: - UseCase

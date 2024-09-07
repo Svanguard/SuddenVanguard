@@ -11,6 +11,7 @@
 		0DBCAF3ECEE41D1C03C9E875 /* NetworkService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAC8A24EF2DA38A8911C0332 /* NetworkService.framework */; };
 		244F9652C41B599DDF6F5019 /* GetRankDataRepositoryImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A08B18F82D34FAB32DAB16 /* GetRankDataRepositoryImp.swift */; };
 		2EDC3260B88483B8CECC0DBA /* ProfileDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735958F5CC653186D4519FB /* ProfileDTO.swift */; };
+		2F15AFEAE77F9C214AE5B796 /* RankDataStoreImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9AEF00D036C3EBD8691F1C /* RankDataStoreImp.swift */; };
 		33C90A53912FA67A68AA0948 /* SearchUsersDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */; };
 		4174D538A6D45C6F18B695EE /* RankDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D80B82A4D12C803E409B637 /* RankDTO.swift */; };
 		68A960902E4CA6DF2AD37CFD /* RankServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089D29D51443420DDF5139D1 /* RankServiceImp.swift */; };
@@ -40,6 +41,7 @@
 		089D29D51443420DDF5139D1 /* RankServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankServiceImp.swift; sourceTree = "<group>"; };
 		2E62CEF3B76BD4AC717A45A2 /* SearchUsersDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersDTO.swift; sourceTree = "<group>"; };
 		4E75197C294DE74F5162FAA7 /* Data.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Data.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C9AEF00D036C3EBD8691F1C /* RankDataStoreImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankDataStoreImp.swift; sourceTree = "<group>"; };
 		7D80B82A4D12C803E409B637 /* RankDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankDTO.swift; sourceTree = "<group>"; };
 		908FEFE2684E9ADDA0F1AC02 /* SearchNumberRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNumberRepositoryImp.swift; sourceTree = "<group>"; };
 		A9CAD68237F1808AC7FB1C01 /* GetProfileDataRepositoryImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataRepositoryImp.swift; sourceTree = "<group>"; };
@@ -143,8 +145,17 @@
 				647255CD65221C9CD4A43DED /* DTO */,
 				73F3ED55BFDC2EF15878F5B6 /* Repository */,
 				B119E31677D59F7802A67D11 /* Service */,
+				E39F1FE1F4D061E2937763A7 /* Store */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		E39F1FE1F4D061E2937763A7 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				5C9AEF00D036C3EBD8691F1C /* RankDataStoreImp.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		EF3121301A12FEB266E0B923 /* Project */ = {
@@ -232,6 +243,7 @@
 				8A3EF9E4E592948CC259F8BF /* SearchUsersRepositoryImp.swift in Sources */,
 				68A960902E4CA6DF2AD37CFD /* RankServiceImp.swift in Sources */,
 				7B601806E276C3BD3C14B230 /* SearchServiceImp.swift in Sources */,
+				2F15AFEAE77F9C214AE5B796 /* RankDataStoreImp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

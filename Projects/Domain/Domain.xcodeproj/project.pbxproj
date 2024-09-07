@@ -26,6 +26,7 @@
 		EBDA42B9CEA0960CC778045C /* RankService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C0A55EAFE771229F596A8C /* RankService.swift */; };
 		EF762BFB8212220D77FB806C /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635E9CCB12A7F469B1A7A221 /* SearchUseCase.swift */; };
 		F67BD99A329E4D114DB81A22 /* SearchUsersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B17BB37B5A1CF275506A09 /* SearchUsersRepository.swift */; };
+		FE00DBCD8EB7FBFA5E87EA44 /* RankDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045043B91E2ECDBC08459CED /* RankDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +43,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		045043B91E2ECDBC08459CED /* RankDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankDataStore.swift; sourceTree = "<group>"; };
 		055606A60668084DC93C0A98 /* RankRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankRequest.swift; sourceTree = "<group>"; };
 		2459DE0FB4E4FD13B7FB4AD6 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		2631E3BA481483BAEA9EF018 /* SearchUseCaseImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCaseImp.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				11B3611D1728B87E7C917C63 /* Entity */,
 				4394E698057673598FF09CFD /* RepositoryInterface */,
 				679765B2495BA9696862366E /* Service */,
+				CBF14CD0AA9D5E0FAE739022 /* Store */,
 				2BE278B80FDD95404961E580 /* UseCase */,
 				B272B02E964808DBD04F94F7 /* UseCaseImplementations */,
 			);
@@ -213,6 +216,14 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
+		CBF14CD0AA9D5E0FAE739022 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				045043B91E2ECDBC08459CED /* RankDataStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -292,6 +303,7 @@
 				F67BD99A329E4D114DB81A22 /* SearchUsersRepository.swift in Sources */,
 				EBDA42B9CEA0960CC778045C /* RankService.swift in Sources */,
 				953C45A21B5D1E09AA49ABB9 /* SearchService.swift in Sources */,
+				FE00DBCD8EB7FBFA5E87EA44 /* RankDataStore.swift in Sources */,
 				8A6C59B2F6C613D29EF2C523 /* RankUseCase.swift in Sources */,
 				EF762BFB8212220D77FB806C /* SearchUseCase.swift in Sources */,
 				58E79EC87BAC0371D5B49E91 /* RankUseCaseImp.swift in Sources */,

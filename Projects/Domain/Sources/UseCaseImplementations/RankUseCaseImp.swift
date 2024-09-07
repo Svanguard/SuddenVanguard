@@ -16,15 +16,19 @@ public struct RankUseCaseImp: RankUseCase {
         self.rankService = rankService
     }
     
+    public func loadRankData(period: RankPeriod) -> AnyPublisher<([RankUser], Bool), Error> {
+        return rankService.loadRankData(period: period)
+    }
+    
+    public func refreshRankData(period: RankPeriod) -> AnyPublisher<([RankUser], Bool), Error> {
+        return rankService.refreshRankData(period: period)
+    }
+    
+    public func loadMoreRankData(period: RankPeriod) -> AnyPublisher<([RankUser], Bool), Error> {
+        return rankService.loadMoreRankData(period: period)
+    }
+    
     public func getPunishData(request: SearchNumberRequest) -> AnyPublisher<(PunishResultType, String), Error> {
         return rankService.getPunishData(request: request)
-    }
-    
-    public func getRankData(request: RankRequest) -> AnyPublisher<RankResponse, Error> {
-        return rankService.getRankData(request: request)
-    }
-    
-    public func getProfileData(request: GetProfileRequest) -> AnyPublisher<ProfileResponse, Error> {
-        return rankService.getProfileData(request: request)
     }
 }

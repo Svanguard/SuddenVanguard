@@ -47,7 +47,7 @@ public struct RankView: View {
                             }
                         }
                         
-                        if viewModel.showMoreProgressView() {
+                        if viewModel.hasMoreData {
                             ProgressView()
                                 .frame(maxWidth: .infinity, alignment: .center)
                                 .onAppear {
@@ -58,7 +58,7 @@ public struct RankView: View {
                     .listStyle(.plain)
                     .searchable(text: $viewModel.text, placement: .navigationBarDrawer(displayMode: .always), prompt: "검색")
                     .refreshable {
-                       viewModel.refreshData()
+                        viewModel.refreshData()
                     }
                 }
             }
