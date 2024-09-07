@@ -30,6 +30,10 @@ public enum DesignSystemAsset {
   public static let reportpic5 = DesignSystemImages(name: "reportpic5")
   public static let logo = DesignSystemImages(name: "logo")
   public static let logo2 = DesignSystemImages(name: "logo2")
+  public static let logoimg = DesignSystemImages(name: "logoimg")
+  public static let flame = DesignSystemImages(name: "flame")
+  public static let mail = DesignSystemImages(name: "mail")
+  public static let vanguard = DesignSystemImages(name: "vanguard")
   public static let userimg = DesignSystemImages(name: "userimg")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

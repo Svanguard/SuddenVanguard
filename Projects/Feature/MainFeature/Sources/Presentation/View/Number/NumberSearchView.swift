@@ -77,7 +77,7 @@ struct NumberSearchView: View {
             
         case .restriction:
             ResultView(
-                title: "게임 이용 제한 유저!",
+                title: "게임 이용 제한 유저 발견!",
                 content: "\(userNick)님은 현재 게임 이용 제한 상태입니다.\n제재 기간: \(viewModel.userPunishDate)",
                 image: .init(
                     content: "exclamationmark.triangle.fill",
@@ -90,7 +90,7 @@ struct NumberSearchView: View {
             
         case .protection:
             ResultView(
-                title: "보호모드 유저!",
+                title: "보호모드 유저 발견!",
                 content: "\(userNick)님은 현재 보호모드 상태입니다.\n제한 기간: \(viewModel.userPunishDate)",
                 image: .init(
                     content: "exclamationmark.triangle.fill",
@@ -103,7 +103,7 @@ struct NumberSearchView: View {
             
         case .success:
             ResultView(
-                title: "핵의심 제보 유저!",
+                title: "핵의심 유저 발견!",
                 content: "\(userNick)님은 다른 유저의 제보로 뱅가드에 등록되어 있습니다.",
                 image: .init(
                     content: "exclamationmark.triangle.fill",

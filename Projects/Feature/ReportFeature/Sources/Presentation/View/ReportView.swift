@@ -81,7 +81,7 @@ public struct ReportView: View {
                     .listStyle(.inset)
                     .scrollIndicators(.hidden)
                     .navigationTitle("제보하기")
-                    .navigationBarTitleDisplayMode(.large)
+                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(trailing: Button {
                         viewModel.mailButtonTapped()
                     } label: {

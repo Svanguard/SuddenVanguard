@@ -236,11 +236,11 @@
 			};
 			buildConfigurationList = B3FD05C59F197F398A0B04AB /* Build configuration list for PBXProject "App" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				ko,
 			);
 			mainGroup = 4102E3E068508DD683953C7D;
 			productRefGroup = E9C3DB3EC6D7655028A9C0D3 /* Products */;
@@ -286,9 +286,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
-				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY)";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2024.08.24.18.57;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2024.09.06.18.39;
+				DEVELOPMENT_TEAM = ND6356Y385;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Derived/InfoPlists/App-Info.plist";
@@ -378,7 +379,7 @@
 				CLANG_ENABLE_MODULE_DEBUGGING = YES;
 				CODE_SIGN_IDENTITY = "$(CODE_SIGN_IDENTITY)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2024.08.24.18.57;
+				CURRENT_PROJECT_VERSION = 2024.09.06.18.39;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "Derived/InfoPlists/App-Info.plist";

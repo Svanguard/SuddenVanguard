@@ -48,6 +48,10 @@ extension Project {
         
         return Project(name: name,
                        organizationName: .organizationName,
+                       options: .options(
+                       defaultKnownRegions: ["en", "ko"],
+                       developmentRegion: "ko"
+                       ),
                        packages: packages,
                        targets: targets,
                        schemes: schemes
