@@ -17,6 +17,12 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
-	<string>2024.08.03.22.07</string>
+	<string>2024.09.06.18.39</string>
+	<key>HOST_VALUE</key>
+	<string>$(HOST_VALUE)</string>
+	<key>NEXEN_URL</key>
+	<string>$(NEXEN_URL)</string>
+	<key>PORT_NUMBER</key>
+	<string>$(PORT_NUMBER)</string>
 </dict>
 </plist>

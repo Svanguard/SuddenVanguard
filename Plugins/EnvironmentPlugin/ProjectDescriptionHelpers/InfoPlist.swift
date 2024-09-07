@@ -10,21 +10,37 @@ import ProjectDescription
 extension InfoPlist {
     public static let appInfoPlist: Self = .extendingDefault(
         with: .baseInfoPlist
-   
+            .merging(.secrets, uniquingKeysWith: { oldValue, newValue in
+                newValue
+            })
     )
     
     public static let frameworkInfoPlist: Self = .extendingDefault(
         with: .framework
-     
+            .merging(.secrets, uniquingKeysWith: { oldValue, newValue in
+                newValue
+            })
     )
 }
 
 public extension [String: Plist.Value] {
+    static let secrets: Self = [
+        "HOST_VALUE": "$(HOST_VALUE)",
+        "PORT_NUMBER": "$(PORT_NUMBER)",
+        "NEXEN_URL": "$(NEXEN_URL)"
+    ]
+    
     static let baseInfoPlist: Self = [
         "UISupportedInterfaceOrientations":
             [
-                "UIInterfaceOrientationPortrait",
+                "UIInterfaceOrientationPortrait"
             ],
+        "NSAppTransportSecurity":
+            [
+                "NSAllowsArbitraryLoads": true
+            ],
+        "UIUserInterfaceStyle": "Dark",
+        "UILaunchStoryboardName": "LaunchScreen.storyboard",
         "CFBundleShortVersionString": .shortVersion,
         "CFBundleVersion": .version,
         "CFBundleDisplayName": "$(APP_DISPLAY_NAME)",

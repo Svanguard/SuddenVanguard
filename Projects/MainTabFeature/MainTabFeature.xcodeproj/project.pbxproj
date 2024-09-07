@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28912E2A252D1733F60ED7EC /* RankFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E8F78E28339A59E7BC53E0 /* RankFeature.framework */; };
 		3567456265403EF3770E7CE2 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB01DD9ED24C5FE75C828EE1 /* MainTabView.swift */; };
+		426E4AA9DB40A030D648BE08 /* ReportFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8CBEADECACAC22CADD3EAE1 /* ReportFeature.framework */; };
+		577CE2CC0585155CCC74E8CC /* SettingFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C236C06432281ADF1D0ED83 /* SettingFeature.framework */; };
 		951AF69CB6A02607BEA18D3A /* MainFeature.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 372C93AEDE2C496EA5D210FF /* MainFeature.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,10 +29,13 @@
 
 /* Begin PBXFileReference section */
 		012A140AE43C132D1A947770 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		0C236C06432281ADF1D0ED83 /* SettingFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		372C93AEDE2C496EA5D210FF /* MainFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		74477E3F61BF8B9592B607DD /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		87E8F78E28339A59E7BC53E0 /* RankFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RankFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABF87786BEB604C6125E4C36 /* MainTabFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MainTabFeature-Info.plist"; sourceTree = "<group>"; };
 		CB01DD9ED24C5FE75C828EE1 /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		E8CBEADECACAC22CADD3EAE1 /* ReportFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReportFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB80C9C6AC0C132632C258EE /* MainTabFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainTabFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -39,6 +45,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				951AF69CB6A02607BEA18D3A /* MainFeature.framework in Frameworks */,
+				28912E2A252D1733F60ED7EC /* RankFeature.framework in Frameworks */,
+				426E4AA9DB40A030D648BE08 /* ReportFeature.framework in Frameworks */,
+				577CE2CC0585155CCC74E8CC /* SettingFeature.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,6 +67,9 @@
 			children = (
 				372C93AEDE2C496EA5D210FF /* MainFeature.framework */,
 				EB80C9C6AC0C132632C258EE /* MainTabFeature.framework */,
+				87E8F78E28339A59E7BC53E0 /* RankFeature.framework */,
+				E8CBEADECACAC22CADD3EAE1 /* ReportFeature.framework */,
+				0C236C06432281ADF1D0ED83 /* SettingFeature.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,11 +160,11 @@
 			};
 			buildConfigurationList = 3AE8E69C6C0CEA60529676FD /* Build configuration list for PBXProject "MainTabFeature" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				ko,
 			);
 			mainGroup = FA318AAC5A0895B7BA2663F3;
 			productRefGroup = 339FB07533DCDCAFBBDEA70A /* Products */;

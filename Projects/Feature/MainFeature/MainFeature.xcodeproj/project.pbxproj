@@ -7,8 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		830FCE7F75E99480D8BA4CB6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1345D8A5D4AD384DBD1CDEB1 /* ContentView.swift */; };
+		207721AE8DA59E974D50A8A9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CEDE374127E8E097B3E89F /* MainView.swift */; };
+		3B734B9F9206B458DEED67FD /* NumberSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91FD606562BF6D907F77AB2 /* NumberSearchView.swift */; };
+		42B390CD42B569F003600E4B /* UserRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */; };
+		47588FC8656AB9505B75FE4C /* NumberSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC6368822D1A37CE9AB4944 /* NumberSearchViewModel.swift */; };
+		5B33FC7C27DD730502BA593C /* UserSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */; };
+		66791E684A86C85BB8400E32 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58110B654265101F478CE2A6 /* EmptyStateView.swift */; };
+		810544508663E9E88932D00A /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69121D4DE8B9149A253BC79 /* SearchFieldView.swift */; };
+		92D91D9383DC2E5CA1304FBF /* UserSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5784C3E27B154E9F6C91296 /* UserSearchView.swift */; };
 		A008A74C16400F4C352D614A /* FeatureDependency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF59E537DED595ABC4723375 /* FeatureDependency.framework */; };
+		A4D24FE4D242E49ECD3C22EF /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 516FD13893B1A194C70AADB2 /* SearchResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,9 +34,17 @@
 
 /* Begin PBXFileReference section */
 		028067B5198A06189E74D594 /* MainFeature-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MainFeature-Info.plist"; sourceTree = "<group>"; };
-		1345D8A5D4AD384DBD1CDEB1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		03CEDE374127E8E097B3E89F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRowView.swift; sourceTree = "<group>"; };
+		2FC6368822D1A37CE9AB4944 /* NumberSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSearchViewModel.swift; sourceTree = "<group>"; };
 		412DEA5C9D73808BEA29B72A /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		4A4646C564432D5BB7376920 /* MainFeature.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MainFeature.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		516FD13893B1A194C70AADB2 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		58110B654265101F478CE2A6 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		A5784C3E27B154E9F6C91296 /* UserSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchView.swift; sourceTree = "<group>"; };
+		A69121D4DE8B9149A253BC79 /* SearchFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
+		B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchViewModel.swift; sourceTree = "<group>"; };
+		B91FD606562BF6D907F77AB2 /* NumberSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberSearchView.swift; sourceTree = "<group>"; };
 		E88239E3C16860C07494EEE2 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		FF59E537DED595ABC4723375 /* FeatureDependency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FeatureDependency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -45,6 +61,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AB73F397D9F8FD6BC2EB481 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				A69121D4DE8B9149A253BC79 /* SearchFieldView.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		0CD3FC6251C22EBCDDA725CD /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
@@ -53,12 +77,34 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
+		207DD46D7CF7C7493DDF1D8D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A196FCD59CCC698C2795FAEC /* NickName */,
+				DE38C990AE5E2E63F1AAB9AE /* Number */,
+				58110B654265101F478CE2A6 /* EmptyStateView.swift */,
+				03CEDE374127E8E097B3E89F /* MainView.swift */,
+				1B17C0A472E3B92BF53B67F6 /* UserRowView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		43F4A437CC5A834B2849B60A /* Derived */ = {
 			isa = PBXGroup;
 			children = (
 				0CD3FC6251C22EBCDDA725CD /* InfoPlists */,
 			);
 			path = Derived;
+			sourceTree = "<group>";
+		};
+		54434BD74A79CCB06EC28E10 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				AB5A4E85DE9C8C41C968F766 /* Model */,
+				207DD46D7CF7C7493DDF1D8D /* View */,
+				D9511F88C5BA2161C63AE5BD /* ViewModel */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		88B00E4983284B1C425F8B55 = {
@@ -79,12 +125,46 @@
 			path = ../../../Config;
 			sourceTree = "<group>";
 		};
+		A196FCD59CCC698C2795FAEC /* NickName */ = {
+			isa = PBXGroup;
+			children = (
+				A5784C3E27B154E9F6C91296 /* UserSearchView.swift */,
+			);
+			path = NickName;
+			sourceTree = "<group>";
+		};
 		A2C5D2ABA4EEE52E4C95210C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1345D8A5D4AD384DBD1CDEB1 /* ContentView.swift */,
+				0AB73F397D9F8FD6BC2EB481 /* Component */,
+				54434BD74A79CCB06EC28E10 /* Presentation */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		AB5A4E85DE9C8C41C968F766 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				516FD13893B1A194C70AADB2 /* SearchResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D9511F88C5BA2161C63AE5BD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2FC6368822D1A37CE9AB4944 /* NumberSearchViewModel.swift */,
+				B61D5C3F6A7B704B0A6A6799 /* UserSearchViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DE38C990AE5E2E63F1AAB9AE /* Number */ = {
+			isa = PBXGroup;
+			children = (
+				B91FD606562BF6D907F77AB2 /* NumberSearchView.swift */,
+			);
+			path = Number;
 			sourceTree = "<group>";
 		};
 		EBE3D5F842746F51E6A3D84B /* Products */ = {
@@ -140,11 +220,11 @@
 			};
 			buildConfigurationList = EAACB9E6F08918F3B50EE017 /* Build configuration list for PBXProject "MainFeature" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
 				en,
+				ko,
 			);
 			mainGroup = 88B00E4983284B1C425F8B55;
 			productRefGroup = EBE3D5F842746F51E6A3D84B /* Products */;
@@ -171,7 +251,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830FCE7F75E99480D8BA4CB6 /* ContentView.swift in Sources */,
+				810544508663E9E88932D00A /* SearchFieldView.swift in Sources */,
+				A4D24FE4D242E49ECD3C22EF /* SearchResult.swift in Sources */,
+				66791E684A86C85BB8400E32 /* EmptyStateView.swift in Sources */,
+				207721AE8DA59E974D50A8A9 /* MainView.swift in Sources */,
+				92D91D9383DC2E5CA1304FBF /* UserSearchView.swift in Sources */,
+				3B734B9F9206B458DEED67FD /* NumberSearchView.swift in Sources */,
+				42B390CD42B569F003600E4B /* UserRowView.swift in Sources */,
+				47588FC8656AB9505B75FE4C /* NumberSearchViewModel.swift in Sources */,
+				5B33FC7C27DD730502BA593C /* UserSearchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

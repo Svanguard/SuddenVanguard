@@ -11,7 +11,16 @@
          location = "group:Common/Common.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Core/Core.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Data/Data.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:DesignSystem/DesignSystem.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Domain/Domain.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:FeatureDependency/FeatureDependency.xcodeproj">
@@ -19,15 +28,34 @@
       <FileRef
          location = "group:MainTabFeature/MainTabFeature.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:NetworkService/NetworkService.xcodeproj">
+      </FileRef>
       <Group
          location = "group:Feature"
          name = "Feature">
          <FileRef
             location = "group:MainFeature/MainFeature.xcodeproj">
          </FileRef>
+         <FileRef
+            location = "group:RankFeature/RankFeature.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:ReportFeature/ReportFeature.xcodeproj">
+         </FileRef>
+         <FileRef
+            location = "group:SettingFeature/SettingFeature.xcodeproj">
+         </FileRef>
       </Group>
    </Group>
    <FileRef
       location = "group:README.md">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Dependencies">
+      <FileRef
+         location = "group:Tuist/.build/tuist-derived/Kingfisher/Kingfisher.xcodeproj">
+      </FileRef>
+   </Group>
 </Workspace>
