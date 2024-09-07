@@ -126,6 +126,16 @@ public final class RankServiceImp: RankService {
                         userImage: profileResponse.userImage
                     )
                 }
+                .catch { _ in
+                    // 오류 발생 시 해당 데이터를 무시하고 빈 값을 반환
+                    Just(RankUser(
+                        username: "병영에서 확인 되지 않는 유저입니다",
+                        suddenNumber: userData.userNexonSn,
+                        count: userData.count,
+                        userImage: ""
+                    ))
+                    .setFailureType(to: Error.self)
+                }
                 .eraseToAnyPublisher()
         }
         
