@@ -42,17 +42,17 @@ struct NumberSearchView: View {
                     .foregroundStyle(.gray)
                     .font(.body)
                     .padding()
+            } else if viewModel.isLoading {
+                ProgressView()
             } else {
-                VStack {
-                    List {
-                        NavigationLink(destination: {
-                            resultView(userNick: viewModel.userData.userName)
-                        }) {
-                            UserRowView(user: viewModel.userData)
-                        }
+                List {
+                    NavigationLink(destination: {
+                        resultView(userNick: viewModel.userData.userName)
+                    }) {
+                        UserRowView(user: viewModel.userData)
                     }
-                    .listStyle(.plain)
                 }
+                .listStyle(.plain)
             }
         }
         .navigationTitle("병영번호 검색")
@@ -127,5 +127,6 @@ struct NumberSearchView: View {
             .presentationDetents([.height(330)])
             .interactiveDismissDisabled()
         }
+        
     }
 }

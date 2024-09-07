@@ -19,15 +19,15 @@ final class NumberSearchViewModel: ObservableObject {
     @Published var searchQuery = ""
     @Published var userData: SearchUserData = .init(suddenNumber: 0, userName: "", userImage: "")
     
-    @Published var isLoading = false
     @Published var isSearchFieldFocused = true
+    @Published var isLoading = false
     
     @Published var showResult = false
     @Published var resultType: PunishResultType = .clean
     @Published var userPunishDate = ""
     
     private var cancellables = Set<AnyCancellable>()
-    private let debounceDelay: TimeInterval = 0.5
+    private let debounceDelay: TimeInterval = 0.7
     
     init() {
         setupSearchDebounce()
@@ -37,7 +37,6 @@ final class NumberSearchViewModel: ObservableObject {
         guard let suddenNumber = Int(searchQuery), !searchQuery.isEmpty else {
             return
         }
-        isLoading = true
         searchUseCase.searchNumberToSudden(suddenNumber: suddenNumber)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
@@ -46,6 +45,7 @@ final class NumberSearchViewModel: ObservableObject {
                     print("서든병영 데이터 패치 에러: \(error)")
                 }
             } receiveValue: { [weak self] userData in
+                self?.isLoading = false
                 self?.userData = userData
             }
             .store(in: &cancellables)
@@ -55,7 +55,6 @@ final class NumberSearchViewModel: ObservableObject {
         guard let suddenNumber = Int(searchQuery), !searchQuery.isEmpty else {
             return
         }
-        isLoading = true
         searchUseCase.searchNumberToServer(suddenNumber: suddenNumber)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
@@ -75,9 +74,12 @@ final class NumberSearchViewModel: ObservableObject {
             .debounce(for: .seconds(debounceDelay), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink { [weak self] query in
+                self?.isLoading = true
+                
                 self?.searchNumberToSudden()
                 self?.searchNumberToServer()
             }
             .store(in: &cancellables)
     }
 }
+
