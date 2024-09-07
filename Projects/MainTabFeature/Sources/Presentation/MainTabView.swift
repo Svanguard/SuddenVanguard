@@ -18,8 +18,6 @@ public struct MainTabView: View {
         setupTabBarAppearance()
     }
     
-    @State private var showTab = 0
-    
     public var body: some View {
         TabView {
             MainView()
@@ -74,10 +72,8 @@ public struct MainTabView: View {
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
         
-        // 구분선 색상 설정
-        appearance.shadowColor = UIColor.darkGray // 원하는 색상으로 구분선 설정
+        appearance.shadowColor = UIColor.darkGray
         
-        // appearance를 탭바에 적용
         UITabBar.appearance().standardAppearance = appearance
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }

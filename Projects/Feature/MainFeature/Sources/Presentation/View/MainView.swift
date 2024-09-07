@@ -19,17 +19,16 @@ public struct MainView: View {
                 VStack {
                     
                     Spacer()
-                    Image(uiImage: DesignSystemAsset.logoimg.image)
+                    Image(uiImage: DesignSystemAsset.vanguardlogo.image)
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 100)
-                        .padding(.horizontal, 50)
+//                        .frame(height: 100)
+//                        .padding(.horizontal, 50)
                     
                     Text("모든 서든러의 전과기록을 확인해 보세요!")
                         .foregroundColor(.white)
                         .font(.caption)
                         .fontWeight(.regular)
-                        .padding(.top, 10)
                     
                     HStack {
                         Spacer()
@@ -56,6 +55,7 @@ public struct MainView: View {
                         
                         Spacer()
                     }
+                    .padding(.bottom)
                     
                     Spacer()
                 }
