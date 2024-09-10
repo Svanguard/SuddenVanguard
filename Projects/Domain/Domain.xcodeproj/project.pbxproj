@@ -20,6 +20,7 @@
 		8D0CE2A00284C1AB1CCB0E63 /* RankRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055606A60668084DC93C0A98 /* RankRequest.swift */; };
 		953C45A21B5D1E09AA49ABB9 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2459DE0FB4E4FD13B7FB4AD6 /* SearchService.swift */; };
 		B5085AE74BECBB828F9F2983 /* GetProfileDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1AF4145109F54E7933EB14 /* GetProfileDataRepository.swift */; };
+		B9FF2C939FADA82E2B18048F /* Common.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A017294042D1AF1C824ECFAC /* Common.framework */; };
 		BBB23960A36D6551766F53CD /* SearchNumberRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED577832D19C664B5734EB87 /* SearchNumberRepository.swift */; };
 		C25DAA36C8E8FA6C56AB1AEA /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F05FA89FC00FF328860F544 /* ProfileResponse.swift */; };
 		DBE07947EE278F62DE0DF1B6 /* RankResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338834A0A043CC52178A329B /* RankResponse.swift */; };
@@ -56,6 +57,7 @@
 		635E9CCB12A7F469B1A7A221 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		6A237A374A74F3B29155DAEB /* RankUseCaseImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankUseCaseImp.swift; sourceTree = "<group>"; };
 		7E847B34588D80A712D3AE36 /* SearchUsersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersResponse.swift; sourceTree = "<group>"; };
+		A017294042D1AF1C824ECFAC /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6EC9091368344091556765C /* GetProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileRequest.swift; sourceTree = "<group>"; };
 		B55759C9EED1F9864F56739B /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		BD15A37E85BAE3A36B2CE72C /* Domain-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Domain-Info.plist"; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9FF2C939FADA82E2B18048F /* Common.framework in Frameworks */,
 				3397A266F379521733729379 /* Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +104,7 @@
 		23FB790DBB2E2B4343512188 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				A017294042D1AF1C824ECFAC /* Common.framework */,
 				D0950BE22FC63C7D2DCE33C5 /* Core.framework */,
 				FD49F277B86481D3D105FAC8 /* Domain.framework */,
 			);

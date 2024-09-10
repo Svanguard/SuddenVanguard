@@ -12,6 +12,7 @@ let project = Project.makeProject(
     name: "Domain",
     moduleType: .dynamicFramework,
     dependencies: [
-        .core
+        .core,
+        .common
     ]
 )

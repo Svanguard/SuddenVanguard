@@ -40,7 +40,7 @@ public extension [String: Plist.Value] {
                 "NSAllowsArbitraryLoads": true
             ],
         "UIUserInterfaceStyle": "Dark",
-        "UILaunchStoryboardName": "LaunchScreen.storyboard",
+        "UILaunchStoryboardName": "LaunchScreen",
         "CFBundleShortVersionString": .shortVersion,
         "CFBundleVersion": .version,
         "CFBundleDisplayName": "$(APP_DISPLAY_NAME)",
