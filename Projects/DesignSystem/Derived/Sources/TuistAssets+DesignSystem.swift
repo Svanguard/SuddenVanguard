@@ -28,7 +28,6 @@ public enum DesignSystemAsset {
   public static let reportpic3 = DesignSystemImages(name: "reportpic3")
   public static let reportpic4 = DesignSystemImages(name: "reportpic4")
   public static let reportpic5 = DesignSystemImages(name: "reportpic5")
-  public static let vanguardlogo2 = DesignSystemImages(name: "vanguardlogo 2")
   public static let vanguardlogo = DesignSystemImages(name: "vanguardlogo")
   public static let flame = DesignSystemImages(name: "flame")
   public static let mail = DesignSystemImages(name: "mail")
