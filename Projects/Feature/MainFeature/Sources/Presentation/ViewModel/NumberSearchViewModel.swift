@@ -35,6 +35,7 @@ final class NumberSearchViewModel: ObservableObject {
     
     private func searchNumberToSudden() {
         guard let suddenNumber = Int(searchQuery), !searchQuery.isEmpty else {
+            clearUserData()
             return
         }
         searchUseCase.searchNumberToSudden(suddenNumber: suddenNumber)
@@ -43,16 +44,20 @@ final class NumberSearchViewModel: ObservableObject {
                 self?.isLoading = false
                 if case .failure(let error) = completion {
                     print("서든병영 데이터 패치 에러: \(error)")
+                    self?.userData = .init(suddenNumber: 0, userName: "", userImage: "")
+                    self?.checkUserData()
                 }
             } receiveValue: { [weak self] userData in
                 self?.isLoading = false
                 self?.userData = userData
+                self?.showResult = true
             }
             .store(in: &cancellables)
     }
     
     private func searchNumberToServer() {
         guard let suddenNumber = Int(searchQuery), !searchQuery.isEmpty else {
+            clearUserData()
             return
         }
         searchUseCase.searchNumberToServer(suddenNumber: suddenNumber)
@@ -65,6 +70,7 @@ final class NumberSearchViewModel: ObservableObject {
             } receiveValue: { [weak self] (resultType, punishDate) in
                 self?.resultType = resultType
                 self?.userPunishDate = punishDate
+                self?.showResult = true
             }
             .store(in: &cancellables)
     }
@@ -80,6 +86,20 @@ final class NumberSearchViewModel: ObservableObject {
                 self?.searchNumberToServer()
             }
             .store(in: &cancellables)
+    }
+    
+    private func clearUserData() {
+        searchQuery = ""
+        userData = .init(suddenNumber: 0, userName: "", userImage: "")
+        checkUserData()
+    }
+    
+    private func checkUserData() {
+        if userData == .init(suddenNumber: 0, userName: "", userImage: "") {
+            showResult = false
+        } else {
+            showResult = true
+        }
     }
 }
 
