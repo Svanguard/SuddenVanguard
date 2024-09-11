@@ -44,7 +44,12 @@ struct NumberSearchView: View {
                     .padding()
             } else if viewModel.isLoading {
                 ProgressView()
-            } else {
+            } else if !viewModel.showResult {
+                Text("\(viewModel.searchQuery)는 확인되지 않는 병영입니다.")
+                    .foregroundStyle(.gray)
+                    .font(.body)
+                    .padding()
+            }else {
                 List {
                     NavigationLink(destination: {
                         resultView(userNick: viewModel.userData.userName)
