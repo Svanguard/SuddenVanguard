@@ -49,6 +49,7 @@
 
 | Name | Tag |
 | --- | --- |
+| Combine | Async Data Handling |
 | Tuist | Module |
 | Kingfisher | Image |
 
