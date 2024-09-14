@@ -21,6 +21,7 @@
 // swiftlint:disable identifier_name line_length nesting type_body_length type_name
 public enum DesignSystemAsset {
   public static let bg = DesignSystemImages(name: "bg")
+  public static let chevronColor = DesignSystemColors(name: "chevronColor")
   public static let main = DesignSystemColors(name: "main")
   public static let searchBorderColor = DesignSystemColors(name: "searchBorderColor")
   public static let searchColor = DesignSystemColors(name: "searchColor")

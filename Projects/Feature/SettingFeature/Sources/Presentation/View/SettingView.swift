@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import DesignSystem
 import SwiftUI
 
 public struct SettingView: View {
@@ -39,7 +40,7 @@ public struct SettingView: View {
                             
                             Spacer()
                             
-                            Text("1.0.0 (최신버전)")
+                            Text("1.0.1 (최신버전)")
                                 .foregroundStyle(.gray)
                                 .font(.footnote)
                         }
@@ -47,15 +48,28 @@ public struct SettingView: View {
                         Text("서든뱅가드 정보")
                     }
                     
-//                    Section {
-//                        NavigationLink {
-//                            // 평가하기 화면으로 이동
-//                        } label: {
-//                            Text("평가하기")
-//                        }
-//                    } header: {
-//                        Text("고객지원")
-//                    }
+                    Section {
+                        HStack {
+                            Button {
+                                let appID = "6670616799"
+                                let urlString = "https://apps.apple.com/app/id\(appID)?action=write-review"
+                                if let url = URL(string: urlString) {
+                                    UIApplication.shared.open(url)
+                                }
+                            } label: {
+                                Text("평가하기")
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .font(.footnote)
+                                .fontWeight(.medium)
+                                .foregroundStyle(DesignSystemAsset.chevronColor.swiftUIColor)
+                        }
+                    } header: {
+                        Text("고객지원")
+                    }
                 }
                 .listStyle(.grouped)
             }
