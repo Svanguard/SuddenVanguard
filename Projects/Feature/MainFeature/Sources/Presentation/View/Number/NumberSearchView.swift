@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Common
 import DesignSystem
 import Kingfisher
 import SwiftUI
@@ -49,10 +50,11 @@ struct NumberSearchView: View {
                     .foregroundStyle(.gray)
                     .font(.body)
                     .padding()
-            }else {
+            } else {
                 List {
                     NavigationLink(destination: {
                         resultView(userNick: viewModel.userData.userName)
+                            .reviewCounter()
                     }) {
                         UserRowView(user: viewModel.userData)
                     }

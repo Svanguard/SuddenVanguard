@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Common
 import DesignSystem
 import SwiftUI
 
@@ -63,6 +64,7 @@ struct UserSearchView: View {
                                 viewModel.searchNumber(userSuddenNumber: user.suddenNumber)
                                 viewModel.addUserToSearchHistory(user)
                             }
+                            .reviewCounter()
                     }) {
                         UserRowView(user: user)
                     }

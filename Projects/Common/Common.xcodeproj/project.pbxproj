@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		1D7BE6158FA8E1047D546FB6 /* PunishResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CFAF8D0EC180C278543100 /* PunishResultType.swift */; };
 		24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4906F43F6A038295B5589D3 /* ViewValues.swift */; };
 		2AB0F9ED51BBDC9373BDDFF2 /* AppLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170170CE0C43F0B37C75808F /* AppLocalized.swift */; };
+		63CE974B2C95D53D00D3FF33 /* ReviewCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CE974A2C95D53D00D3FF33 /* ReviewCounter.swift */; };
 		8A722F523E198A38F5745AD2 /* RankPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9B9E58F99352B1959C0688 /* RankPeriod.swift */; };
 		93B4564AF7501CC16CB08140 /* RankUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC753CBD6A7B0D62A60E08B /* RankUser.swift */; };
 		9F03D3C993AEE0B9BE094100 /* HapticFeedbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */; };
@@ -37,6 +38,7 @@
 		3354DE7E2B4F1877FECB508B /* Common-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Common-Info.plist"; sourceTree = "<group>"; };
 		37CFAF8D0EC180C278543100 /* PunishResultType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PunishResultType.swift; sourceTree = "<group>"; };
 		3DA77FB5518DC2177F7CDB4F /* Common.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Common.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		63CE974A2C95D53D00D3FF33 /* ReviewCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCounter.swift; sourceTree = "<group>"; };
 		7B6A36F8CDC71501059F6DEA /* SearchUserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserData.swift; sourceTree = "<group>"; };
 		BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackManager.swift; sourceTree = "<group>"; };
 		E4906F43F6A038295B5589D3 /* ViewValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewValues.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				BD56F52FC0B779943F46419C /* HapticFeedbackManager.swift */,
+				63CE974A2C95D53D00D3FF33 /* ReviewCounter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -205,8 +208,6 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				ORGANIZATIONNAME = Svanguard;
-				TargetAttributes = {
-				};
 			};
 			buildConfigurationList = 7A960902591CDB4F68854742 /* Build configuration list for PBXProject "Common" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -241,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CE974B2C95D53D00D3FF33 /* ReviewCounter.swift in Sources */,
 				24F5061ECC00125F3693E096 /* ViewValues.swift in Sources */,
 				8A722F523E198A38F5745AD2 /* RankPeriod.swift in Sources */,
 				93B4564AF7501CC16CB08140 /* RankUser.swift in Sources */,
@@ -274,7 +276,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.Common;
 				PRODUCT_NAME = Common;
 				SDKROOT = iphoneos;
@@ -370,7 +375,10 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "$(inherited) -ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Svanguard.SuddenVanguard.Common;
 				PRODUCT_NAME = Common;
 				SDKROOT = iphoneos;
@@ -378,10 +386,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
