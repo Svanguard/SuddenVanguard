@@ -15,7 +15,7 @@ public enum MainNavigationRoutes: Hashable {
 }
 
 public enum RankNavigationRoutes: Hashable {
-    case resultView(userNick: String)
+    case resultView(userNick: String, userSuddenNumber: Int)
 }
 
 public enum SettingNavigationRoute: Hashable {

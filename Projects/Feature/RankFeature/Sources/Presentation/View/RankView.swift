@@ -39,7 +39,7 @@ public struct RankView: View {
                         List {
                             ForEach(viewModel.filteredUsers.enumerated().map({ $0 }), id: \.1.id) { index, user in
                                 Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
-                                    NavigationLink(value: RankNavigationRoutes.resultView(userNick: user.username)) {
+                                    NavigationLink(value: RankNavigationRoutes.resultView(userNick: user.username, userSuddenNumber: user.suddenNumber)) {
                                         RankUserListCell(user: user)
                                     }
                                     .onAppear {
@@ -91,8 +91,11 @@ public struct RankView: View {
                 })
                 .navigationDestination(for: RankNavigationRoutes.self) { route in
                     switch route {
-                    case .resultView(let userNick):
-                        resultView(userNick: userNick)
+                    case .resultView(let userNick, let userSuddenNumber):
+                        resultView(userNick: userNick, userSuddenNumber: userSuddenNumber)
+                            .onAppear {
+                                viewModel.searchNumber(userSuddenNumber: userSuddenNumber)
+                            }
                     }
                 }
             }
@@ -122,7 +125,7 @@ public struct RankView: View {
     }
     
     @ViewBuilder
-    private func resultView(userNick: String) -> some View {
+    private func resultView(userNick: String, userSuddenNumber: Int) -> some View {
         if viewModel.userFetchLoading {
             ProgressView()
         } else {
