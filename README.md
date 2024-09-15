@@ -55,8 +55,31 @@
 
 <br />
 
+## 🏛️ 아키텍쳐
+
+![Architecture](https://github.com/user-attachments/assets/7a2942e2-e4da-4479-a200-17ac7932683f)
+
+> Clean Architecture + MVVM
+
+- DIP(의존성 역전 원칙) 준수
+  - 추상화된 Protocol을 채택하여 객체의 생성과 사용을 분리
+  - 하위모듈에서 구현체가 아닌 추상화된 타입에 의존
+- ViewModel - UseCase - Service - Repository로 역할에 따라 나누어 로직 모듈화
+
+<br />
+
 ## 📺 Detail
 
 | 유저 검색 | 실시간 순위 | 제보하기 |
 | --- | --- | --- |
 | <img src="https://github.com/user-attachments/assets/6bd77123-8df0-48fe-afef-7381a9e3d962" width="200"/> | <img src="https://github.com/user-attachments/assets/02e366e1-6860-4062-8a1f-2f093755d99d" width="200"/> | <img src="https://github.com/user-attachments/assets/e6386179-f490-4ec1-b719-5392315b7d4c" width="200"/> |
+
+<br />
+
+
+
+
+
+
+
+
