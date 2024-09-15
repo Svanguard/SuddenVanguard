@@ -6,6 +6,7 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Common
 import DesignSystem
 import SwiftUI
 
@@ -13,81 +14,88 @@ public struct RankView: View {
     public init() { }
     
     @StateObject private var viewModel = RankViewModel()
+    @State private var path = NavigationPath()
     
     public var body: some View {
-        NavigationStack {
-            VStack {
-                HStack {
-                    filterButton
-                        .padding(.horizontal)
+        NavigationStack(path: $path) {
+            TabViewItemWrapperView(path: $path, selection: .rank) {
+                VStack {
+                    HStack {
+                        filterButton
+                            .padding(.horizontal)
+                        
+                        Spacer()
+                    }
                     
-                    Spacer()
-                }
-                
-                if viewModel.isLoading {
-                    Spacer()
-                    
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                        .scaleEffect(1.5)
-                    
-                    Spacer()
-                } else {
-                    List {
-                        ForEach(viewModel.filteredUsers.enumerated().map({ $0 }), id: \.1.id) { index, user in
-                            Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
-                                NavigationLink {
-                                    resultView(userNick: user.username)
-                                        .onAppear {
-                                            viewModel.searchNumber(userSuddenNumber: user.suddenNumber)
-                                        }
-                                } label: {
-                                    RankUserListCell(user: user)
+                    if viewModel.isLoading {
+                        Spacer()
+                        
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(1.5)
+                        
+                        Spacer()
+                    } else {
+                        List {
+                            ForEach(viewModel.filteredUsers.enumerated().map({ $0 }), id: \.1.id) { index, user in
+                                Section(header: viewModel.isSearching ? nil : headerView(for: index + 1)) {
+                                    NavigationLink(value: RankNavigationRoutes.resultView(userNick: user.username)) {
+                                        RankUserListCell(user: user)
+                                    }
+                                    .onAppear {
+                                        viewModel.searchNumber(userSuddenNumber: user.suddenNumber)
+                                    }
                                 }
                             }
+                            
+                            if viewModel.hasMoreData {
+                                ProgressView()
+                                    .frame(maxWidth: .infinity, alignment: .center)
+                                    .onAppear {
+                                        viewModel.loadMoreData()
+                                    }
+                            }
                         }
-                        
-                        if viewModel.hasMoreData {
-                            ProgressView()
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .onAppear {
-                                    viewModel.loadMoreData()
-                                }
+                        .listStyle(.plain)
+                        .searchable(text: $viewModel.text, placement: .navigationBarDrawer(displayMode: .always), prompt: "검색")
+                        .refreshable {
+                            viewModel.refreshData()
                         }
                     }
-                    .listStyle(.plain)
-                    .searchable(text: $viewModel.text, placement: .navigationBarDrawer(displayMode: .always), prompt: "검색")
-                    .refreshable {
-                        viewModel.refreshData()
+                }
+                .navigationTitle("실시간순위")
+                .navigationBarTitleDisplayMode(.inline)
+                .confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden, actions: {
+                    Button {
+                        viewModel.selectedPeriod = .daily
+                        viewModel.loadData()
+                    } label: {
+                        Text("일간")
+                    }
+                    
+                    Button {
+                        viewModel.selectedPeriod = .weekly
+                        viewModel.loadData()
+                    } label: {
+                        Text("주간")
+                    }
+                    
+                    Button {
+                        viewModel.selectedPeriod = .monthly
+                        viewModel.loadData()
+                    } label: {
+                        Text("월간")
+                    }
+                    
+                    Button("닫기", role: .cancel) { }
+                })
+                .navigationDestination(for: RankNavigationRoutes.self) { route in
+                    switch route {
+                    case .resultView(let userNick):
+                        resultView(userNick: userNick)
                     }
                 }
             }
-            .navigationTitle("실시간순위")
-            .navigationBarTitleDisplayMode(.large)
-            .confirmationDialog("", isPresented: $viewModel.showActionSheet, titleVisibility: .hidden, actions: {
-                Button {
-                    viewModel.selectedPeriod = .daily
-                    viewModel.loadData()
-                } label: {
-                    Text("일간")
-                }
-                
-                Button {
-                    viewModel.selectedPeriod = .weekly
-                    viewModel.loadData()
-                } label: {
-                    Text("주간")
-                }
-                
-                Button {
-                    viewModel.selectedPeriod = .monthly
-                    viewModel.loadData()
-                } label: {
-                    Text("월간")
-                }
-                
-                Button("닫기", role: .cancel) { }
-            })
         }
     }
     
@@ -183,8 +191,6 @@ public struct RankView: View {
                 )
                 .presentationDetents([.height(330)])
                 .interactiveDismissDisabled()
-                
-                
             }
         }
     }

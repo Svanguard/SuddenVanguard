@@ -13,7 +13,6 @@ import SwiftUI
 public struct MainView: View {
     public init() { }
     
-    @State private var contentOffset: CGFloat = 0
     @State private var path = NavigationPath()
     
     public var body: some View {
@@ -35,9 +34,7 @@ public struct MainView: View {
                         HStack {
                             Spacer()
                             
-                            Button {
-                                path.append(NavigationRoutes.nickname)
-                            } label: {
+                            NavigationLink(value: MainNavigationRoutes.nickname) {
                                 SearchFieldView(
                                     placeHolder: "닉네임으로 검색",
                                     opacityValue: 1.0
@@ -46,9 +43,7 @@ public struct MainView: View {
                             
                             Spacer()
                             
-                            Button {
-                                path.append(NavigationRoutes.number)
-                            } label: {
+                            NavigationLink(value: MainNavigationRoutes.number) {
                                 SearchFieldView(
                                     placeHolder: "병영번호로 검색",
                                     opacityValue: 0.2
@@ -74,7 +69,7 @@ public struct MainView: View {
                     Spacer()
                 }
             }
-            .navigationDestination(for: NavigationRoutes.self) { route in
+            .navigationDestination(for: MainNavigationRoutes.self) { route in
                 switch route {
                 case .nickname:
                     UserSearchView()
