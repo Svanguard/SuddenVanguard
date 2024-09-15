@@ -99,7 +99,7 @@ public struct RankView: View {
                 Text(viewModel.selectedPeriod.displayName)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    
+                
                 Image(systemName: "chevron.down")
                     .font(.caption2)
             }
@@ -170,7 +170,7 @@ public struct RankView: View {
                 )
                 .presentationDetents([.height(280)])
                 .interactiveDismissDisabled()
-        
+                
             case .error:
                 ResultView(
                     title: "검색 결과가 없습니다",
@@ -184,7 +184,7 @@ public struct RankView: View {
                 .presentationDetents([.height(330)])
                 .interactiveDismissDisabled()
                 
-   
+                
             }
         }
     }

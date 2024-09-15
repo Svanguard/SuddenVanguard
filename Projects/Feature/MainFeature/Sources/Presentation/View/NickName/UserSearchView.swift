@@ -12,25 +12,23 @@ import SwiftUI
 
 struct UserSearchView: View {
     @StateObject var viewModel = UserSearchViewModel()
-
+    
     var body: some View {
-        NavigationStack {
-            if #available(iOS 17.0, *) {
-                UserSearch
-                    .searchable(
-                        text: $viewModel.searchQuery,
-                        isPresented: $viewModel.isSearchFieldFocused,
-                        placement: .navigationBarDrawer(displayMode: .always),
-                        prompt: "닉네임 검색"
-                    )
-            } else {
-                UserSearch
-                    .searchable(
-                        text: $viewModel.searchQuery,
-                        placement: .navigationBarDrawer(displayMode: .always),
-                        prompt: "닉네임 검색"
-                    )
-            }
+        if #available(iOS 17.0, *) {
+            UserSearch
+                .searchable(
+                    text: $viewModel.searchQuery,
+                    isPresented: $viewModel.isSearchFieldFocused,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: "닉네임 검색"
+                )
+        } else {
+            UserSearch
+                .searchable(
+                    text: $viewModel.searchQuery,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: "닉네임 검색"
+                )
         }
     }
     

@@ -13,77 +13,74 @@ import SwiftUI
 public struct MainView: View {
     public init() { }
     
+    @State private var contentOffset: CGFloat = 0
+    @State private var path = NavigationPath()
+    
     public var body: some View {
-        NavigationStack {
-            VStack {
+        NavigationStack(path: $path) {
+            TabViewItemWrapperView(path: $path, selection: .main) {
                 VStack {
-                    
-                    Spacer()
-                    Image(uiImage: DesignSystemAsset.vanguardlogo.image)
-                        .resizable()
-                        .scaledToFit()
-//                        .frame(height: 100)
-//                        .padding(.horizontal, 50)
-                    
-                    Text("모든 서든러의 전과기록을 확인해 보세요!")
-                        .foregroundColor(.white)
-                        .font(.caption)
-                        .fontWeight(.regular)
-                    
-                    HStack {
+                    VStack {
                         Spacer()
                         
-                        NavigationLink {
-                            UserSearchView()
-                        } label: {
-                            SearchFieldView(
-                                placeHolder: "닉네임으로 검색",
-                                opacityValue: 1.0
-                            )
-                        }
+                        Image(uiImage: DesignSystemAsset.vanguardlogo.image)
+                            .resizable()
+                            .scaledToFit()
                         
-                        Spacer()
+                        Text("모든 서든러의 전과기록을 확인해 보세요!")
+                            .foregroundColor(.white)
+                            .font(.caption)
+                            .fontWeight(.regular)
                         
-                        NavigationLink {
-                            NumberSearchView()
-                        } label: {
-                            SearchFieldView(
-                                placeHolder: "병영번호로 검색",
-                                opacityValue: 0.2
-                            )
+                        HStack {
+                            Spacer()
+                            
+                            Button {
+                                path.append(NavigationRoutes.nickname)
+                            } label: {
+                                SearchFieldView(
+                                    placeHolder: "닉네임으로 검색",
+                                    opacityValue: 1.0
+                                )
+                            }
+                            
+                            Spacer()
+                            
+                            Button {
+                                path.append(NavigationRoutes.number)
+                            } label: {
+                                SearchFieldView(
+                                    placeHolder: "병영번호로 검색",
+                                    opacityValue: 0.2
+                                )
+                            }
+                            
+                            Spacer()
                         }
+                        .padding(.bottom)
                         
                         Spacer()
                     }
-                    .padding(.bottom)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 50)
+                    .background(
+                        Image(uiImage: DesignSystemAsset.bg.image)
+                            .resizable()
+                            .scaledToFill()
+                            .ignoresSafeArea()
+                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    )
                     
                     Spacer()
                 }
-                .padding(.horizontal, 20)
-                .padding(.bottom, 50)
-                .background(
-                    Image(uiImage: DesignSystemAsset.bg.image)
-                        .resizable()
-                        .scaledToFill()
-                        .ignoresSafeArea()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                )
-                
-                Spacer()
-                
-//                ScrollView {
-//                    ForEach(0..<7) { index in
-//                        Rectangle()
-//                            .frame(height: 100)
-//                            .foregroundStyle(Color(.darkGray))
-//                            .overlay {
-//                                Text("광고 문의")
-//                                    .foregroundColor(.white)
-//                            }
-//                    }
-//                }
-//                .padding(.top, 62)
-//                .scrollIndicators(.hidden)
+            }
+            .navigationDestination(for: NavigationRoutes.self) { route in
+                switch route {
+                case .nickname:
+                    UserSearchView()
+                case .number:
+                    NumberSearchView()
+                }
             }
         }
     }
