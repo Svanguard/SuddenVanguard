@@ -27,7 +27,7 @@ public struct MainTabView: View {
                 .tag(Tab.main)
                 .tabItem {
                     VStack {
-                        Tab.main.symbolImage
+                        Image(uiImage: DesignSystemAsset.vanguard.image)
                             .resizable()
                             .scaledToFit()
                         Text(Tab.main.rawValue)
@@ -39,7 +39,7 @@ public struct MainTabView: View {
                 .tag(Tab.rank)
                 .tabItem {
                     VStack {
-                        Tab.rank.symbolImage
+                        Image(uiImage: DesignSystemAsset.flame.image)
                             .resizable()
                             .scaledToFit()
                         Text(Tab.rank.rawValue)
@@ -51,7 +51,7 @@ public struct MainTabView: View {
                 .tag(Tab.report)
                 .tabItem {
                     VStack {
-                        Tab.report.symbolImage
+                        Image(uiImage: DesignSystemAsset.mail.image)
                             .resizable()
                             .scaledToFit()
                         Text(Tab.report.rawValue)
@@ -63,7 +63,7 @@ public struct MainTabView: View {
                 .tag(Tab.setting)
                 .tabItem {
                     VStack {
-                        Tab.setting.symbolImage
+                        Image(systemName: "gearshape")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)

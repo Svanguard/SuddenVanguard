@@ -14,8 +14,6 @@ public struct TabViewItemWrapperView<C: View>: View {
     let selection: Tab
     var view: () -> C
     
-    @Environment(\.refresh) var refreshAction
-    
     public init(path: Binding<NavigationPath>, selection: Tab, @ViewBuilder view: @escaping () -> C) {
         self._path = path
         self.selection = selection
