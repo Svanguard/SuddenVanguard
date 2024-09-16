@@ -31,7 +31,7 @@ public struct RankView: View {
                         Spacer()
                         
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
+                            .progressViewStyle(.circular)
                             .scaleEffect(1.5)
                         
                         Spacer()
