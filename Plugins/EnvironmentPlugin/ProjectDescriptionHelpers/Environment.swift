@@ -46,7 +46,7 @@ public extension DeploymentTargets {
 
 extension Plist.Value {
     static let version: Self = "1"
-    static let shortVersion: Self = "1.0.1"
+    static let shortVersion: Self = "1.0.0"
     
     static let bundleDisplayName: Self = .string(.displayName)
     static let bundleShortVersionString: Self = .string(.marketingVersion)
