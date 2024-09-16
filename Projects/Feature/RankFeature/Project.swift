@@ -12,6 +12,6 @@ let project = Project.makeProject(
     name: "RankFeature",
     moduleType: .feature,
     dependencies: [
-        .featureDependency,
+        .featureDependency
     ]
 )

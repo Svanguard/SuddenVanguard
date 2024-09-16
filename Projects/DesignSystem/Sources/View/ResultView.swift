@@ -12,19 +12,29 @@ public struct ResultView: View {
     let title: String
     let content: String
     let image: Config
+    let showLink: Bool
+    let linkURL: URL?
+    
+    @State private var showSafari = false
     
     public init(
         title: String,
         content: String,
-        image: Config
+        image: Config,
+        showLink: Bool = false,
+        linkURL: URL? = nil
     ) {
         self.title = title
         self.content = content
         self.image = image
+        self.showLink = showLink
+        self.linkURL = linkURL
     }
     
     public var body: some View {
         VStack(spacing: 15) {
+            Spacer()
+            
             Image(systemName: image.content)
                 .font(.title)
                 .foregroundStyle(image.foreground)
@@ -40,20 +50,37 @@ public struct ResultView: View {
             
             Text(content)
                 .font(.callout)
+                .fontWeight(.medium)
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .foregroundStyle(.gray)
                 .padding(.vertical, 6)
+            
+            Spacer()
+            
+            // showLink가 true일 때만 버튼을 표시
+            if showLink, let linkURL = linkURL {
+                Button(action: {
+                    showSafari = true
+                }) {
+                    Text("병영수첩으로 이동")
+                        .font(.body)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity, maxHeight: 50)
+                        .foregroundStyle(.primary)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 6)
+                                .stroke(Color.gray, lineWidth: 0.7)
+                        )
+                }
+                .sheet(isPresented: $showSafari) {
+                    SafariView(url: linkURL)
+                }
+                .padding(.bottom)
+                .padding(.horizontal)
+            }
         }
-        .padding([.horizontal, .bottom], 15)
-        .background {
-            RoundedRectangle(cornerRadius: 12)
-                .fill(.background)
-                .padding(.top, 30)
-        }
-        .shadow(color: .black.opacity(0.12), radius: 8)
-        .padding(.horizontal, 15)
-        
     }
     
     public struct Config {
