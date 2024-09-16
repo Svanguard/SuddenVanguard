@@ -13,7 +13,7 @@ import SwiftUI
 
 struct NumberSearchView: View {
     @StateObject var viewModel = NumberSearchViewModel()
-
+    
     var body: some View {
         if #available(iOS 17.0, *) {
             NumberSearch
@@ -53,8 +53,10 @@ struct NumberSearchView: View {
             } else {
                 List {
                     NavigationLink(destination: {
-                        resultView(userNick: viewModel.userData.userName)
+                        resultView(userNick: viewModel.userData.userName, userSuddenNumber: viewModel.userData.suddenNumber)
                             .reviewCounter()
+                            .navigationTitle("조회 결과")
+                            .navigationBarTitleDisplayMode(.inline)
                     }) {
                         UserRowView(user: viewModel.userData)
                     }
@@ -67,17 +69,21 @@ struct NumberSearchView: View {
     }
     
     @ViewBuilder
-    private func resultView(userNick: String) -> some View {
+    private func resultView(userNick: String, userSuddenNumber: Int) -> some View {
+        let linkURL = URL(string: "https://barracks.sa.nexon.com/\(userSuddenNumber)/match")!
+        
         switch viewModel.resultType {
         case .clean:
             ResultView(
                 title: "전과 기록이 없습니다",
-                content: "\(userNick)님은 현재 뱅가드에 등록되어 있지 않습니다.",
+                content: "\(userNick)님은 현재\n뱅가드에 등록되어 있지 않습니다.",
                 image: .init(
                     content: "person.fill.checkmark",
                     tint: .green,
                     foreground: .white
-                )
+                ),
+                showLink: true,
+                linkURL: linkURL
             )
             .presentationDetents([.height(280)])
             .interactiveDismissDisabled()
@@ -90,7 +96,9 @@ struct NumberSearchView: View {
                     content: "exclamationmark.triangle.fill",
                     tint: .red,
                     foreground: .white
-                )
+                ),
+                showLink: true,
+                linkURL: linkURL
             )
             .presentationDetents([.height(280)])
             .interactiveDismissDisabled()
@@ -103,7 +111,9 @@ struct NumberSearchView: View {
                     content: "exclamationmark.triangle.fill",
                     tint: .red,
                     foreground: .white
-                )
+                ),
+                showLink: true,
+                linkURL: linkURL
             )
             .presentationDetents([.height(280)])
             .interactiveDismissDisabled()
@@ -111,12 +121,14 @@ struct NumberSearchView: View {
         case .success:
             ResultView(
                 title: "핵의심 유저 발견!",
-                content: "\(userNick)님은 다른 유저의 제보로 뱅가드에 등록되어 있습니다.",
+                content: "\(userNick)님은 다른 유저의 제보로\n뱅가드에 등록되어 있습니다.",
                 image: .init(
                     content: "exclamationmark.triangle.fill",
                     tint: .orange,
                     foreground: .white
-                )
+                ),
+                showLink: true,
+                linkURL: linkURL
             )
             .presentationDetents([.height(280)])
             .interactiveDismissDisabled()
@@ -129,11 +141,11 @@ struct NumberSearchView: View {
                     content: "person.fill.questionmark",
                     tint: .blue,
                     foreground: .white
-                )
+                ),
+                showLink: false // 링크가 필요 없는 경우
             )
             .presentationDetents([.height(330)])
             .interactiveDismissDisabled()
         }
-        
     }
 }
