@@ -6,30 +6,29 @@
 //  Copyright © 2024 Svanguard. All rights reserved.
 //
 
+import Common
 import DesignSystem
 import SwiftUI
 
 struct UserSearchView: View {
     @StateObject var viewModel = UserSearchViewModel()
-
+    
     var body: some View {
-        NavigationStack {
-            if #available(iOS 17.0, *) {
-                UserSearch
-                    .searchable(
-                        text: $viewModel.searchQuery,
-                        isPresented: $viewModel.isSearchFieldFocused,
-                        placement: .navigationBarDrawer(displayMode: .always),
-                        prompt: "닉네임 검색"
-                    )
-            } else {
-                UserSearch
-                    .searchable(
-                        text: $viewModel.searchQuery,
-                        placement: .navigationBarDrawer(displayMode: .always),
-                        prompt: "닉네임 검색"
-                    )
-            }
+        if #available(iOS 17.0, *) {
+            UserSearch
+                .searchable(
+                    text: $viewModel.searchQuery,
+                    isPresented: $viewModel.isSearchFieldFocused,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: "닉네임 검색"
+                )
+        } else {
+            UserSearch
+                .searchable(
+                    text: $viewModel.searchQuery,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: "닉네임 검색"
+                )
         }
     }
     
@@ -58,11 +57,14 @@ struct UserSearchView: View {
             } else {
                 List(viewModel.users) { user in
                     NavigationLink(destination: {
-                        resultView(userNick: user.userName)
+                        resultView(userNick: user.userName, userSuddenNumber: user.suddenNumber)
                             .onAppear {
                                 viewModel.searchNumber(userSuddenNumber: user.suddenNumber)
                                 viewModel.addUserToSearchHistory(user)
                             }
+                            .reviewCounter()
+                            .navigationTitle("조회 결과")
+                            .navigationBarTitleDisplayMode(.inline)
                     }) {
                         UserRowView(user: user)
                     }
@@ -75,20 +77,24 @@ struct UserSearchView: View {
     }
     
     @ViewBuilder
-    private func resultView(userNick: String) -> some View {
+    private func resultView(userNick: String, userSuddenNumber: Int) -> some View {
         if viewModel.userFetchLoading {
             ProgressView()
         } else {
+            let linkURL = URL(string: "https://barracks.sa.nexon.com/\(userSuddenNumber)/match")!
+            
             switch viewModel.resultType {
             case .clean:
                 ResultView(
                     title: "전과 기록이 없습니다",
-                    content: "\(userNick)님은 현재 뱅가드에 등록되어 있지 않습니다.",
+                    content: "\(userNick)님은 현재\n뱅가드에 등록되어 있지 않습니다.",
                     image: .init(
                         content: "person.fill.checkmark",
                         tint: .green,
                         foreground: .white
-                    )
+                    ),
+                    showLink: true,
+                    linkURL: linkURL
                 )
                 .presentationDetents([.height(280)])
                 .interactiveDismissDisabled()
@@ -101,7 +107,9 @@ struct UserSearchView: View {
                         content: "exclamationmark.triangle.fill",
                         tint: .red,
                         foreground: .white
-                    )
+                    ),
+                    showLink: true,
+                    linkURL: linkURL
                 )
                 .presentationDetents([.height(280)])
                 .interactiveDismissDisabled()
@@ -114,7 +122,9 @@ struct UserSearchView: View {
                         content: "exclamationmark.triangle.fill",
                         tint: .red,
                         foreground: .white
-                    )
+                    ),
+                    showLink: true,
+                    linkURL: linkURL
                 )
                 .presentationDetents([.height(280)])
                 .interactiveDismissDisabled()
@@ -122,12 +132,14 @@ struct UserSearchView: View {
             case .success:
                 ResultView(
                     title: "핵의심 유저 발견!",
-                    content: "\(userNick)님은 다른 유저의 제보로 뱅가드에 등록되어 있습니다.",
+                    content: "\(userNick)님은 다른 유저의 제보로\n뱅가드에 등록되어 있습니다.",
                     image: .init(
                         content: "exclamationmark.triangle.fill",
                         tint: .orange,
                         foreground: .white
-                    )
+                    ),
+                    showLink: true,
+                    linkURL: linkURL
                 )
                 .presentationDetents([.height(280)])
                 .interactiveDismissDisabled()
@@ -140,12 +152,11 @@ struct UserSearchView: View {
                         content: "person.fill.questionmark",
                         tint: .blue,
                         foreground: .white
-                    )
+                    ),
+                    showLink: false // 링크가 필요 없는 경우
                 )
                 .presentationDetents([.height(330)])
                 .interactiveDismissDisabled()
-                
-   
             }
         }
     }

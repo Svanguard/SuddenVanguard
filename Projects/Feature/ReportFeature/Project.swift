@@ -13,6 +13,6 @@ let project = Project.makeProject(
     name: "ReportFeature",
     moduleType: .feature,
     dependencies: [
-        .featureDependency,
+        .featureDependency
     ]
 )
