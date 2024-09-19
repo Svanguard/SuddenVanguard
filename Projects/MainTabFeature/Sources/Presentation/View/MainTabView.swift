@@ -19,55 +19,55 @@ public struct MainTabView: View {
         setupTabBarAppearance()
     }
     
-    @State private var selection: Tab = .main
+    @State private var selection: TabType = .main
     
     public var body: some View {
         TabView(selection: binding) {
             MainView()
-                .tag(Tab.main)
+                .tag(TabType.main)
                 .tabItem {
                     VStack {
                         Image(uiImage: DesignSystemAsset.vanguard.image)
                             .resizable()
                             .scaledToFit()
-                        Text(Tab.main.rawValue)
+                        Text(TabType.main.rawValue)
                             .font(.body)
                     }
                 }
             
             RankView()
-                .tag(Tab.rank)
+                .tag(TabType.rank)
                 .tabItem {
                     VStack {
                         Image(uiImage: DesignSystemAsset.flame.image)
                             .resizable()
                             .scaledToFit()
-                        Text(Tab.rank.rawValue)
+                        Text(TabType.rank.rawValue)
                             .font(.body)
                     }
                 }
             
             ReportView()
-                .tag(Tab.report)
+                .tag(TabType.report)
                 .tabItem {
                     VStack {
                         Image(uiImage: DesignSystemAsset.mail.image)
                             .resizable()
                             .scaledToFit()
-                        Text(Tab.report.rawValue)
+                        Text(TabType.report.rawValue)
                             .font(.body)
                     }
                 }
             
             SettingView()
-                .tag(Tab.setting)
+                .tag(TabType.setting)
                 .tabItem {
                     VStack {
                         Image(systemName: "gearshape")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 18, height: 18)
-                        Text(Tab.setting.rawValue)
+                        Text(TabType.setting.rawValue)
                             .font(.body)
                     }
                 }
@@ -75,7 +75,7 @@ public struct MainTabView: View {
         .tint(.primary)
     }
     
-    private var binding: Binding<Tab> {
+    private var binding: Binding<TabType> {
         return .init {
             return selection
         } set: { selection in

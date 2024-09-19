@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public enum Tab: String {
+public enum TabType: String {
     case main = "뱅가드"
     case rank = "실시간순위"
     case report = "제보하기"
