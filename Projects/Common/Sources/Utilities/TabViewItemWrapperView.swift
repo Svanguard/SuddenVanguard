@@ -11,10 +11,10 @@ import SwiftUI
 public struct TabViewItemWrapperView<C: View>: View {
     @Binding var path: NavigationPath
     
-    let selection: Tab
+    let selection: TabType
     var view: () -> C
     
-    public init(path: Binding<NavigationPath>, selection: Tab, @ViewBuilder view: @escaping () -> C) {
+    public init(path: Binding<NavigationPath>, selection: TabType, @ViewBuilder view: @escaping () -> C) {
         self._path = path
         self.selection = selection
         self.view = view
@@ -24,7 +24,7 @@ public struct TabViewItemWrapperView<C: View>: View {
         ScrollViewReader { proxy in
             view()
                 .onReceive(NotificationCenter.default.publisher(for: .tabViewItemDidChange)) { notification in
-                    if let selection = notification.object as? Tab, self.selection == selection {
+                    if let selection = notification.object as? TabType, self.selection == selection {
                         if !(path.isEmpty) {
                             path = .init()
                         }
@@ -36,7 +36,7 @@ public struct TabViewItemWrapperView<C: View>: View {
 
 extension NotificationCenter {
     
-    public func postTabViewItemDidChange(_ selection: Tab) {
+    public func postTabViewItemDidChange(_ selection: TabType) {
         post(name: .tabViewItemDidChange, object: selection)
     }
 }

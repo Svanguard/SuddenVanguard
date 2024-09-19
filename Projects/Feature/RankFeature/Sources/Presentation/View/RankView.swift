@@ -42,9 +42,6 @@ public struct RankView: View {
                                     NavigationLink(value: RankNavigationRoutes.resultView(userNick: user.username, userSuddenNumber: user.suddenNumber)) {
                                         RankUserListCell(user: user)
                                     }
-                                    .onAppear {
-                                        viewModel.searchNumber(userSuddenNumber: user.suddenNumber)
-                                    }
                                 }
                             }
                             
