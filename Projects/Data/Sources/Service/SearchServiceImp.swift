@@ -32,11 +32,8 @@ public final class SearchServiceImp: SearchService {
                    let punishDate: String
                    
                    switch response.punishType {
-                   case "restriction":
+                   case "restriction", "protection":
                        resultType = .restriction
-                       punishDate = response.punishDate
-                   case "protection":
-                       resultType = .protection
                        punishDate = response.punishDate
                    default:
                        if response.registerFg {
