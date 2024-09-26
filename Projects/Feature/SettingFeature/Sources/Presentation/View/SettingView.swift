@@ -42,7 +42,7 @@ public struct SettingView: View {
                                 
                                 Spacer()
                                 
-                                Text("1.0.2 (최신버전)")
+                                Text("1.0.3 (최신버전)")
                                     .foregroundStyle(.gray)
                                     .font(.footnote)
                             }
