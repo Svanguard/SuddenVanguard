@@ -14,7 +14,7 @@ public extension String {
     static let organizationName: String = "Svanguard"
 
     /// 앱스토어에 게시할 때마다 증가해줘야 하는 버전
-    static let marketingVersion: Self = "1.0.2"
+    static let marketingVersion: Self = "1.0.3"
     /// 개발자가 내부적으로 확인하기 위한 용도 (날짜를 사용하기도 함 - 2024.06.5.1 )
     static var buildVersion: Self {
         let date = Date()
@@ -46,7 +46,7 @@ public extension DeploymentTargets {
 
 extension Plist.Value {
     static let version: Self = "1"
-    static let shortVersion: Self = "1.0.2"
+    static let shortVersion: Self = "1.0.3"
     
     static let bundleDisplayName: Self = .string(.displayName)
     static let bundleShortVersionString: Self = .string(.marketingVersion)
