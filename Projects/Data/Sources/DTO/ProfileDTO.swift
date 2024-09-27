@@ -58,7 +58,9 @@ struct CharacterInfo: Decodable {
     let vipGrade: Int
     let vipGradeCSS, seasonYear, punishType, punishDate: String
     let officialClan: Int
-    let inventoryTag, totalSP: String
+    let totalSP: String
+    let isMate: Bool
+    let mentoFormalTag: String
 
     enum CodingKeys: String, CodingKey {
         case userNoOrigin = "user_no_origin"
@@ -87,8 +89,9 @@ struct CharacterInfo: Decodable {
         case punishType = "punish_type"
         case punishDate = "punish_date"
         case officialClan = "official_clan"
-        case inventoryTag = "inventory_tag"
         case totalSP = "total_sp"
+        case isMate = "isMate"
+        case mentoFormalTag = "mentoFormalTag"
     }
 }
 
@@ -102,6 +105,9 @@ struct ProfileInfo: Decodable {
     let mannerGrade1_Class, mannerGrade2, mannerGrade2_Class, mannerGrade3: String
     let mannerGrade3_Class, mannerGrade4, mannerGrade4_Class, mannerGrade5_Data: String
     let mannerGrade6_Data, mannerGrade6_Grade, mannerPercentileRate: String
+    let inventoryTag: String
+    let mateTag: String
+    let mateActiveTag: String
 
     enum CodingKeys: String, CodingKey {
         case imageNo = "image_no"
@@ -124,6 +130,9 @@ struct ProfileInfo: Decodable {
         case mannerGrade6_Data = "manner_grade_6_data"
         case mannerGrade6_Grade = "manner_grade_6_grade"
         case mannerPercentileRate = "manner_percentile_rate"
+        case inventoryTag = "inventory_tag"
+        case mateTag = "mate_tag"
+        case mateActiveTag = "mate_active_tag"
     }
 }
 
